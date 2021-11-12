@@ -6,9 +6,5 @@ class ExperimentalTechnique(metaclass=abc.ABCMeta):
 		pass
 
 	@abc.abstractmethod
-	def separate_peaks(self):
-		pass
-
-	@abc.abstractmethod
 	def get_peak_features(self):
 		pass
