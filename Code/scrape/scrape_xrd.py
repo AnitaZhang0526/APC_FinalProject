@@ -28,15 +28,7 @@ NUM_RECORDS = 6424
 # Number of records per page on webmineral.com
 RECORDS_PER_PAGE = 100
 
-# ---------- END CONSTANTS ---------- #
-
-
-# Open csv file
-file = open(FILE_PATH, "w")
-writer = csv.writer(file)
-
-# Write header row to csv
-header = [
+HEADER_ROW = [
 	"2_theta_1",
 	"intensity_1",
 	"2_theta_2",
@@ -46,7 +38,16 @@ header = [
 	"material_name",
 	"material_formula"
 ]
-writer.writerow(header)
+
+# ---------- END CONSTANTS ---------- #
+
+
+# Open csv file
+file = open(FILE_PATH, "w")
+writer = csv.writer(file)
+
+# Write header row to csv
+writer.writerow(HEADER_ROW)
 
 # Keep track of materials that have already been added to the database
 # to avoid duplicates
