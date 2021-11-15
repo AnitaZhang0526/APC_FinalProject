@@ -48,6 +48,10 @@ header = [
 ]
 writer.writerow(header)
 
+# Keep track of materials that have already been added to the database
+# to avoid duplicates
+seen_materials = []
+
 # Fetch each page and write records to csv
 for i in range(1, NUM_RECORDS, RECORDS_PER_PAGE):
 
@@ -70,8 +74,20 @@ for i in range(1, NUM_RECORDS, RECORDS_PER_PAGE):
 		# Create a list to store row data to write to csv
 		row = []
 
+		# Get a list of all td elements in the row
+		tds = j.find_all("td")
+
+		# If this material has already been added to the database,
+		# don't add it again.
+		material_name = tds[6]
+		if material_name in seen_materials:
+			continue;
+
+		# Keep track of materials that have already been added to the database
+		seen_materials.append(material_name)
+
 		# Loop through each cell in the row
-		for m, n in enumerate(j.find_all("td")):
+		for m, n in enumerate(tds):
 
 			# The data for 2_theta_{1,2,3} needs to be parsed
 			if m == 0 or m == 2 or m == 4:
