@@ -18,4 +18,4 @@ python scrape_xrd.py
 Coming soon!
 
 ## Using the Auto-Documentation Script
-Type in ```make html``` in the command line to auto-document existing .py files. Used default theme.
+Type in ```make html``` in the command line to auto-document existing .py files to generate a webpage with instructions. The current webpage uses the default theme.
