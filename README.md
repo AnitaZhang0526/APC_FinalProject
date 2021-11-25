@@ -16,3 +16,6 @@ python scrape_xrd.py
 
 ### Updating the FTIR Database
 Coming soon!
+
+## Using the Auto-Documentation Script
+Type in ```make html``` to auto-document existing .py files.
