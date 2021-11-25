@@ -1,13 +1,28 @@
 # Tests for compare_to_database.py
 
-def test_match_xrd():
-	assert False
+from Code.compare_to_database import CompareToDatabase
+from unittest import mock
 
-def test_match_ftir():
-	assert False
+@mock.patch.object(CompareToDatabase, "_match_xrd")
+def test_match_xrd(mock):
+	CompareToDatabase('xrd').match()
+	mock.assert_called()
 
-def test_match_none():
-	assert False
+@mock.patch.object(CompareToDatabase, "_match_ftir")
+def test_match_ftir(mock):
+	CompareToDatabase('ftir').match()
+	mock.assert_called()
 
-def test_match_random():
-	assert False
+@mock.patch.object(CompareToDatabase, "_match_ftir")
+@mock.patch.object(CompareToDatabase, "_match_xrd")
+def test_match_none(mock_xrd, mock_ftir):
+	CompareToDatabase().match()
+	mock_xrd.assert_not_called()
+	mock_ftir.assert_not_called()
+
+@mock.patch.object(CompareToDatabase, "_match_ftir")
+@mock.patch.object(CompareToDatabase, "_match_xrd")
+def test_match_random(mock_xrd, mock_ftir):
+	CompareToDatabase('random string').match()
+	mock_xrd.assert_not_called()
+	mock_ftir.assert_not_called()
