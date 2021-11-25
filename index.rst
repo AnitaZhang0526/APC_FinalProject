@@ -5,10 +5,15 @@
 
 Welcome to XRD/FTIR Analysis Tool Suite's documentation!
 ========================================================
+The tool is designed to automatically extract information from XRD and FTIR data through profile fitting and data matching.
+
+XRD data will provide information about a material's crystal structure, and FTRI will provide information about a material's bond structure.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   modules
 
 
 
