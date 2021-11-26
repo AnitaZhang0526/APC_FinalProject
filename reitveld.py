@@ -76,7 +76,7 @@ class Reitveld(PeakProfileFitting):
                 composite_model = composite_model + model
         return composite_model, params
     
-    def find_best_fit(self,peak_widths,peak_indices,n_trials)
+    def find_best_fit(self,peak_widths,peak_indices,n_trials):
         options = ['GaussianModel', 'LorentzianModel', 'VoigtModel']
         lowest_cost = np.inf
         best_model_choices = []
@@ -107,8 +107,8 @@ class Reitveld(PeakProfileFitting):
             elif model_choice == 'LorentzianModel':
                 FWHM.append(2*s)
             elif model_choice == 'VoightModel':
-                FWHM.apppend(3.6013*s)
-        return FWHM
+                FWHM.append(3.6013*s)
+        return FWHM,center,intensity
 
 #     def find_best_fit(self,range,initial_guess,peak_indicies,idx):
 #        x = self.x
