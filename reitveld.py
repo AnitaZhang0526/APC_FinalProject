@@ -118,4 +118,3 @@ class Reitveld(PeakProfileFitting):
 #        
 #        best_params = optimize.minimize(self.cost(x, x_ref, width, I_peak), initial_guess)
 #        return best_params
-#
