@@ -1,1 +1,4 @@
 pytest
+pandas
+unittest
+scipy
