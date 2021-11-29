@@ -7,7 +7,9 @@ import matplotlib.pyplot as plt
 from scipy import optimize, signal
 from lmfit import models
 
-class Reitveld(PeakProfileFitting):
+from PeakProfileFitting import PeakProfileFitting
+
+class Rietveld(PeakProfileFitting):
 
     # initialize the class
     # the class has two properties, each a float array from input file
@@ -75,7 +77,7 @@ class Reitveld(PeakProfileFitting):
             else:
                 composite_model = composite_model + model
         return composite_model, params
-
+    
     def find_best_fit(self,peak_widths,peak_indices,n_trials):
         options = ['GaussianModel', 'LorentzianModel', 'VoigtModel']
         lowest_cost = np.inf
