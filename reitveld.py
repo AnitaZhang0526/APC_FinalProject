@@ -75,7 +75,7 @@ class Reitveld(PeakProfileFitting):
             else:
                 composite_model = composite_model + model
         return composite_model, params
-    
+
     def find_best_fit(self,peak_widths,peak_indices,n_trials):
         options = ['GaussianModel', 'LorentzianModel', 'VoigtModel']
         lowest_cost = np.inf
