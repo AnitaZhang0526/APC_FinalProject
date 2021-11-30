@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from PeakProfileFitting import PeakProfileFitting 
+from Code.PeakProfileFitting import PeakProfileFitting 
 
 class Reitveld(PeakProfileFitting):  
 
