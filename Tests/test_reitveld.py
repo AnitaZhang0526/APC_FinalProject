@@ -1,5 +1,4 @@
 from unittest import mock
-import matplotlib.pyplot as plt
 from Code.reitveld import Reitveld
 import numpy as np
 
@@ -8,8 +7,6 @@ data = np.genfromtxt(f, delimiter=' ')
 x = data[:,0]
 I = data[:,1]
 I = I/max(I)
-plt.plot(I)
-plt.show()
 
 def test_get_peaks(x,I):
     first_peak_idx = 11
