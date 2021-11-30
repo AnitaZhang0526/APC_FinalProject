@@ -46,8 +46,7 @@ def test_find_best_fit():
     reitveld_input = Reitveld(x,I)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
-    peak_indices = reitveld_input.get_peaks(cutoff,peak_widths)
-    best_model_choices, best_values = reitveld_input.find_best_fit(peak_widths,peak_indices)
+    best_model_choices, best_values = reitveld_input.find_best_fit(cutoff,peak_widths)
     assert(len(best_model_choices)==10)
     assert(isinstance(best_values,dict))
 
