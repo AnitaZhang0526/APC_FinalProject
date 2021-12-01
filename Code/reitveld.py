@@ -101,7 +101,7 @@ class Reitveld(PeakProfileFitting):
         center = []
         FWHM = []
         model_choices, values = self.find_best_fit(cutoff,peak_widths)
-        print(values)
+        # print(values)
         for i in range(len(model_choices)):
             prefix = f'm{i}_'
             key_amp = prefix+'amplitude'
@@ -110,8 +110,8 @@ class Reitveld(PeakProfileFitting):
             intensity.append(values.get(key_amp))
             center.append(values.get(key_cen))
             sig = values.get(key_sig)
-            #print(sig)
-            #print(key_sig)
+            print(sig)
+            print(key_sig)
             if model_choices[0] == 'GaussianModel':
                 FWHM.append(2*sig*np.log(2))
             elif model_choices[0] == 'LorentzianModel':
