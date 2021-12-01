@@ -1,5 +1,5 @@
 from unittest import mock
-from Code.reitveld import Reitveld
+from Code.Rietveld import Rietveld
 import numpy as np
 
 f = open('Malli_80s.allASC.ASC', 'r')
