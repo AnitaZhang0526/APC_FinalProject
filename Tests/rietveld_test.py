@@ -50,7 +50,7 @@ def test_find_best_fit():
     assert(len(best_model_choices)==10)
     assert(isinstance(best_values,dict))
 
-@mock.patch.object(Reitveld,'find_best_fit')
+@mock.patch.object(Rietveld,'find_best_fit')
 def test_get_params(mock):
     rietveld_input = Rietveld(x,I)
     best_model_choices = ['GaussianModel']*10
