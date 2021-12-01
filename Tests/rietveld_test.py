@@ -18,7 +18,7 @@ def test_get_peaks():
     return peaks_found
     
 def test_make_spec():
-    rietveld_input = Reitveld(x,I)
+    rietveld_input = Rietveld(x,I)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     peak_indices = rietveld_input.get_peaks(cutoff,peak_widths)
