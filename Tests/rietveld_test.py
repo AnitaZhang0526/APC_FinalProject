@@ -12,47 +12,47 @@ def test_get_peaks():
     first_peak_idx = 11
     peak_widths = np.arange(5,15)
     cutoff = 0.9
-    reitveld_input = Reitveld(x,I)
-    peaks_found = reitveld_input.get_peaks(cutoff,peak_widths)
+    rietveld_input = Rietveld(x,I)
+    peaks_found = rietveld_input.get_peaks(cutoff,peak_widths)
     assert(peaks_found[0]==first_peak_idx)
     return peaks_found
     
 def test_make_spec():
-    reitveld_input = Reitveld(x,I)
+    rietveld_input = Reitveld(x,I)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
-    peak_indices = reitveld_input.get_peaks(cutoff,peak_widths)
+    peak_indices = rietveld_input.get_peaks(cutoff,peak_widths)
     L = peak_indices.shape[0]
     model_choices = []
     for i in range(L):
         model_choices.append('GaussianModel')
-    spec = reitveld_input.make_spec(peak_widths,model_choices,peak_indices)
+    spec = rietveld_input.make_spec(peak_widths,model_choices,peak_indices)
     assert(spec['modelType'].shape[0]==len(peak_indices))
     
 def test_make_one_model():
-    reitveld_input = Reitveld(x,I)
+    rietveld_input = Rietveld(x,I)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
-    peak_indices = reitveld_input.get_peaks(cutoff,peak_widths)
+    peak_indices = rietveld_input.get_peaks(cutoff,peak_widths)
     L = peak_indices.shape[0]
     model_choices = []
     for i in range(L):
         model_choices.append('GaussianModel')
-    spec = reitveld_input.make_spec(peak_widths,model_choices,peak_indices)
-    composite_model, params = reitveld_input.make_one_model(spec)
+    spec = rietveld_input.make_spec(peak_widths,model_choices,peak_indices)
+    composite_model, params = rietveld_input.make_one_model(spec)
     assert(len(params)==L*5)
 
 def test_find_best_fit():
-    reitveld_input = Reitveld(x,I)
+    rietveld_input = Rietveld(x,I)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
-    best_model_choices, best_values = reitveld_input.find_best_fit(cutoff,peak_widths)
+    best_model_choices, best_values = rietveld_input.find_best_fit(cutoff,peak_widths)
     assert(len(best_model_choices)==10)
     assert(isinstance(best_values,dict))
 
 @mock.patch.object(Reitveld,'find_best_fit')
 def test_get_params(mock):
-    reitveld_input = Reitveld(x,I)
+    rietveld_input = Rietveld(x,I)
     best_model_choices = ['GaussianModel']*10
     best_values = {'m0_amplitude': 1.0291383664365865,
                    'm0_center': 1.00835563344582,
@@ -87,7 +87,7 @@ def test_get_params(mock):
     cutoff = 0.9
     peak_widths = np.arange(5,15)
     mock.return_value = [best_model_choices, best_values]
-    FWHM,center,intensity = reitveld_input.get_params(cutoff,peak_widths)
+    FWHM,center,intensity = rietveld_input.get_params(cutoff,peak_widths)
     assert(len(FWHM)==10)
     assert(len(center)==10)
     assert(len(intensity)==10)
