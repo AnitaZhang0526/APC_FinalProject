@@ -50,9 +50,9 @@ def test_find_best_fit():
     assert(len(best_model_choices)==10)
     assert(isinstance(best_values,dict))
 
-@mock.patch('reitveld.Reitveld')
+@mock.patch.object(Reitveld,'find_best_fit')
 def test_get_params(mock):
-    reitveld_input = mock.return_value
+    reitveld_input = Reitveld(x,I)
     best_model_choices = ['GaussianModel']*10
     best_values = {'m0_amplitude': 1.0291383664365865,
                    'm0_center': 1.00835563344582,
@@ -86,7 +86,7 @@ def test_get_params(mock):
                    'm9_sigma': 0.10500064381692818}
     cutoff = 0.9
     peak_widths = np.arange(5,15)
-    reitveld_input.find_best_fit.return_value = [best_model_choices, best_values]
+    mock.return_value = [best_model_choices, best_values]
     FWHM,center,intensity = reitveld_input.get_params(cutoff,peak_widths)
     assert(len(FWHM)==10)
     assert(len(center)==10)
