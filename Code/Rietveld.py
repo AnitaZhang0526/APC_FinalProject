@@ -4,7 +4,7 @@ from scipy import signal
 from lmfit import models
 from Code.PeakProfileFitting import PeakProfileFitting 
 
-class Reitveld(PeakProfileFitting):  
+class Rietveld(PeakProfileFitting):  
 
     # initialize the class
     # the class has two properties, each a float array from input file
