@@ -29,14 +29,14 @@ NUM_RECORDS = 6424
 RECORDS_PER_PAGE = 100
 
 HEADER_ROW = [
-	"2_theta_1",
-	"intensity_1",
-	"2_theta_2",
-	"intensity_2",
-	"2_theta_3",
-	"intensity_3",
-	"material_name",
-	"material_formula"
+    "2_theta_1",
+    "intensity_1",
+    "2_theta_2",
+    "intensity_2",
+    "2_theta_3",
+    "intensity_3",
+    "material_name",
+    "material_formula"
 ]
 
 # ---------- END CONSTANTS ---------- #
@@ -56,49 +56,59 @@ seen_materials = []
 # Fetch each page and write records to csv
 for i in range(1, NUM_RECORDS, RECORDS_PER_PAGE):
 
-	# Fetch the page
-	url = BASE_URL + str(i)
-	print("Fetching", url)
-	page = requests.get(url)
-	soup = BeautifulSoup(page.content, "html.parser")
+    # Fetch the page
+    url = BASE_URL + str(i)
+    print("Fetching", url)
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
 
-	# Get table with XRD data
-	table = soup.find_all("table")[6]
+    # Get table with XRD data
+    table = soup.find_all("table")[6]
 
-	# Loop through each row in table
-	for i, j in enumerate(table.find_all("tr")):
+    # Loop through each row in table
+    for i, j in enumerate(table.find_all("tr")):
 
-		# Skip the header row
-		if i == 0:
-			continue
+        # Skip the header row
+        if i == 0:
+            continue
 
-		# Create a list to store row data to write to csv
-		row = []
+        # Create a list to store row data to write to csv
+        row = []
 
-		# Get a list of all td elements in the row
-		tds = j.find_all("td")
+        # Get a list of all td elements in the row
+        tds = j.find_all("td")
 
-		# If this material has already been added to the database,
-		# don't add it again.
-		material_name = tds[6]
-		if material_name in seen_materials:
-			continue;
+        # If this material has already been added to the database,
+        # don't add it again.
+        material_name = tds[6]
+        if material_name in seen_materials:
+            continue;
 
-		# Keep track of materials that have already been added to the database
-		seen_materials.append(material_name)
+        # Keep track of materials that have already been added to the database
+        seen_materials.append(material_name)
 
-		# Loop through each cell in the row
-		for m, n in enumerate(tds):
+        # Loop through each cell in the row
+        for m, n in enumerate(tds):
 
-			# The data for 2_theta_{1,2,3} needs to be parsed
-			if m == 0 or m == 2 or m == 4:
-				row.append(re.search(r'\((.*?)\)',n.text).group(1))
-			# All other cells can be stored as-is
-			else:
-				row.append(n.text)
+            # The data for 2_theta_{1,2,3} needs to be parsed
+            if m == 0 or m == 2 or m == 4:
+                row.append(re.search(r'\((.*?)\)',n.text).group(1))
+            # All other cells can be stored as-is
+            else:
+                row.append(n.text)
 
-		# Write row to csv
-		writer.writerow(row)
+        # Don't add rows with non-float data in columns that should
+        # have floats (2_thetas and intensities)
+        bad_data = False
+        for cell in row[:6]:
+            try:
+                float(cell)
+            except ValueError:
+                bad_data = True
+
+        if not bad_data:
+            # Write row to csv
+            writer.writerow(row)
 
 # Close csv file
 file.close()
