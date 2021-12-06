@@ -1,14 +1,12 @@
-import abc
+import os
+import pandas as pd
+import numpy as np
 
-class ExperimentalTechnique(metaclass=abc.ABCMeta):
-	@abc.abstractmethod
-	def load_data(self):
-		pass
+class ExperimentalTechnique():
+	def __init__(self, spectrum):
+		self.spectrum = spectrum
 
-	@abc.abstractmethod
-	def filter_baseline(self):
-		pass
-
-	@abc.abstractmethod
-	def get_peak_features(self):
-		pass
+	def load_data(self,filename):
+		input_path = os.path.join(dir, 'Input', str(filename))
+		spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y'])
+		return spectrum
