@@ -13,8 +13,8 @@ def test_constructor():
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     a = Rietveld(cutoff,peak_widths,spectrum)
-    assert(a.x=x)
-    assert(a.y=I)
+    assert(a.x==x)
+    assert(a.y==I)
 
 def test_get_peaks():
     first_peak_idx = 11
