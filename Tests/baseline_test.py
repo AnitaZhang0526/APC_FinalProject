@@ -1,6 +1,6 @@
 import unittest
 import sys
-from Code.baseline import baseline_removal
+from baseline import baseline_removal
 import numpy as np
 
 
