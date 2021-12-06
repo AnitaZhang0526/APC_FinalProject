@@ -1,4 +1,4 @@
-##required libraries are as follows: 
+#required libraries are as follows: 
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
@@ -56,10 +56,10 @@ def baseline_removal(input_data):
     
 
 ##for testing purposes, __main__ provided below: 
-if __name__=="__main__":
+# if __name__=="__main__":
 
-         input_array = [1,1,1,1,1,1,1,1,1,1,1,1]
-         Modpoly_output = BaselineRemoval(input_array) #ftir class hardcodes this array and creates this object 
-         print('Original input:',input_array)
-         print('Modpoly base corrected values:',Modpoly_output)
+#          input_array = [1,1,1,1,1,1,1,1,1,1,1,1]
+#          Modpoly_output = BaselineRemoval(input_array) #ftir class hardcodes this array and creates this object 
+#          print('Original input:',input_array)
+#          print('Modpoly base corrected values:',Modpoly_output)
  
