@@ -1,6 +1,6 @@
 import unittest
 import sys
-from baseline import baseline_removal
+from Code.baseline import baseline_removal
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
