@@ -1,6 +1,6 @@
-#required libraries are as follows: 
-# import numpy as np
-# from sklearn.linear_model import LinearRegression
+##required libraries are as follows: 
+import numpy as np
+from sklearn.linear_model import LinearRegression
 
 """
 BaselineRemoval method takes an array of input data and returns the data with the baseline removed. 
@@ -10,7 +10,7 @@ This script was based on the imp
 lementation available at: https://github.com/StatguyUser/BaselineRemoval
 """
 
-def BaselineRemoval(input_data):
+def baseline_removal(input_data):
         
         #define number of loops performed in the final linear regression to evaluate a baseline
         iterative_loops = 100 
@@ -20,7 +20,7 @@ def BaselineRemoval(input_data):
         The generic Vandermonde matrix forms an NxN matrix that has i^m...i^(m-1)..i^(m-m)etc. for 1<i<N entries in input_data
         The final vandermonde_matrix is flipped horizontally, with the first column of 1's removed 
         """
-        vander_columns = 3 #least squares linear regression in the 
+        vander_columns = 3 #least squares linear regression requiring a degree of 2, hence we create a matrix of 3 columns and subsequently delete column of 1's 
         vander_rows = np.array((list(range(1,len(input_data)+1))))
         #vander_rows = np.array(vander_rows)      
         vandermonde_matrix = np.fliplr(np.vander(vander_rows, vander_columns))
@@ -56,10 +56,10 @@ def BaselineRemoval(input_data):
     
 
 ##for testing purposes, __main__ provided below: 
-# if __name__=="__main__":
+if __name__=="__main__":
 
-#          input_array = [1,2,5,62,24,663]
-#          Modpoly_output = BaselineRemoval(input_array) #ftir class hardcodes this array and creates this object 
-#          print('Original input:',input_array)
-#          print('Modpoly base corrected values:',Modpoly_output)
+         input_array = [1,1,1,1,1,1,1,1,1,1,1,1]
+         Modpoly_output = BaselineRemoval(input_array) #ftir class hardcodes this array and creates this object 
+         print('Original input:',input_array)
+         print('Modpoly base corrected values:',Modpoly_output)
  
