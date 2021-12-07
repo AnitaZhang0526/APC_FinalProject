@@ -60,7 +60,7 @@ def test_find_best_fit():
 
 @mock.patch.object(Rietveld,'find_best_fit')
 def test_get_params(mock):
-    rietveld_input = Rietveld(x,I)
+    rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
     best_model_choices = ['GaussianModel']*10
     best_values = {'m0_amplitude': 1.0291383664365865,
                    'm0_center': 1.00835563344582,
