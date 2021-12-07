@@ -4,7 +4,7 @@ from LeBail import LeBail
 
 class PeakProfileFitting_Factory():
 	def factory_method(fitting_type):
-	    if fitting_type == 'Rietveld':
+	    if fitting_type == 'rietveld':
 	        return Rietveld()
 	    elif fitting_type == 'Pawley':
 	        return Pawley()
