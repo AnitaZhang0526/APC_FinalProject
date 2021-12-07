@@ -7,8 +7,8 @@ f = open('Malli_80s.allASC.ASC', 'r')
 data = np.genfromtxt(f, delimiter=' ')
 x = data[:,0]
 I = data[:,1]
-spectrum = pd.DataFrame({'x':x,'y':I})
 I = I/max(I)
+spectrum = pd.DataFrame({'x':x,'y':I})
 
 def test_get_peaks():
     first_peak_idx = 11
