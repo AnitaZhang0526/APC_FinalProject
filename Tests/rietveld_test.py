@@ -10,13 +10,6 @@ I = data[:,1]
 spectrum = pd.DataFrame({'x':x,'y':I})
 I = I/max(I)
 
-def test_constructor():
-    peak_widths = np.arange(5,15)
-    cutoff = 0.9
-    a = Rietveld(cutoff,peak_widths,spectrum)
-    assert(sum(a.x==x)==0)
-    assert(sum(a.I==I)==0)
-
 def test_get_peaks():
     first_peak_idx = 11
     peak_widths = np.arange(5,15)
