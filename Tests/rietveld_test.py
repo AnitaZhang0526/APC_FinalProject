@@ -1,6 +1,7 @@
 from unittest import mock
 from Code.Rietveld import Rietveld
 import numpy as np
+import pandas as pd
 
 f = open('Malli_80s.allASC.ASC', 'r')
 data = np.genfromtxt(f, delimiter=' ')
