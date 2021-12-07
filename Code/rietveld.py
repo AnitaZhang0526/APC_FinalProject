@@ -11,7 +11,7 @@ class Rietveld(PeakProfileFitting):
     # x is the independent variable, and I is the depedent variable
     def __init__(self, cutoff,peak_widths,spectrum):
         self.cutoff = cutoff
-        self.peak_width = peak_widths
+        self.peak_widths = peak_widths
         self.x = spectrum['x']
         self.I = spectrum['y']
 
