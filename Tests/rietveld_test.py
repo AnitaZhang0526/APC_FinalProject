@@ -15,7 +15,7 @@ def test_constructor():
     cutoff = 0.9
     a = Rietveld(cutoff,peak_widths,spectrum)
     assert((a.x==x).all())
-    assert((a.y==I).all())
+    assert((a.I==I).all())
 
 def test_get_peaks():
     first_peak_idx = 11
