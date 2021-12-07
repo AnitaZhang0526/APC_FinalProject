@@ -60,6 +60,8 @@ def test_find_best_fit():
 
 @mock.patch.object(Rietveld,'find_best_fit')
 def test_get_params(mock):
+    cutoff = 0.9
+    peak_widths = np.arange(5,15)
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
     best_model_choices = ['GaussianModel']*10
     best_values = {'m0_amplitude': 1.0291383664365865,
@@ -92,8 +94,6 @@ def test_get_params(mock):
                    'm9_amplitude': 0.1606060078236745,
                    'm9_center': 34.48205912997776,
                    'm9_sigma': 0.10500064381692818}
-    cutoff = 0.9
-    peak_widths = np.arange(5,15)
     mock.return_value = [best_model_choices, best_values]
     FWHM,center,intensity = rietveld_input.get_params()
     assert(len(FWHM)==10)
