@@ -40,7 +40,7 @@ def test_make_one_model():
     model_choices = []
     for i in range(L):
         model_choices.append('GaussianModel')
-    spec = rietveld_input.make_spec(model_choices)
+    spec = rietveld_input.make_spec(model_choices,peak_indices)
     composite_model, params = rietveld_input.make_one_model(spec)
     print('yay')
     assert(len(params)==L*5)
