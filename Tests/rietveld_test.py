@@ -38,9 +38,9 @@ def test_make_spec():
     assert(spec['modelType'].shape[0]==len(peak_indices))
     
 def test_make_one_model():
-    rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
-    peak_widths = np.arange(5,15)
     cutoff = 0.9
+    peak_widths = np.arange(5,15)
+    rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
     peak_indices = rietveld_input.get_peaks()
     L = peak_indices.shape[0]
     model_choices = []
