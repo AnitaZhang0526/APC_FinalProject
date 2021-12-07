@@ -44,10 +44,10 @@ def test_make_one_model():
     assert(len(params)==L*5)
 
 def test_find_best_fit():
+    print('yay')
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
-    print('yay')
     best_model_choices, best_values = rietveld_input.find_best_fit()
     assert(len(best_model_choices)==10)
     assert(isinstance(best_values,dict))
