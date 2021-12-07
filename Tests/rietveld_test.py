@@ -14,8 +14,8 @@ def test_constructor():
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     a = Rietveld(cutoff,peak_widths,spectrum)
-    assert(a.x==x)
-    assert(a.y==I)
+    assert(a.x.all()==x)
+    assert(a.y.all()==I)
 
 def test_get_peaks():
     first_peak_idx = 11
@@ -51,9 +51,9 @@ def test_make_one_model():
     assert(len(params)==L*5)
 
 def test_find_best_fit():
-    rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
+    rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
     best_model_choices, best_values = rietveld_input.find_best_fit()
     assert(len(best_model_choices)==10)
     assert(isinstance(best_values,dict))
