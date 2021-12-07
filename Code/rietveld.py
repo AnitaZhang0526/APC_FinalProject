@@ -88,7 +88,7 @@ class Rietveld(PeakProfileFitting):
         best_values = []
         for i in range(n_trials):
             model_choices = [options[i]]*len(peak_indices)
-            spec = self.make_spec(self.peak_widths,model_choices,peak_indices)
+            spec = self.make_spec(model_choices)
             composite_model,params = self.make_one_model(spec)
             predicted_model = composite_model.fit(self.I, params, x=self.x)
             results = predicted_model.eval(params=params)
