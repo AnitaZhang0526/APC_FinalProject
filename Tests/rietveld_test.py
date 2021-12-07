@@ -27,7 +27,7 @@ def test_make_spec():
     model_choices = []
     for i in range(L):
         model_choices.append('GaussianModel')
-    spec = rietveld_input.make_spec(model_choices)
+    spec = rietveld_input.make_spec(model_choices,peak_indices)
     assert(spec['modelType'].shape[0]==len(peak_indices))
     
 def test_make_one_model():
