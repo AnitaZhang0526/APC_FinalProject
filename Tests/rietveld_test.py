@@ -41,10 +41,10 @@ def test_make_one_model():
         model_choices.append('GaussianModel')
     spec = rietveld_input.make_spec(model_choices)
     composite_model, params = rietveld_input.make_one_model(spec)
+    print('yay')
     assert(len(params)==L*5)
 
 def test_find_best_fit():
-    print('yay')
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
