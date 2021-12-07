@@ -1,5 +1,5 @@
 from unittest import mock
-from Code.Rietveld import Rietveld
+from Code.rietveld import Rietveld
 import numpy as np
 import pandas as pd
 
@@ -51,7 +51,7 @@ def test_make_one_model():
     assert(len(params)==L*5)
 
 def test_find_best_fit():
-    rietveld_input = Rietveld(x,I)
+    rietveld_input = Rietveld(cutoff,peak_widths,spectrum)
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     best_model_choices, best_values = rietveld_input.find_best_fit()
