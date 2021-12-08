@@ -15,7 +15,7 @@ def test_baseline_removal():
     return np.testing.assert_array_equal(answer, correct, 'not equal bad bad bad')
 
 
-if __name__=="__main__":
+# if __name__=="__main__":
     
-        answer = test_baseline_removal()
-        print(answer)
+#         answer = test_baseline_removal()
+#         print(answer)
