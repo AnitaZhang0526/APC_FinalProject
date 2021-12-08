@@ -1,6 +1,5 @@
+pytest
 numpy
 pandas
 scipy
 lmfit
-scipy
-scikit-learn
