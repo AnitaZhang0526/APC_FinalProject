@@ -47,7 +47,6 @@
 60.94,100,34.47,100,19.62,80,Chromphyllite,"(K,Ba)(Cr,Al)2[AlSi3O10](OH,F)2"
 60.90,100,19.45,100,5.73,100,Nontronite,"Na0.3Fe+++2(Si,Al)4O10(OH)2•n(H2O)"
 60.81,100,37.28,100,26.51,90,Shirokshinite,K(NaMg2)Si4O10F2
-60.46,-,34.33,-,22.72,-,Kurumsakite,"(Zn,Ni,Cu)8Al8V2Si5O35•27(H2O) (?)"
 60.46,100,19.36,100,5.59,80,Hectorite,"Na0,3(Mg,Li)3Si4O10(OH)2"
 60.07,100,50.55,100,30.38,100,Tazheranite,CaTiZr2O8
 60.02,100,38.27,60,33.67,60,Mcgovernite,Mn9Mg4Zn2As2Si2O17(OH)14
@@ -62,7 +61,6 @@
 58.60,100,34.20,100,30.59,90,Calderite,"(Mn++,Ca)3(Fe+++,Al)2(SiO4)3"
 58.07,100,49.50,100,29.36,100,Cesstibtantite,"(Cs,Na)SbTa4O12"
 57.95,100,50.67,100,42.40,100,Lindsleyite,"(Ba,Sr)(Ti,Cr,Fe,Mg)21O38"
-57.32,-,30.80,-,26.08,-,Dessauite,"(Sr,Pb)(Y,U)(Ti,Fe+++)20O38"
 57.21,100,28.23,100,34.02,80,Cobaltaustinite,CaCo(AsO4)(OH)
 57.17,100,35.60,100,30.27,100,Maghemite,gamma-Fe+++2O3
 56.86,100,48.57,100,33.86,100,Zavaritskite,BiOF
@@ -70,12 +68,10 @@
 56.78,100,30.27,100,42.19,100,Bismutite,Bi2(CO3)O2
 56.59,100,42.19,100,42.99,60,Pseudosinhalite,Mg2Al3B2O9(OH)
 56.44,100,33.68,100,16.71,100,Murdochite,"PbCu6O8-x(Cl,Br)2x"
-56.36,-,45.30,-,31.58,-,Hapkeite,Fe2Si
 56.29,100,33.04,85,37.07,65,Pyrite,FeS2
 56.21,100,26.91,100,11.95,100,Akaganeite,"Fe+++(O,OH,Cl)"
 56.21,100,22.21,98,38.61,69,Nsutite,(Mn++++1-x)(Mn++x)(O2-2x)(OH2x) where x = 0.06-0.07
 56.03,100,67.31,95,31.47,85,Simpsonite,"Al4(Ta,Nb)3O13(OH)"
-55.66,-,41.99,-,36.65,-,Akhtenskite,Mn++++O2
 55.04,100,35.32,90,32.05,80,Kimzeyite,"Ca3(Zr,Ti)2(Si,Al,Fe+++)3O12"
 54.94,100,65.70,60,41.78,60,Kleberite,FeTi6O13•4(H2O) (?)
 54.94,100,33.54,97,24.50,96,Eskolaite,Cr2O3
@@ -242,7 +238,6 @@
 45.07,100,29.96,75,26.75,70,Aurostibite,AuSb2
 44.90,100,28.68,100,32.10,80,Bariosincosite,Ba(V++++O)2(PO4)2•4(H2O)
 44.83,100,43.25,100,38.27,100,Calcioancylite-(Ce),CaCe(CO3)2(OH)•(H2O)
-44.83,-,38.27,-,31.59,-,Tertschite,Ca4B10O19•20(H2O)
 44.83,100,31.82,70,28.68,70,Korzhinskite,CaB2O4•(H2O)
 44.83,100,31.36,100,29.36,100,Marianoite,"Na2Ca4(Nb,Zr)2(Si2O7)2(O,F)4"
 44.83,100,26.83,90,53.01,80,Berzelianite,Cu2Se
@@ -254,7 +249,6 @@
 44.51,100,51.85,42,76.37,21,Nickel,Ni
 44.41,100,48.90,50,78.46,24,Brownleeite,MnSi
 44.39,100,81.75,30,115.26,20,Chromium,Cr
-44.37,100,82.35,90, <90 ,80,Ferchromide,"Cr3Fe1-x(x=0,6)"
 44.37,100,17.37,100,8.75,60,Uranocircite,Ba(UO2)2(PO4)2•12(H2O)
 44.28,100,45.98,67,39.89,44,Mavlyanovite,Mn5Si3
 44.23,100,38.61,50,78.61,40,IMA2008-055,"(Ni,Fe,Ir)"
@@ -370,7 +364,6 @@
 40.11,100,29.04,100,42.78,80,Laitakarite,"Bi4(Se,S)3"
 40.04,100,72.74,80,47.30,60,Damiaoite,PtIn2
 40.02,100,28.84,40,42.46,20,Poubaite,"PbBi2Se2(Te,S)2"
-4-,100,39.64,100,52.65,95,Chondrodite,"(Mg,Fe++)5(SiO4)2(F,OH)2"
 39.93,100,62.77,70,36.84,70,Humite,"(Mg,Fe++)7(SiO4)3(F,OH)2"
 39.86,100,41.78,90,153.71,40,Keithconnite,Pd3-xTe(x=0.14 to 0.43)
 39.86,100,29.06,100,42.82,90,Sobolevskite,PdBi
@@ -427,7 +420,6 @@
 38.02,100,18.59,90,50.85,55,Brucite,Mg(OH)2
 37.93,100,108.35,80,43.04,80,Eugenite,Ag9Hg2
 37.93,100,77.40,80,44.14,70,Bilibinskite,Au3Cu2PbTe2
-37.93,100,4-,60,35.19,40,Allargentum,Ag1-xSbx(x=0.009-0.16)
 37.93,100,30.48,60,42.19,50,Hibbingite,"(Fe,Mg)2(OH)3Cl"
 37.90,100,18.35,90,33.70,80,Cumengite,Cu20Pb21Cl42(OH)40•6H2O
 37.88,100,13.70,76,31.42,55,Drysdallite,"Mo(Se,S)2"
@@ -806,7 +798,6 @@
 33.47,100,29.74,66,10.90,56,Fluoro-sodic-pedrizite,NaLi2(Mg2Al2Li)S5Si8O22F2
 33.47,100,12.40,80,24.96,60,Pyrosmalite-(Fe),"(Fe++,Mn)8Si6O15(OH,Cl)10"
 33.46,100,34.06,64,47.30,36,Jagueite,Cu2Pd3Se4
-33.46,-,30.86,-,26.86,-,Berdesinskiite,V+++2TiO5
 33.46,100,27.59,60,9.02,60,Johninnesite,Na2Mg4Mn++12(AsO4)2(Si12O35)(OH)6
 33.46,100,24.10,100,11.98,100,Srebrodolskite,Ca2Fe+++2O5
 33.45,100,33.24,75,25.82,65,Ferrorosemaryite,[ ]NaFe++Fe+++Al(PO4)3
@@ -821,7 +812,6 @@
 33.33,100,34.56,75,26.03,60,Hagendorfite,"NaCaMn(Fe++,Fe+++,Mg)2(PO4)3"
 33.33,100,29.73,42,36.62,39,Wadalite,Ca6Al5Si2O16Cl3
 33.32,100,33.52,65,33.76,47,Merwinite,Ca3Mg(SiO4)2
-33.32,100,26.37,80,2-,80,IMA2009-012,NaNa2(Mg2Al2Li)Si8O22F2
 33.32,100,8.30,60,28.98,55,Nyboite,NaNa2(Mg3Al2)Si7AlO22(OH)2
 33.30,100,29.80,69,30.14,48,Schlegelite,Bi7O4(MoO4)2(AsO4)3
 33.30,100,29.71,65,57.28,49,Goldmanite,"Ca3(V,Al,Fe+++)2(SiO4)3"
@@ -1082,7 +1072,6 @@
 31.94,100,35.02,90,54.94,80,Manganberzeliite,"(Ca,Na)3(Mn,Mg)2(AsO4)3"
 31.94,100,33.13,60,32.27,55,Apatite-(CaF),Ca5(PO4)3F
 31.94,100,29.76,90,28.77,90,Yuksporite,"(Sr,Ba)2K4(Ca,Na)14([ ],Mn,Fe){(Ti,Nb)4(O,OH)4[Si6O17]2[Si2O7]3}(H2O,OH)n, n~3"
-31.94,-,28.68,-,22.04,-,Suolunite,Ca2Si2O5(OH)2•(H2O)
 31.94,100,25.06,100,9.71,60,Synchysite-(Ce),CaCe(CO3)2F
 31.94,100,23.39,100,15.13,35,Bazirite,BaZrSi3O9
 31.94,100,15.87,67,30.27,17,Orthojoaquinite-(La),"Ba2Na(La,Ce)2Fe++Ti2Si8O26(OH,O,F)•H2O"
@@ -1468,7 +1457,6 @@
 30.52,100,25.92,44,30.12,36,Dixenite,Cu+Mn++14Fe+++(As+++O3)5(SiO4)2(As+++++O4)(OH)6
 30.49,50,57.60,25,45.67,25,Zincospiroffite,Zn2Te3O8
 30.49,100,34.11,91,54.37,42,IMA2007-058,TiO2
-30.49,100,3-,100,24.90,90,Watkinsonite,"PbCu2Bi4(Se,S)8"
 30.48,100,22.90,80,55.29,80,Blixite,Pb8O5(OH)2Cl4
 30.48,100,15.64,80,41.58,80,Florencite-(Nd),"(Nd,Ce)Al3(PO4)2(OH)6"
 30.48,100,7.05,50,41.38,50,Steigerite,AlVO4•3(H2O)
@@ -1655,8 +1643,6 @@
 30.01,100,32.51,30,22.26,30,Philolithite,"Pb12O6Mn(Mg,Mn)2(Mn,Mg)4(SO4)(CO3)4Cl4(OH)12"
 30.01,100,29.51,80,28.72,35,Aeschynite-(Ce),"(Ce,Ca,Fe)(Ti,Nb)2(O,OH)6"
 30.01,100,28.06,80,49.58,70,Muckeite,CuNiBiS3
-3-,100,30.10,95,24.41,46,Titanowodginite,"(Mn++,Fe++)(Ti,Sn)(Ta,Nb)2O8"
-3-,100,30.10,95,24.41,46,IMA2000-026,"(Mn,Li)4(Ta,Sn)4(Ta,Nb)8O32"
 29.99,100,31.33,88,20.52,68,Labyrinthite,"(Na,K,Sr)35Ca12Fe3Zr6TiSi51O144(O,OH,H2O)9Cl3"
 29.99,100,24.20,40,53.01,16,Columbite-(Fe),Fe++Nb2O6
 29.98,100,24.28,70,38.46,65,Marumoite,Pb32As40S92
@@ -1735,7 +1721,6 @@
 29.80,100,30.23,95,18.31,65,Hubnerite,MnWO4
 29.80,100,28.10,70,25.41,70,Stibivanite,Sb+++2V++++O5
 29.80,100,10.52,100,17.04,60,Francevillite,"(Ba,Pb)(UO2)2V2O8•5(H2O)"
-29.80,100,6.18,100,13.85,-,Lintisite,Na3LiTi2Si4O14•2(H2O)
 29.79,100,58.85,90,49.55,90,Bismutomicrolite,"(Bi,Ca)(Ta,Nb)2O6(OH)"
 29.79,100,30.24,95,31.66,90,Bario-orthojoaquinite,"Fe++2(Ba,Sr)4Ti2[Si4O12]O2•(H2O)"
 29.78,100,14.78,77,49.70,40,Bartonite,K3Fe10S14
@@ -1884,7 +1869,6 @@
 29.36,100,30.55,83,11.60,78,Mrazekite,Bi+++2Cu++3(PO4)2O2(OH)2•2(H2O)
 29.36,100,28.13,100,27.08,70,Sarkinite,Mn++2(AsO4)(OH)
 29.36,100,28.11,65,14.32,50,Parabariomicrolite,BaTa4O10(OH)2•2H20
-29.36,100,28.04,70,3-,50,Oboyerite,Pb6H6(Te++++O3)3(Te++++++O6)2•2(H2O)
 29.36,100,26.59,89,16.37,66,Studenitsite,NaCa2[B9O14(OH)4]•2(H2O)
 29.36,100,24.23,100,36.53,75,Peprossiite-(Ce),"(Ce,La)(Al3O)2/3B4O10"
 29.36,100,20.69,90,28.13,80,Cornetite,Cu3(PO4)(OH)3
@@ -2885,7 +2869,6 @@
 25.43,100,20.64,100,18.43,100,Halotrichite,Fe++Al2(SO4)4•22(H2O)
 25.43,100,18.63,85,19.36,65,Mendozite,NaAl(SO4)2•11(H2O)
 25.43,100,8.37,100,32.17,80,Nalivkinite,Li2NaFe++7Ti2Si8O24(OH)4F
-25.43,-,30.93,-,31.19,-,Vanadoandrosite-(Ce),"(Mn++,Ca)(REE)V+++AlMn++(Si2O7)(SiO4)O(OH)"
 25.41,100,44.53,40,15.21,35,Millosevichite,"(Al,Fe+++)2(SO4)3"
 25.41,100,35.66,19,19.14,15,Serrabrancaite,MnPO4•(H2O)
 25.39,100,18.84,100,18.60,100,Acuminite,SrAlF4(OH)•(H2O)
@@ -2996,7 +2979,6 @@
 24.57,100,33.41,55,49.21,45,Chromatite,CaCrO4
 24.57,100,32.10,90,25.35,90,Pekovite,SrB2Si2O8
 24.57,100,28.31,50,26.83,50,Giessenite,"Pb13(Cu,Ag)(Bi,Sb)9S28 (?)"
-24.56,100,2-,70,29.07,50,Waterhouseite,Mn7(PO4)2(OH)8
 24.55,100,13.73,50,34.26,40,Dolerophanite,Cu2(SO4)O
 24.55,100,11.22,97,30.40,57,Plumbophyllite,Pb2Si4O10•H2O
 24.52,100,47.54,90,28.77,80,Freudenbergite,Na2Fe+++2Ti6O16
@@ -3366,7 +3348,6 @@
 19.22,100,26.27,60,19.36,50,Gilmarite,Cu3(AsO4)(OH)3
 19.20,100,33.93,50,38.10,20,Feitknechtite,beta-Mn+++O(OH)
 19.20,100,23.20,90,27.33,85,Ohmilite,"Sr3(Ti,Fe+++)(Si2O6)2(O,OH)•2-3(H2O)"
-19.20,-,15.34,-,15.21,-,Rubicline,"(Rb,K)AlSi3O8"
 19.17,100,33.50,60,25.89,40,Xocomecatlite,Cu3Te++++++O4(OH)4
 19.13,100,26.25,70,17.92,50,Brandholzite,Mg[Sb(OH)6]2•6(H2O)
 19.12,100,11.02,92,17.84,68,Cejkaite,Na4(UO2)(CO3)3
@@ -3394,7 +3375,6 @@
 18.73,100,47.25,90,36.06,50,Jacquesdietrichite,Cu2[BO(OH)2](OH)3
 18.63,100,33.09,95,21.00,65,Metavariscite,AlPO4•2(H2O)
 18.63,100,28.87,80,9.72,60,Kleemanite,ZnAl2(PO4)2(OH)2•3(H2O)
-18.63,-,11.47,-,8.03,-,Karpinskite,"(Mg,Ni)2Si2O5(OH)2 (?)"
 18.59,100,13.85,80,28.04,70,Mangangordonite,"(Mn++,Fe++,Mg)Al2(PO4)2(OH)2•8(H2O)"
 18.55,100,39.86,40,37.60,40,Nordstrandite,Al(OH)3
 18.55,100,23.72,80,21.81,80,Derriksite,Cu4(UO2)(SeO3)2(OH)6
@@ -3415,7 +3395,6 @@
 18.39,100,20.45,40,20.64,20,Gibbsite,Al(OH)3
 18.39,100,15.59,90,35.02,65,Borax,Na2B4O5(OH)4•8(H2O)
 18.35,100,7.96,50,12.51,40,Zincaluminite,Zn6Al6(SO4)2(OH)26•5(H2O)
-18.32,-,20.06,-,20.98,-,Akdalaite,5(Al2O3)•(H2O)
 18.31,100,34.60,60,9.14,60,Cyanophyllite,Cu++5Al2(SbO4)3(OH)7•9(H2O)
 18.31,100,32.79,82,31.15,80,Noelbensonite,BaMn+++2(Si2O7)(OH)2•(H2O)
 18.31,100,9.17,100,32.57,60,Utahite,Cu5Zn3(Te++++++O4)4(OH)8•7(H2O)
@@ -3495,7 +3474,6 @@
 16.94,100,29.55,34,50.17,31,Calciohilairite,CaZrSi3O9•3(H2O)
 16.94,100,16.31,80,17.80,75,Werdingite,"(Mg,Fe)2Al14B4Si4O37"
 16.94,100,8.45,82,25.53,54,Christelite,Zn3Cu2(SO4)2(OH)6•4(H2O)
-16.91,100,1-,60,27.41,40,Ilinskite,NaCu5O2(SeO3)2Cl
 16.87,100,20.40,50,23.97,40,Henmilite,Ca2Cu[B(OH)4]2(OH)4
 16.81,100,14.78,95,30.81,70,Nasinite,Na2B5O8(OH)•2(H2O)
 16.78,100,14.75,60,28.13,50,Hilairite,Na2ZrSi3O9•3(H2O)
@@ -3521,7 +3499,6 @@
 16.10,100,14.53,90,17.04,70,Refikite,C19H31COOH
 16.10,100,10.09,100,12.10,90,Swartzite,CaMg(UO2)(CO3)3•12(H2O)
 16.10,100,10.78,100,30.99,80,Bobkingite,Cu5Cl2(OH)8(H2O)2
-16.04,100,31.54,-,11.16,-,Caoxite,Ca(C2O4)•3(H2O)
 16.04,100,49.47,90,37.62,90,Tarkianite,"(Cu,Fe)(Re,Mo)4S8"
 16.01,100,32.39,70,20.99,60,Rokuhnite,Fe++Cl2•(H2O)
 15.98,100,32.29,90,19.58,90,Andalusite,Al2SiO5 = Al[6]Al[5]OSiO4
@@ -3587,7 +3564,6 @@
 14.89,100,18.41,65,28.14,44,Ruifrancoite,"Ca2([  ],Mn)2(Fe+++,Mn,Mg)4Be4(PO4)6(OH)4•6H2O"
 14.88,100,29.65,90,13.70,80,Paraumbite,K3Zr2HSi6O18•n(H2O) n=3 to 7
 14.85,100,9.22,90,28.04,70,Roscherite,"Ca(Mn++,Fe++)5Be4(PO4)6(OH)4•6(H2O)"
-14.83,-,20.49,-,21.08,-,Kumdykolite,NaAlSi3O8
 14.83,100,14.48,80,28.87,70,Nabesite,Na2BeSi4O10•4(H2O)
 14.80,100,28.29,90,9.32,90,Guimaraesite,"Ca2(Zn,Mg,Fe)5Be4(PO4)6(OH)4•6H2O"
 14.78,100,24.85,90,16.19,70,Melanophlogite,"SiO2•n(C,H,O,S)"
@@ -3861,7 +3837,6 @@
 11.33,100,22.72,90,34.47,40,Stichtite,Mg6Cr2(CO3)(OH)16•4(H2O)
 11.33,100,29.44,70,22.76,30,Ansermetite,MnV2O6•4(H2O)
 11.32,100,36.04,90,24.92,60,Apophyllite-(KF),"(K,Na)Ca4Si8O20(F,OH)•8(H2O)"
-11.31,-,19.45,-,22.55,-,Kokchetavite,KAlSi3O8
 11.29,100,27.33,70,29.06,70,Geminite,Cu++2As+++++2O7•3(H2O)
 11.29,100,22.78,90,25.35,60,Uranophane-beta,Ca[(UO2)SiO3(OH)]2•(H2O)
 11.29,100,9.94,100,62.68,80,Ankinovichite,"(Ni,Zn)Al4(VO3)2(OH)12(H2O)2.5"
@@ -4032,9 +4007,6 @@
 10.03,100,6.49,57,28.85,53,Jimthompsonite,"(Mg,Fe++)5Si6O16(OH)2"
 10.02,100,31.57,90,31.42,80,Niahite,"(NH4)(Mn++,Mg,Ca)PO4•(H2O)"
 10.01,100,30.35,20,21.08,10,Fedotovite,K2Cu++3(SO4)3O
-1-,100,60.02,40,34.20,20,Honessite,Ni6Fe+++2(SO4)(OH)16•4(H2O)
-1-,100,32.27,80,15.76,50,Arseniosiderite,Ca2Fe+++3(AsO4)3O2•3(H2O)
-1-,100,28.13,80,26.35,70,Tengchongite,CaU++++++6Mo++++++2O25•12(H2O)
 9.99,100,35.45,50,31.94,50,Schollhornite,Na0.3CrS2•(H2O)
 9.96,100,29.78,80,14.07,60,Botryogen,MgFe+++(SO4)2(OH)•7(H2O)
 9.93,100,27.58,80,10.51,60,Allanpringite,Fe3(PO4)2(OH)3•5H2O
