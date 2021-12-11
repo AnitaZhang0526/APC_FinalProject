@@ -1,15 +1,10 @@
-# compare_to_database.py
-#
-# This class takes in peak information
-# and returns the closest match from the database.
-
 import pandas as pd
 import numpy as np
 from scipy.spatial import distance
 
 class CompareToDatabase:
-    """This class takes in peak information
-       and returns the closest match from the database.
+    """This class takes in peak information and 
+    returns the closest match from the database.
 
     :param data_type: "xrd" or "ftir", defaults to None
     :type client: str
@@ -20,14 +15,20 @@ class CompareToDatabase:
     :type peaks: list
     """
 
-    # data_type = "xrd" or "ftir"
-    # peaks = 2-D array of peak locations (2-theta) and their relative intensities
-    #  ex: [[14.24, 90], [38.88, 100], ...]
     def __init__(self, data_type = None, peaks = []):
+        """Constructor method
+        """
         self.data_type = data_type
         self.peaks = peaks
 
     def match(self):
+        """Returns the closest material match from the XRD or FTIR
+        database, based on data type.
+
+        :return: Returns the closest material match
+        :rtype: list with attributes in the following order: 
+            [2_theta_1, intensity_1, 2_theta_2, intensity_2, 2_theta_3, intensity_3, material_name, material_formula]
+        """
         match = None;
 
         if self.data_type == "xrd":
@@ -39,6 +40,7 @@ class CompareToDatabase:
 
     # --------- Private methods ---------
 
+    # Returns match from XRD database
     def _match_xrd(self):
         match = None
         min_distance = float("inf")
@@ -80,15 +82,18 @@ class CompareToDatabase:
 
         return match
 
+    # Takes all XRD peaks and returns the three most intense
     def _xrd_most_intense_peaks(self, peaks):
         sorted_peaks = sorted(peaks, key = lambda x: x[1], reverse = True)
         return sorted_peaks[:3]
 
+    # Calculates euclidean distances between two sets of three peaks
     def _xrd_distance(self, input_peaks, db_peaks):
         i = np.array(input_peaks).flatten()
         d = np.array(db_peaks).flatten()
         return distance.euclidean(i, d)
 
+    # Returns match from FTIR database
     def _match_ftir(self):
         # TODO this method will be filled in later
         return None
