@@ -11,7 +11,7 @@ class Rietveld(PeakProfileFitting):
     # x is the independent variable, and I is the depedent variable
     def __init__(self, cutoff,peak_widths,spectrum):
         self.cutoff = cutoff
-        self.peak_width = peak_widths
+        self.peak_widths = peak_widths
         self.x = spectrum['x']
         self.I = spectrum['y']
 
@@ -28,13 +28,12 @@ class Rietveld(PeakProfileFitting):
         c = np.sum(np.power(results-self.I, 2))/len(self.x)
         return c
 
-    def make_spec(self,model_choices):
+    def make_spec(self,model_choices,peak_indices):
         modelType = []
         height = []
         sigma = []
         center = []
         x_range = np.max(self.x)-np.min(self.x)
-        peak_indices = self.get_peaks()
         for model_idx,peak_idx in enumerate(peak_indices):
             modelType.append(model_choices[model_idx])
             height.append(self.I[peak_idx])
@@ -80,7 +79,7 @@ class Rietveld(PeakProfileFitting):
         return composite_model, params
 
     def find_best_fit(self):
-        peak_indices = self.get_peaks(self.cutoff,self.peak_widths)
+        peak_indices = self.get_peaks()
         options = ['GaussianModel','LorentzianModel','VoigtModel']
         n_trials = len(options)
         lowest_cost = np.inf
@@ -88,7 +87,7 @@ class Rietveld(PeakProfileFitting):
         best_values = []
         for i in range(n_trials):
             model_choices = [options[i]]*len(peak_indices)
-            spec = self.make_spec(self.peak_widths,model_choices,peak_indices)
+            spec = self.make_spec(model_choices,peak_indices)
             composite_model,params = self.make_one_model(spec)
             predicted_model = composite_model.fit(self.I, params, x=self.x)
             results = predicted_model.eval(params=params)
