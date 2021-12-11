@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from Code.PeakProfileFitting import PeakProfileFitting 
+from PeakProfileFitting import PeakProfileFitting 
 
 class Rietveld(PeakProfileFitting):  
 
@@ -12,13 +12,13 @@ class Rietveld(PeakProfileFitting):
     def __init__(self, cutoff,peak_widths,spectrum):
         self.cutoff = cutoff
         self.peak_width = peak_widths
-        self.x = spectrum['x']
-        self.I = spectrum['y']
+        self.x = spectrum[0]
+        self.I = spectrum[1]
 
     def get_peaks(self):
         b,a = signal.butter(2, self.cutoff, 'low')
         I_filtered = signal.filtfilt(b,a,self.I)
-        peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_widths)
+        peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_width)
         threshold = 0.20
         idx =(self.I[peak_indicies]>threshold)
         peak_indicies = peak_indicies[idx]
@@ -38,7 +38,7 @@ class Rietveld(PeakProfileFitting):
         for model_idx,peak_idx in enumerate(peak_indices):
             modelType.append(model_choices[model_idx])
             height.append(self.I[peak_idx])
-            sigma.append(x_range/len(self.x)*np.min(self.peak_widths)),
+            sigma.append(x_range/len(self.x)*np.min(self.peak_width)),
             center.append(self.x[peak_idx])
         spec = pd.DataFrame({'modelType':modelType,
                              'height':height,
@@ -80,7 +80,7 @@ class Rietveld(PeakProfileFitting):
         return composite_model, params
 
     def find_best_fit(self):
-        peak_indices = self.get_peaks(self.cutoff,self.peak_widths)
+        peak_indices = self.get_peaks()
         options = ['GaussianModel','LorentzianModel','VoigtModel']
         n_trials = len(options)
         lowest_cost = np.inf
@@ -88,7 +88,7 @@ class Rietveld(PeakProfileFitting):
         best_values = []
         for i in range(n_trials):
             model_choices = [options[i]]*len(peak_indices)
-            spec = self.make_spec(self.peak_widths,model_choices,peak_indices)
+            spec = self.make_spec(model_choices)
             composite_model,params = self.make_one_model(spec)
             predicted_model = composite_model.fit(self.I, params, x=self.x)
             results = predicted_model.eval(params=params)
