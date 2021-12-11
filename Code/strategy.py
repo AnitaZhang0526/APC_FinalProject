@@ -10,7 +10,7 @@ class Strategy:
         height = []
         sigma = []
         center = []
-        x_range = np.max(self.x)-np.min(self.x)
+        x_range = np.max(x)-np.min(x)
         for model_idx,peak_idx in enumerate(peak_indices):
             modelType.append(model_choices[model_idx])
             height.append(I[peak_idx])
