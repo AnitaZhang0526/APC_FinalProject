@@ -1,6 +1,6 @@
 import unittest
 import sys
-from Code.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression #from baseline import baseline_removal, linear_regression, vandermonde_matrix
+from Code.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
@@ -14,7 +14,7 @@ def test_baseline_removal():
 
     np.testing.assert_array_equal(answer, correct)
 
-def test_vandermonde_matrix():git p
+def test_vandermonde_matrix():
 
     test_data = np.ones(5)
     answer = vandermonde_matrix(test_data)
