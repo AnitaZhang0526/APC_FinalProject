@@ -18,7 +18,6 @@ def test_get_peaks():
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
     peaks_found = rietveld_input.get_peaks()
-    print(peaks_found)
     assert(peaks_found[0]==first_peak_idx)
     
 def test_make_one_model():
@@ -32,9 +31,8 @@ def test_make_one_model():
     for i in range(L):
         model_choices.append('GaussianModel')
     strategy = Strategy()
-    spec = strategy.make_one_spec(model_choices,peak_indices)
+    spec = strategy.make_one_spec(model_choices,peak_indices,rietveld_input.I,rietveld_input.x,rietveld_input.peak_widths)
     composite_model, params = rietveld_input.make_one_model(spec)
-    print('yay')
     assert(len(params)==L*5)
 
 def test_find_best_fit():

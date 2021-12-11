@@ -10,7 +10,7 @@ def test_make_one_spec():
     x = np.arange(0,90,0.05)
     peak_widths = np.arange(5,15)
     spec = strategy.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
-    assert(spec['modelType'] == model_choices)
+    assert((spec['modelType'] == model_choices).all())
     assert(len(spec['height']) == 11)
 
 def test_make_specs():
