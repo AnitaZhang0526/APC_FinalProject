@@ -7,17 +7,25 @@ from Code.peak import Peak
 from Code.strategy import Strategy
 
 class Rietveld(PeakProfileFitting):  
-
-    # initialize the class
-    # the class has two properties, each a float array from input file
-    # x is the independent variable, and I is the depedent variable
-    def __init__(self, cutoff,peak_widths,spectrum,strategy):
+    """
+    : Rietveld inherits from PeakProfileFitting
+    : The class has five properties: 
+    : x: type double, from PeakProfileFitting
+    : I: type double, from PeakProfileFitting
+    : cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
+    : peak_widths: type double array, a range that the a peak's width can fall between
+    : strategy: Strategy object, an object that contain choices regarding the optimization process 
+    : x is the independent variable, and I is the depedent variable
+    """
+    def __init__(self,cutoff,peak_widths,spectrum,strategy):
+        super().__init__(spectrum)
         self.cutoff = cutoff
         self.peak_widths = peak_widths
-        self.x = spectrum['x']
-        self.I = spectrum['y']
         self.strategy = strategy
 
+    """
+    : get rough initial peak estimates (without refinement)
+    """
     def get_peaks(self):
         b,a = signal.butter(2, self.cutoff, 'low')
         I_filtered = signal.filtfilt(b,a,self.I)
@@ -27,10 +35,17 @@ class Rietveld(PeakProfileFitting):
         peak_indicies = peak_indicies[idx]
         return peak_indicies
 
+    """
+    : calculate the squared error
+    """  
     def cost(self,results):
         c = np.sum(np.power(results-self.I, 2))/len(self.x)
         return c
 
+    """
+    : spec: dataFrame object, specification for the composite model
+    : make a composite model that fits all peaks
+    """  
     def make_one_model(self,spec):
         x = self.x
         I = self.I
@@ -64,6 +79,10 @@ class Rietveld(PeakProfileFitting):
                 composite_model = composite_model + model
         return composite_model, params
 
+    """
+    : strategy_choice: type string, 'fast','best', or 'random'
+    : find the best composite model
+    """  
     def find_best_fit(self,strategy_choice):
         peak_indices = self.get_peaks()
         lowest_cost = np.inf
@@ -81,6 +100,10 @@ class Rietveld(PeakProfileFitting):
                 best_values = predicted_model.best_values
         return best_model_choices, best_values
 
+    """
+    : strategy_choice: type string, 'fast','best', or 'random'
+    : return the refined peak parameters
+    """  
     def get_peaks_params(self,strategy_choice):
         peaks = []
         model_choices, values = self.find_best_fit(strategy_choice)
