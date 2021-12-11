@@ -8,6 +8,5 @@ class PeakProfileFitting(metaclass=abc.ABCMeta):
 		self.x = spectrum['x']
 		self.I = spectrum['y']
 
-	@abstractmethod
 	def get_peak_params(self):
 		pass
