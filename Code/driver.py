@@ -41,7 +41,7 @@ if __name__ == '__main__':
                 model_choices.append('GaussianModel')
             spec = analysis.make_spec(model_choices)
             composite_model, params = analysis.make_one_model(spec)
-            best_model_choices, best_values = analysis.find_best_fit()
+            #best_model_choices, best_values = analysis.find_best_fit()
 
     else: 
         print('Missing argument.')
