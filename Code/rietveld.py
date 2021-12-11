@@ -3,17 +3,20 @@ import pandas as pd
 from scipy import signal
 from lmfit import models
 from Code.PeakProfileFitting import PeakProfileFitting 
+from Code.peak import Peak
+from Code.strategy import Strategy
 
 class Rietveld(PeakProfileFitting):  
 
     # initialize the class
     # the class has two properties, each a float array from input file
     # x is the independent variable, and I is the depedent variable
-    def __init__(self, cutoff,peak_widths,spectrum):
+    def __init__(self, cutoff,peak_widths,spectrum,strategy):
         self.cutoff = cutoff
         self.peak_widths = peak_widths
         self.x = spectrum['x']
         self.I = spectrum['y']
+        self.strategy = strategy
 
     def get_peaks(self):
         b,a = signal.butter(2, self.cutoff, 'low')
@@ -27,23 +30,6 @@ class Rietveld(PeakProfileFitting):
     def cost(self,results):
         c = np.sum(np.power(results-self.I, 2))/len(self.x)
         return c
-
-    def make_spec(self,model_choices,peak_indices):
-        modelType = []
-        height = []
-        sigma = []
-        center = []
-        x_range = np.max(self.x)-np.min(self.x)
-        for model_idx,peak_idx in enumerate(peak_indices):
-            modelType.append(model_choices[model_idx])
-            height.append(self.I[peak_idx])
-            sigma.append(x_range/len(self.x)*np.min(self.peak_widths)),
-            center.append(self.x[peak_idx])
-        spec = pd.DataFrame({'modelType':modelType,
-                             'height':height,
-                             'sigma':sigma,
-                             'center':center})
-        return spec
 
     def make_one_model(self,spec):
         x = self.x
@@ -78,16 +64,13 @@ class Rietveld(PeakProfileFitting):
                 composite_model = composite_model + model
         return composite_model, params
 
-    def find_best_fit(self):
+    def find_best_fit(self,strategy_choice):
         peak_indices = self.get_peaks()
-        options = ['GaussianModel','LorentzianModel','VoigtModel']
-        n_trials = len(options)
         lowest_cost = np.inf
         best_model_choices = []
         best_values = []
-        for i in range(n_trials):
-            model_choices = [options[i]]*len(peak_indices)
-            spec = self.make_spec(model_choices,peak_indices)
+        specs,model_choices_list = self.strategy.make_specs(strategy_choice,peak_indices,self.x,self.I,self.peak_widths)
+        for spec,model_choices in zip(specs,model_choices_list):
             composite_model,params = self.make_one_model(spec)
             predicted_model = composite_model.fit(self.I, params, x=self.x)
             results = predicted_model.eval(params=params)
@@ -98,23 +81,23 @@ class Rietveld(PeakProfileFitting):
                 best_values = predicted_model.best_values
         return best_model_choices, best_values
 
-    def get_params(self):
-        intensity = []
-        center = []
-        FWHM = []
-        model_choices, values = self.find_best_fit(self.cutoff,self.peak_widths)
-        for i in range(len(model_choices)):
+    def get_peaks_params(self,strategy_choice):
+        peaks = []
+        model_choices, values = self.find_best_fit(strategy_choice)
+        for i,type in enumerate(model_choices):
             prefix = f'm{i}_'
             key_amp = prefix+'amplitude'
             key_cen = prefix+'center'
             key_sig = prefix+'sigma'
-            intensity.append(values.get(key_amp))
-            center.append(values.get(key_cen))
+            intensity = values.get(key_amp)
+            center = values.get(key_cen)
             sig = values.get(key_sig)
             if model_choices[0] == 'GaussianModel':
-                FWHM.append(2*sig*np.log(2))
+                FWHM = 2*sig*np.log(2)
             elif model_choices[0] == 'LorentzianModel':
-                FWHM.append(2*sig)
+                FWHM = 2*sig
             elif model_choices[0] == 'VoigtModel':
-                FWHM.append(3.6013*sig)
-        return FWHM,center,intensity
+                FWHM = 3.6013*sig
+            peak = Peak(FWHM,center,intensity,type)
+            peaks.append(peak)
+        return peaks
