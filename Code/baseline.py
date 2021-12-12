@@ -31,7 +31,7 @@ def qr_factorization(vandermonde_matrix):
         The QR factorization of the Vandermonde matrix is required for generating the coefficients used in the least squares solution
         """
         qr_factorization = np.linalg.qr(vandermonde_matrix)[0][:,1:]
-        print('qr', qr_factorization)
+        print('qr', np.round(qr_factorization,4))
         return qr_factorization
 
 def linear_regression(input_data, qr_factorization):
