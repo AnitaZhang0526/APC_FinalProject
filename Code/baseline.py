@@ -49,7 +49,7 @@ def linear_regression(input_data, qr_factorization):
         """
         #begin linear regression to evaluate baseline
         for i in range(iterative_loops):
-            
+             #LinearRegression()np.linalg.lstsq
             prediction=LinearRegression().fit(qr_factorization,working).predict(qr_factorization)
             working=np.array(np.minimum(input_data, prediction))
           
@@ -72,11 +72,11 @@ def baseline_removal(input_data):
 
 
 
-# #for testing purposes, __main__ provided below: 
-# if __name__=="__main__":
+#for testing purposes, __main__ provided below: 
+if __name__=="__main__":
 
-#         input_array = [1,1,1,1,1]
-#         Modpoly_output = baseline_removal(input_array) #ftir class hardcodes this array and creates this object 
-#         print('Original input:',input_array)
-#         print('Modpoly base corrected values:',Modpoly_output)
+        input_array = [1,1,1,1,1,1,1,1,1,1]
+        Modpoly_output = baseline_removal(input_array) #ftir class hardcodes this array and creates this object 
+        print('Original input:',input_array)
+        print('Modpoly base corrected values:',Modpoly_output)
  
