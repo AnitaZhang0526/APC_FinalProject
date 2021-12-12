@@ -1,10 +1,7 @@
 import abc
-from abc import abstractmethod
 
 class PeakProfileFitting(metaclass=abc.ABCMeta):
-
-	@abstractmethod
-	def __init__(self, cutoff,peak_widths,spectrum,strategy):
+	def __init__(self,spectrum):
 		self.x = spectrum['x']
 		self.I = spectrum['y']
 
