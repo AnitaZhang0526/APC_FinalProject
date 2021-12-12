@@ -2,50 +2,50 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from PeakProfileFitting import PeakProfileFitting 
+from Code.PeakProfileFitting import PeakProfileFitting 
+from Code.peak import Peak
+from Code.strategy import Strategy
 
 class Rietveld(PeakProfileFitting):  
-
-    # initialize the class
-    # the class has two properties, each a float array from input file
-    # x is the independent variable, and I is the depedent variable
-    def __init__(self, cutoff,peak_widths,spectrum):
+    """
+    : Rietveld inherits from PeakProfileFitting
+    : The class has five properties: 
+    : x: type double, from PeakProfileFitting
+    : I: type double, from PeakProfileFitting
+    : cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
+    : peak_widths: type double array, a range that the a peak's width can fall between
+    : strategy: Strategy object, an object that contain choices regarding the optimization process 
+    : x is the independent variable, and I is the depedent variable
+    """
+    def __init__(self,cutoff,peak_widths,spectrum,strategy):
+        super().__init__(spectrum)
         self.cutoff = cutoff
-        self.peak_width = peak_widths
-        self.x = spectrum[0]
-        self.I = spectrum[1]
+        self.peak_widths = peak_widths
+        self.strategy = strategy
 
+    """
+    : get rough initial peak estimates (without refinement)
+    """
     def get_peaks(self):
         b,a = signal.butter(2, self.cutoff, 'low')
         I_filtered = signal.filtfilt(b,a,self.I)
-        peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_width)
+        peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_widths)
         threshold = 0.20
         idx =(self.I[peak_indicies]>threshold)
         peak_indicies = peak_indicies[idx]
         return peak_indicies
 
+    """
+    : calculate the squared error
+    """  
     def cost(self,results):
         c = np.sum(np.power(results-self.I, 2))/len(self.x)
         return c
 
-    def make_spec(self,model_choices):
-        modelType = []
-        height = []
-        sigma = []
-        center = []
-        x_range = np.max(self.x)-np.min(self.x)
-        peak_indices = self.get_peaks()
-        for model_idx,peak_idx in enumerate(peak_indices):
-            modelType.append(model_choices[model_idx])
-            height.append(self.I[peak_idx])
-            sigma.append(x_range/len(self.x)*np.min(self.peak_width)),
-            center.append(self.x[peak_idx])
-        spec = pd.DataFrame({'modelType':modelType,
-                             'height':height,
-                             'sigma':sigma,
-                             'center':center})
-        return spec
-
+    """
+    : spec: dataFrame object, specification for the composite model
+    : make a composite model that fits all peaks
+    """  
     def make_one_model(self,spec):
         x = self.x
         I = self.I
@@ -79,16 +79,17 @@ class Rietveld(PeakProfileFitting):
                 composite_model = composite_model + model
         return composite_model, params
 
-    def find_best_fit(self):
+    """
+    : strategy_choice: type string, 'fast','best', or 'random'
+    : find the best composite model
+    """  
+    def find_best_fit(self,strategy_choice):
         peak_indices = self.get_peaks()
-        options = ['GaussianModel','LorentzianModel','VoigtModel']
-        n_trials = len(options)
         lowest_cost = np.inf
         best_model_choices = []
         best_values = []
-        for i in range(n_trials):
-            model_choices = [options[i]]*len(peak_indices)
-            spec = self.make_spec(model_choices)
+        specs,model_choices_list = self.strategy.make_specs(strategy_choice,peak_indices,self.x,self.I,self.peak_widths)
+        for spec,model_choices in zip(specs,model_choices_list):
             composite_model,params = self.make_one_model(spec)
             predicted_model = composite_model.fit(self.I, params, x=self.x)
             results = predicted_model.eval(params=params)
@@ -99,23 +100,27 @@ class Rietveld(PeakProfileFitting):
                 best_values = predicted_model.best_values
         return best_model_choices, best_values
 
-    def get_params(self):
-        intensity = []
-        center = []
-        FWHM = []
-        model_choices, values = self.find_best_fit(self.cutoff,self.peak_widths)
-        for i in range(len(model_choices)):
+    """
+    : strategy_choice: type string, 'fast','best', or 'random'
+    : return the refined peak parameters
+    """  
+    def get_peaks_params(self,strategy_choice):
+        peaks = []
+        model_choices, values = self.find_best_fit(strategy_choice)
+        for i,type in enumerate(model_choices):
             prefix = f'm{i}_'
             key_amp = prefix+'amplitude'
             key_cen = prefix+'center'
             key_sig = prefix+'sigma'
-            intensity.append(values.get(key_amp))
-            center.append(values.get(key_cen))
+            intensity = values.get(key_amp)
+            center = values.get(key_cen)
             sig = values.get(key_sig)
             if model_choices[0] == 'GaussianModel':
-                FWHM.append(2*sig*np.log(2))
+                FWHM = 2*sig*np.log(2)
             elif model_choices[0] == 'LorentzianModel':
-                FWHM.append(2*sig)
+                FWHM = 2*sig
             elif model_choices[0] == 'VoigtModel':
-                FWHM.append(3.6013*sig)
-        return FWHM,center,intensity
+                FWHM = 3.6013*sig
+            peak = Peak(FWHM,center,intensity,type)
+            peaks.append(peak)
+        return peaks
