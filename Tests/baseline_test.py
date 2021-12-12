@@ -34,7 +34,7 @@ def test_linear_regression():
 
     test_data = np.ones(5)
     qr_factorized = [[-6.32455532e-01,5.34522484e-01],[-3.16227766e-01,-2.67261242e-01],[8.32667268e-17,-5.34522484e-01],[3.16227766e-01,-2.67261242e-01],[6.32455532e-01,5.34522484e-01]]
-    answer = scikit-learn.linear_regression(test_data, qr_factorized)
+    answer = linear_regression(test_data, qr_factorized)
     correct = np.ones(5)
 
     np.testing.assert_array_equal(answer, correct)
