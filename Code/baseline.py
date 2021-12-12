@@ -10,11 +10,7 @@ This script was based on the imp
 lementation available at: https://github.com/StatguyUser/BaselineRemoval
 """
 
-def baseline_removal(input_data):
-        
-        #define number of loops performed in the final linear regression to evaluate a baseline
-        iterative_loops = 100 
-      
+def vandermonde_matrix(input_data):
         """
         A modified Vandermonde matrix is used in the subsequent linear regression to solve for a baseline.
         The generic Vandermonde matrix forms an NxN matrix that has i^m...i^(m-1)..i^(m-m)etc. for 1<i<N entries in input_data
@@ -24,7 +20,10 @@ def baseline_removal(input_data):
         vander_rows = np.array((list(range(1,len(input_data)+1))))
         #vander_rows = np.array(vander_rows)      
         vandermonde_matrix = np.fliplr(np.vander(vander_rows, vander_columns))
-
+        print('vander', vandermonde_matrix)
+        return vandermonde_matrix
+        
+def qr_factorization(vandermonde_matrix):
         """
         QR factorization is performed to decompose the modified vandermonde matrix, A, into the product of two matricies, Q and R
         Q is an orthogonal matrix and R is an upper triangular matrix. 
@@ -32,7 +31,13 @@ def baseline_removal(input_data):
         The QR factorization of the Vandermonde matrix is required for generating the coefficients used in the least squares solution
         """
         qr_factorization = np.linalg.qr(vandermonde_matrix)[0][:,1:]
-      
+        print('qr', qr_factorization)
+        return qr_factorization
+
+def linear_regression(input_data, qr_factorization):
+
+        #define number of loops performed in the final linear regression to evaluate a baseline
+        iterative_loops = 100       
         #define placeholders for storing iterations of computed values for the computed baseline
         working = input_data
         prediction =[]        
@@ -49,17 +54,29 @@ def baseline_removal(input_data):
             working=np.array(np.minimum(input_data, prediction))
           
         #compute final baseline-removed data           
-        baseline=np.array(input_data-prediction)
-       
+        final_data=np.array(prediction) 
+        print('final data', final_data)
+        return final_data
+    
+def baseline_removal(input_data):
+        """
+        Final baseline removal function returns the input_data minus the calculated baseline. 
+        """
+        vander = vandermonde_matrix(input_data)
+        qr_factored = qr_factorization(vander)
+        baseline = input_data - linear_regression(input_data,qr_factored)
+        print('baseline', baseline)
+
         #return baseline-removed data 
         return baseline
-    
 
-#for testing purposes, __main__ provided below: 
+
+
+# #for testing purposes, __main__ provided below: 
 # if __name__=="__main__":
 
-#          input_array = [1,1,1,1,1,1,1,1,1,1,1,1]
-#          Modpoly_output = BaselineRemoval(input_array) #ftir class hardcodes this array and creates this object 
-#          print('Original input:',input_array)
-#          print('Modpoly base corrected values:',Modpoly_output)
+#         input_array = [1,1,1,1,1]
+#         Modpoly_output = baseline_removal(input_array) #ftir class hardcodes this array and creates this object 
+#         print('Original input:',input_array)
+#         print('Modpoly base corrected values:',Modpoly_output)
  
