@@ -1,10 +1,12 @@
 from ExperimentalTechnique import ExperimentalTechnique
+import Code.baseline as baseline
 
 class FTIR(ExperimentalTechnique):
 
-	def filter_baseline():
-		# add Arjun's filter method
-		pass
+	def filter_baseline(self):
+		baseline_removed = baseline.baseline_removal(self.spectrum['y'])
+		return baseline_removed
+		
 
 	def flip_input(self,a_or_t):
 		if a_or_t == "transmittance":
