@@ -38,7 +38,3 @@ def test_linear_regression():
     correct = np.ones(5)
 
     np.testing.assert_array_equal(answer, correct)
-
-if __name__=="__main__":    
-        answer = test_baseline_removal()
-        print(answer)

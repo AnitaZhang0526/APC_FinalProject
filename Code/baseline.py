@@ -70,13 +70,3 @@ def baseline_removal(input_data):
         #return baseline-removed data 
         return baseline
 
-
-
-#for testing purposes, __main__ provided below: 
-if __name__=="__main__":
-
-        input_array = [1,1,1,1,1,1,1,1,1,1]
-        Modpoly_output = baseline_removal(input_array) #ftir class hardcodes this array and creates this object 
-        print('Original input:',input_array)
-        print('Modpoly base corrected values:',Modpoly_output)
- 
