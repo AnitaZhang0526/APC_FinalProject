@@ -25,8 +25,8 @@ def test_vandermonde_matrix():
 def test_qr_factorization():
 
     test_data = [[1,1,1],[1,2,4],[1,3,9],[1,4,16],[1,5,25]]
-    answer = qr_factorization(test_data)
-    correct = [[-6.32455532e-01,5.34522484e-01],[-3.16227766e-01,-2.67261242e-01],[8.32667268e-17,-5.34522484e-01],[3.16227766e-01,-2.67261242e-01],[6.32455532e-01,5.34522484e-01]]
+    answer = ndarray.round.qr_factorization(test_data)
+    correct = ndarray.round([[-6.32455532e-01,5.34522484e-01],[-3.16227766e-01,-2.67261242e-01],[8.32667268e-17,-5.34522484e-01],[3.16227766e-01,-2.67261242e-01],[6.32455532e-01,5.34522484e-01]])
     print('qr', answer)
     np.testing.assert_array_equal(answer, correct)
 
