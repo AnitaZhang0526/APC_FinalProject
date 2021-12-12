@@ -64,9 +64,9 @@ def baseline_removal(input_data):
         """
         vander = vandermonde_matrix(input_data)
         qr_factored = qr_factorization(vander)
-        baseline = input_data - linear_regression(input_data,qr_factored)
+        baseline_removed = input_data - linear_regression(input_data,qr_factored)
         print('baseline', baseline)
 
         #return baseline-removed data 
-        return baseline
+        return baseline_removed
 

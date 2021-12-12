@@ -2,7 +2,7 @@ import os
 
 import pandas as pd
 import numpy as np
-
+import Code.baseline as baseline
 from ExperimentalTechnique import ExperimentalTechnique
 
 class FTIR(ExperimentalTechnique):
@@ -13,7 +13,8 @@ class FTIR(ExperimentalTechnique):
 		return input_df
 
 	def filter_baseline():
-		pass
+    	baseline= baseline.baseline_removal
+		return baseline
 
 	def get_peak_features():
 		pass
