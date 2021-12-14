@@ -18,50 +18,61 @@ from numpy import savetxt
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
  
-# Creating Panda Dataframe from .csv files 
+# Creating Panda Dataframe from .csv files  
 data_metadata = pd.read_csv("ftir_metadata.csv")
 data_library = pd.read_csv("ftir_library.csv")
 
-# Saving sample parameters as arrays
+# Saving sample parameters as dataframe arrays 
 sample_wavenumber = data_library.wavenumber 
 sample_intensity = data_library.intensity
 sample_id = data_library.sample_name
 sample_name = data_metadata.spectrum_identity
 sample_source = data_metadata.organization 
 
-# Counter setup to take the repetition of sample id into account
-count2 = Counter(sample_id)
-rep = list(count2.values())
+# Counter setup to take the repetition of sample id into account. 
+# The counter "count" will be used to count the number of datapoints for 
+# each material in the database. "rep_cum" is used to have cumulative 
+# data points. 
+count = Counter(sample_id)
+rep = list(count.values())
 rep_cum = np.cumsum(rep)
 
-# Converting database as numpy array
+# Converting database as numpy array.
 id = np.array(list(sample_id))
 intensity = np.array(list(sample_intensity))
 wavenumber = np.array(list(sample_wavenumber))
 name = np.array(list(sample_name))
 name_mod = np.append(name, "None") 
 
-# Splitting the arrays 
+# Splitting the single arrays into multpiple arrays
+# corresponding to datapoints of each material   
 id_split = np.split(id,rep_cum)
 intensity_split = np.split(intensity,rep_cum)
 wavenumber_split = np.split(wavenumber,rep_cum)  
 
-# Calculating the peaks wavenumber and intensity
+# Calculating the peaks intensity and the corresponding wavenumber.
+# The cutoff intensity has been used as the parameter to obtain the 
+# peak intensity. All the peaks above the cutoff_intensity has to
+# will be recorded as the result. Hence, lower the value of cutoff 
+# ,more peaks will be obtained and more accurate match will be obtained.
+# In the intial data, all the peaks have been normalized to 1. And 0.2 as 
+# is a good cutoff_intensity value to obtain some peaks.  
 length_intensity = len(intensity_split)-1
-
+cutoff_intensity = 0.2  
 output = []
 length = []  
 for j in range(length_intensity):
     x = intensity_split[j]
-    peaks, _ = find_peaks(x, height=0.5)
+    peaks, _ = find_peaks(x, height= cutoff_intensity)
     length_peaks = len(peaks) 
     wavenumber_peaks = np.empty(length_peaks)
     for i in range(length_peaks):
         wavenumber_peaks[i] = wavenumber_split[j][peaks[i]]
     output.append(wavenumber_peaks)
 
+# Here the final peaks corresponding to sample id, name and, resources 
+# have been saved in the ftir_peaks.csv  
 df = pd.DataFrame(output)
-print(sample_name)
 df.insert(0, "Sample Name", sample_name, True)
 df.insert(1, "Source", sample_source, True)
 df.to_csv('ftir_peaks.csv', index = False)
