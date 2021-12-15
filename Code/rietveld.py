@@ -2,10 +2,12 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from Code.PeakProfileFitting import PeakProfileFitting 
+from Code.peak_profile_fitting import PeakProfileFitting 
 from Code.peak import Peak
-from Code.strategy import Strategy
 
+"""
+a subclass of PeakProfileFitting, a way to profile fit
+"""
 class Rietveld(PeakProfileFitting):  
     """
     : Rietveld inherits from PeakProfileFitting
@@ -15,7 +17,9 @@ class Rietveld(PeakProfileFitting):
     : cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
     : peak_widths: type double array, a range that the a peak's width can fall between
     : strategy: Strategy object, an object that contain choices regarding the optimization process 
-    : x is the independent variable, and I is the depedent variable
+    : The class requires four input parameters:
+    : cutoff, peak_widths, strategy, and
+    : spectrum: dataFrame containing x and y values
     """
     def __init__(self,cutoff,peak_widths,spectrum,strategy):
         super().__init__(spectrum)
