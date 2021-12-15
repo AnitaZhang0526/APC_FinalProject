@@ -1,23 +1,34 @@
-# APC_FinalProject
-XRD/FTIR data processing tool suite. Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel, and Anita Zhang
+#XRD/FTIR Data Processing Tool Suite
+Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel, and Anita Zhang
 
-## Updating the Databases
+## Using this Project
+
+### Install Required Python Packages
+From the main directory, run `pip install -r requirements.txt` to install all required python packages on your computer.
+
+## Contributing to this Project
+
+### Updating the Databases
 If you think that either of the databases needs to be updated, run the
 appropriate updating script locally on your computer and then create a
 commit for the updated database. In your pull request, explain the 
 reason for updating the database.
 
-### Updating the XRD Database
+#### Updating the XRD Database
 The XRD database (csv file) can be updated by running the following script
-**from the `/Code/scrape/` directory**:
+from the `/Code/scrape/` directory:
 ```
 python scrape_xrd.py
 ```
 
-### Updating the FTIR Database
+#### Updating the FTIR Database
 Coming soon!
 
-## Using the Auto-Documentation Script
+### Python Packages
+If you use a python package in the code you are writing, check `requirements.txt` to see if the package is
+already listed there. If not, add the name of the package.
+
+### Using the Auto-Documentation Script
 Type in ```make html``` in the command line to auto-document existing .py files to generate a webpage with instructions. The current webpage uses the default theme.
 To open the html, ```cd _build``` and type in ```open index.html```. If you are using a Windows operating system, you can also open the link through your favorite browser (ex. ```google-chrome index.html```)
 
@@ -28,7 +39,7 @@ To document your code, you will need to do three things:
 
 If a PDF format is desired, make sure you have ```pdfTex``` installed on your machine, and then type in ```make latexpdf``` in the command line. The generated pdf file will be under ```_build/latex/<APC_FinalProject>.pdf```.
 
-#### Git Workflow
+### Git Workflow
 This section of the ReadMe outlines the git workflow that each team member will follow in order to collaboratively work on our project files. The goal is for all of us to be able to refer back to this document to responsibly upload our changes to source files, minimizing version control errors. To summarize, each feature of the project will be worked on in a seaparate branch by a single team member. With the approval of two other teammates, these features will be merged into a development branch and ultimately into the master branch:
 
 1. Use �git clone� command to get the collaborative repository locally on your machine
