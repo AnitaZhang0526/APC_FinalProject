@@ -2,7 +2,7 @@ from unittest import mock
 from Code.rietveld import Rietveld
 import numpy as np
 import pandas as pd
-from APC_FinalProject.Code.strategy import Strategy
+from Code.strategy import Strategy
 
 f = open('Malli_80s.allASC.ASC', 'r')
 data = np.genfromtxt(f, delimiter=' ')
