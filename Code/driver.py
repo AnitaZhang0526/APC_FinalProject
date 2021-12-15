@@ -20,7 +20,7 @@ parser.add_argument('-m', '--method', type=str,
 parser.add_argument('-f', '--fitting', type=str,
     help='Type of Rietveld fitting to be used, "best", "fast", or "random".')
 parser.add_argument('-c', '--cutoff', type=str,
-    help='Cutoff to be used for fitting.')
+    help='Cutoff to be used for fitting (e.g. 0.9).')
 parser.add_argument('-r', '--range', type=str,
     help='Peak widths range to be used for fitting (e.g. "5,15").')
 parser.add_argument('-i', '--inputfile', type=str,
@@ -39,8 +39,14 @@ if __name__ == '__main__':
         technique = ET_Factory.factory_method(args['data'], spectrum)
 
         if (args['method'] == 'Rietveld'):
-            cutoff = float(args['cutoff'])
-            peak_widths_range = args['range'].split(',')
+            if args['cutoff']:
+                cutoff = float(args['cutoff'])
+            else:
+                cutoff = 0.9
+            if args['range']:
+                peak_widths_range = args['range'].split(',')
+            else: 
+                peak_widths_range = [5, 15]
             peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
             strategy = Strategy()
             analysis = PPF_Factory.factory_method(args['method'], cutoff, peak_widths, spectrum, strategy)
@@ -54,6 +60,13 @@ if __name__ == '__main__':
             composite_model, params = analysis.make_one_model(spec)
             peaks = analysis.get_peaks_params(args['fitting'])
             print(peaks)
+            with open(os.path.join('Output', f"{args['inputfile']}.csv"), 'wt', encoding='UTF-8',newline='') as h:
+                csv_peaks = csv.writer(h)
+                header_peaks = ['FWHM', 'center', 'intensity', 'type']
+                csv_peaks.writerow(header_city)
+                for each in peaks:     
+                    entry = [each.FWHM, each.center, each.intensity, each.type]
+                    csv_peaks.writerow(entry)
 
     else: 
         print('Missing argument.')
