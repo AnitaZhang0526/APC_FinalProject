@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import scipy.interpolate as interpolate
 from Code.peak_profile_fitting import PeakProfileFitting
+from Code.peak import Peak
 
 
 class Poly(PeakProfileFitting):
@@ -12,7 +13,7 @@ class Poly(PeakProfileFitting):
 
     # this function uses spline-fitting to output the peak locations, heights, and widths 
     # as an (Nx3) array where N is the number of peaks found
-    def get_peak_params(self):
+    def get_peaks_params(self):
 
         two_theta, intensity = self.x, self.I
         min_angle = np.min(two_theta)

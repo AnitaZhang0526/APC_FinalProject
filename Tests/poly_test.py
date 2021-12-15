@@ -23,7 +23,7 @@ def test_get_peak_params():
     true_intensity = 0.08334675892834108
     
     # check that calculated values of 21st peak match known true values
-    test_peak = poly_input.get_peak_params()[21]
-    assert(test_peak.width == true_width)
+    test_peak = poly_input.get_peaks_params()[21]
+    assert(test_peak.FWHM == true_width)
     assert(test_peak.center == true_center)
     assert(test_peak.intensity == true_intensity)
