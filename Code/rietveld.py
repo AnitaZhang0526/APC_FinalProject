@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from Code.peak_profile_fitting import PeakProfileFitting 
-from Code.peak import Peak
+from APC_FinalProject.Code.peak_profile_fitting import PeakProfileFitting 
+from APC_FinalProject.Code.peak import Peak
 
 """
 a subclass of PeakProfileFitting, a way to profile fit
