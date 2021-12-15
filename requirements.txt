@@ -4,3 +4,8 @@ pandas
 scipy
 lmfit
 scikit-learn
+itertools
+random
+argparse
+csv
+sklearn
