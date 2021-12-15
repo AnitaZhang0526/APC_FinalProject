@@ -20,6 +20,10 @@ Coming soon!
 ## Using the Auto-Documentation Script
 Type in ```make html``` in the command line to auto-document existing .py files to generate a webpage with instructions. The current webpage uses the default theme.
 To open the html, ```cd _build``` and type in ```open index.html```. If you are using a Windows operating system, you can also open the link through your favorite browser (ex. ```google-chrome index.html```)
-To write comments that can be recognized by the Sphinx, follow the instructions in this link: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html.
+
+To document your code, you will need to do three things:
+1. Write comments that can be recognized by Sphinx, as shown in this link: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html.
+2. Create a file ```docs/name_of_code_file.rst``` , as shown in this link: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/build-the-docs.html.
+3. Add the name of your module to ```docs/modules.rst```.
 
 If a PDF format is desired, make sure you have ```pdfTex``` installed on your machine, and then type in ```make latexpdf``` in the command line. The generated pdf file will be under ```_build/latex/<APC_FinalProject>.pdf```.
