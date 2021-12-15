@@ -11,6 +11,14 @@ I = data[:,1]
 I = I/max(I)
 spectrum = pd.DataFrame({'x':x,'y':I})
 
+def test_constructor():
+    peak_widths = np.arange(5,15)
+    strategy = Strategy()
+    cutoff = 0.9
+    rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
+    assert((rietveld_input.x==x).all())
+    assert((rietveld_input.I==I).all())
+
 def test_get_peaks():
     strategy = Strategy()
     first_peak_idx = 11

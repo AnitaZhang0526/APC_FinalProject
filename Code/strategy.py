@@ -5,6 +5,12 @@ import random
 
 class Strategy:
 
+    """
+    : build one composite model based on specifications
+	: model_choices: list of strings, indicating the types of peak models
+	: peak_indices: list of doubles, peak indices of rough peak positions
+    : peak_widths: type double array, a range that the a peak's width can fall between 
+	"""
     def make_one_spec(self,model_choices,peak_indices,I,x,peak_widths):
         modelType = []
         height = []
@@ -22,6 +28,15 @@ class Strategy:
                              'center':center})
         return spec
 
+    """
+    : make a list of specifications based on user's choice of level of optimization
+    : also returns the model choices for each specification
+    : strategy_choice: type string, 'fast','best', or 'random'
+    : peak_indices: list of doubles, peak indices of rough peak positions
+    : x: the independent variable data
+	: I: the intensity or the dependent variable data
+    : peak_widths: type double array, a range that the a peak's width can fall between 
+    """
     def make_specs(self,strategy_choice,peak_indices,I,x,peak_widths):
         specs = []
         options = ['GaussianModel','LorentzianModel','VoigtModel']
