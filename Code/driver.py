@@ -59,7 +59,6 @@ if __name__ == '__main__':
             spec = strategy.make_one_spec(model_choices, peak_indices, spectrum['x'], spectrum['y'], peak_widths)
             composite_model, params = analysis.make_one_model(spec)
             peaks = analysis.get_peaks_params(args['fitting'])
-            print(peaks)
             with open(os.path.join('Output', f"{args['inputfile']}.csv"), 'wt', encoding='UTF-8',newline='') as h:
                 csv_peaks = csv.writer(h)
                 header_peaks = ['FWHM', 'center', 'intensity', 'type']
