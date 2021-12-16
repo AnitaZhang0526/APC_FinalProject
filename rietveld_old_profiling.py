@@ -16,5 +16,5 @@ rietveld_old = Rietveld_old(x,I)
 if __name__ == '__main__':
     cutoff = 0.9
     peak_widths = np.arange(5,15) 
-    peak_indices = rietveld_old.getPeaks(cutoff,peak_widths)
+    peak_indices = rietveld_old.get_peaks(cutoff,peak_widths)
     cProfile.run('rietveld_old.find_best_fit(peak_widths,peak_indices)')
