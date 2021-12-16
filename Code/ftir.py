@@ -10,5 +10,5 @@ class FTIR(ExperimentalTechnique):
 
 	def flip_input(self,a_or_t):
 		if a_or_t == True:
-			self.spectrum['x'] = 2 - np.log(self.spectrum['x'])
+			self.spectrum['y'] = 2 - np.log(self.spectrum['y'])
 		return self
