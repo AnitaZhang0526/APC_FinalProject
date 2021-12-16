@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.spatial import distance
+from Code.peak import Peak
 
 class CompareToDatabase:
     """This class takes in peak information and 
@@ -12,7 +13,7 @@ class CompareToDatabase:
     :param peaks: 2-D array of peak locations (2-theta) and their relative intensities
         ex: [[14.24, 90], [38.88, 100], ...],
         defaults to []
-    :type peaks: list
+    :type peaks: list of Peak objects
     """
 
     def __init__(self, data_type = None, peaks = []):
@@ -71,9 +72,9 @@ class CompareToDatabase:
         
         for i in range(len(two_theta_one)):
             db_peaks = [
-                [two_theta_one[i], intensity_one[i]],
-                [two_theta_two[i], intensity_two[i]],
-                [two_theta_three[i], intensity_three[i]],
+                Peak(None,two_theta_one[i],intensity_one[i],None),
+                Peak(None,two_theta_two[i],intensity_two[i],None),
+                Peak(None,two_theta_three[i],intensity_three[i],None),
             ]
             distance = self._xrd_distance(input_peaks, db_peaks)
             if distance < min_distance:
@@ -84,13 +85,21 @@ class CompareToDatabase:
 
     # Takes all XRD peaks and returns the three most intense
     def _xrd_most_intense_peaks(self, peaks):
-        sorted_peaks = sorted(peaks, key = lambda x: x[1], reverse = True)
+        sorted_peaks = sorted(peaks, key = lambda x: x.intensity, reverse = True)
         return sorted_peaks[:3]
 
     # Calculates euclidean distances between two sets of three peaks
     def _xrd_distance(self, input_peaks, db_peaks):
-        i = np.array(input_peaks).flatten()
-        d = np.array(db_peaks).flatten()
+        i = []
+        for ip in input_peaks:
+            i.append(ip.center)
+            i.append(ip.intensity)
+
+        d = []
+        for dp in db_peaks:
+            d.append(dp.center)
+            d.append(dp.intensity)
+
         return distance.euclidean(i, d)
 
     # Returns match from FTIR database
