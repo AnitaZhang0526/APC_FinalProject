@@ -29,8 +29,8 @@ python scrape_xrd.py
 Coming soon!
 
 ### Python Packages
-If you use a python package in the code you are writing, check `requirements.txt` to see if the package is
-already listed there. If not, add the name of the package.
+If you use a python package in the code you are writing, check `requirements.txt` and `setup.py` to see if the package is
+already listed there. If not, add the name of the package to both files.
 
 ### Using the Auto-Documentation Script
 Type in ```make html``` in the command line to auto-document existing .py files to generate a webpage with instructions. The current webpage uses the default theme.
