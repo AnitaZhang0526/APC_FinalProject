@@ -40,8 +40,8 @@ if __name__ == '__main__':
         cutoff = float(args['cutoff'])     
         peak_widths_range = args['range'].split(',')
         peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
-        analysis = PPF_Factory.factory_method(args['method'], cutoff, peak_widths, spectrum, strategy)
-        peaks = analysis.get_peaks_params(args['fitting'])
+        peaks, analysis = PPF_Factory.factory_method(args['method'], args['fitting'], cutoff, peak_widths, spectrum, strategy)
+        # peaks = analysis.get_peaks_params(args['fitting'])
         
         #if (args['method'] == 'Rietveld'):
             # analysis = PPF_Factory.factory_method(args['method'], args['cutoff'], peak_widths, spectrum, strategy)
@@ -50,8 +50,9 @@ if __name__ == '__main__':
         #elif (args['method'] == 'polyfit'):
          #   pass
             # peaks = analysis.get_peaks_params()
-        # if not (os.path.isdir(os.path.join(dir, 'Output'))):
-        #     os.mkdir(os.path.join(dir, 'Output'))
+        
+        if not (os.path.isdir(os.path.join(dir, 'Output'))):
+            os.mkdir(os.path.join(dir, 'Output'))
         with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
             csv_peaks = csv.writer(h)
             header_peaks = ['FWHM', 'center', 'intensity', 'type']
