@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../Code'))
 
 
 # -- Project information -----------------------------------------------------
@@ -60,6 +60,7 @@ def setup(app):
 html_theme = 'alabaster'
 master_doc = 'index'
 
+# -- Extension configuration -------------------------------------------------
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -74,7 +75,8 @@ latex_elements = {
     'figure_align':'htbp',
     'pointsize': '10pt',
     'sphinxsetup': \
-        'hmargin={0.7in,0.7in}, vmargin={1in,1in}, \
+        'hmargin={0.7in,0.7in}, \
+        vmargin={1in,1in}, \
         verbatimwithframe=true, \
         TitleColor={rgb}{0,0,0}, \
-        HeaderFamily=\\rmfamily\\bfseries}
+        HeaderFamily=\\rmfamily\\bfseries'}

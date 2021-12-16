@@ -1,4 +1,4 @@
-from ExperimentalTechnique import ExperimentalTechnique
+from Code.ExperimentalTechnique import ExperimentalTechnique
 
 class FTIR(ExperimentalTechnique):
 
