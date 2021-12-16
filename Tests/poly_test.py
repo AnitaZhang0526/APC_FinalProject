@@ -31,7 +31,7 @@ def test_get_peak_params():
 def test_get_peak_params_edge():
     x1 = np.linspace(0,90,9000)
     y1 = [1]*len(x1)
-    spectrum1 = {'x':x1,'I':y1}
+    spectrum1 = {'x':x1,'y':y1}
     poly_input = Poly(spectrum1) 
     
     # check that calculated values of 21st peak match known true values
