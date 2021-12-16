@@ -41,15 +41,6 @@ if __name__ == '__main__':
         peak_widths_range = args['range'].split(',')
         peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
         peaks, analysis = PPF_Factory.factory_method(args['method'], args['fitting'], cutoff, peak_widths, spectrum, strategy)
-        # peaks = analysis.get_peaks_params(args['fitting'])
-        
-        #if (args['method'] == 'Rietveld'):
-            # analysis = PPF_Factory.factory_method(args['method'], args['cutoff'], peak_widths, spectrum, strategy)
-            # peaks = analysis.get_peaks_params(args['fitting'])
-            #peaks = analysis.get_peaks_params(args['fitting'])
-        #elif (args['method'] == 'polyfit'):
-         #   pass
-            # peaks = analysis.get_peaks_params()
         
         if not (os.path.isdir(os.path.join(dir, 'Output'))):
             os.mkdir(os.path.join(dir, 'Output'))
