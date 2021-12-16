@@ -26,6 +26,7 @@ parser.add_argument('-r', '--range', type=str,
     help='Peak widths range to be used for fitting (e.g. "5,15").')
 parser.add_argument('-i', '--inputfile', type=str,
     help='Filename of input file to be analyzed (e.g. "1-1-4-11_pH0_3-17-2020.csv").')
+parser.set_defaults(transmittance=True, fitting="best", cutoff="0.9", range="5,15")
 
 if __name__ == '__main__':
     args = vars(parser.parse_args())
@@ -37,17 +38,17 @@ if __name__ == '__main__':
         spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y'])
         spectrum['y']=spectrum['y']/max(spectrum['y'])
 
-        technique = ET_Factory.factory_method(args['data'], spectrum)
+        technique = ET_Factory.factory_method(args['data'], spectrum, args['transmittance'])
 
         if (args['method'] == 'Rietveld'):
-            if args['cutoff']:
-                cutoff = float(args['cutoff'])
-            else:
-                cutoff = 0.9
-            if args['range']:
-                peak_widths_range = args['range'].split(',')
-            else: 
-                peak_widths_range = [5, 15]
+            # if args['cutoff']:
+            #     cutoff = float(args['cutoff'])
+            # else:
+            #     cutoff = 0.9
+            # if args['range']:
+            #     peak_widths_range = args['range'].split(',')
+            # else: 
+            #     peak_widths_range = [5, 15]
             peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
             strategy = Strategy()
             analysis = PPF_Factory.factory_method(args['method'], cutoff, peak_widths, spectrum, strategy)
@@ -58,7 +59,7 @@ if __name__ == '__main__':
             # peaks = analysis.get_peaks_params()
         if not (os.path.isdir(os.path.join(dir, 'Output'))):
             os.mkdir(os.path.join(dir, 'Output'))
-        with open(os.path.join(dir, 'Output', f"{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
+        with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
             csv_peaks = csv.writer(h)
             header_peaks = ['FWHM', 'center', 'intensity', 'type']
             csv_peaks.writerow(header_peaks)
