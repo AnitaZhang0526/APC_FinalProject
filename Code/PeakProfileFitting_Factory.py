@@ -12,10 +12,10 @@ class PeakProfileFitting_Factory():
             print("Done.")
             return peaks, r
         elif method == 'polyfit':
-        	p = Poly(spectrum)
-        	print("Calculating parameters of peaks. Please wait.")
-        	peaks = p.get_peaks_params()
-        	print("Done.")
-        	return peaks, p
+            p = Poly(spectrum)
+            print("Calculating parameters of peaks. Please wait.")
+            peaks = p.get_peaks_params()
+            print("Done.")
+            return peaks, p
         else:
             raise ValueError(f'Cannot make: {method}')
