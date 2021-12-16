@@ -1,6 +1,10 @@
 # APC_FinalProject
 XRD/FTIR data processing tool suite. Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel, and Anita Zhang
 
+## Setting up the Project
+
+From the top level directory, run `pip install -e .` to install the required python packages.
+
 ## Updating the Databases
 If you think that either of the databases needs to be updated, run the
 appropriate updating script locally on your computer and then create a
