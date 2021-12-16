@@ -33,39 +33,40 @@ if __name__ == '__main__':
 
     if args['data'] and args['method'] and args['cutoff'] and args['range'] and args['inputfile']:
         dir = os.path.dirname(os.path.realpath(__file__))
-
         input_path = os.path.join(dir, 'Input', str(args['inputfile']))
-        spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y'])
-        spectrum['y']=spectrum['y']/max(spectrum['y'])
+        old_spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y'])
+        print(old_spectrum)
 
-        technique = ET_Factory.factory_method(args['data'], spectrum, args['transmittance'])
+        spectrum, technique = ET_Factory.factory_method(args['inputfile'], args['data'], args['transmittance'])
+
+        strategy = Strategy()   
+        cutoff = float(args['cutoff'])     
+        peak_widths_range = args['range'].split(',')
+        peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
+        analysis = PPF_Factory.factory_method(args['method'], cutoff, peak_widths, spectrum, strategy)
+        print(spectrum)
 
         if (args['method'] == 'Rietveld'):
-            # if args['cutoff']:
-            #     cutoff = float(args['cutoff'])
-            # else:
-            #     cutoff = 0.9
-            # if args['range']:
-            #     peak_widths_range = args['range'].split(',')
-            # else: 
-            #     peak_widths_range = [5, 15]
-            peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
-            strategy = Strategy()
-            analysis = PPF_Factory.factory_method(args['method'], cutoff, peak_widths, spectrum, strategy)
+            peak_indices = analysis.get_peaks()
+            print(peak_indices)
+            # old_analysis = PPF_Factory.factory_method(args['method'], args['cutoff'], peak_widths, old_spectrum, strategy)
+            # old_peaks = old_analysis.get_peaks_params(args['fitting'])
 
-            peaks = analysis.get_peaks_params(args['fitting'])
+            # analysis = PPF_Factory.factory_method(args['method'], args['cutoff'], peak_widths, spectrum, strategy)
+            # peaks = analysis.get_peaks_params(args['fitting'])
+            #peaks = analysis.get_peaks_params(args['fitting'])
         elif (args['method'] == 'polyfit'):
             pass
             # peaks = analysis.get_peaks_params()
-        if not (os.path.isdir(os.path.join(dir, 'Output'))):
-            os.mkdir(os.path.join(dir, 'Output'))
-        with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
-            csv_peaks = csv.writer(h)
-            header_peaks = ['FWHM', 'center', 'intensity', 'type']
-            csv_peaks.writerow(header_peaks)
-            for each in peaks:     
-                entry = [each.FWHM, each.center, each.intensity, each.type]
-                csv_peaks.writerow(entry)
+        # if not (os.path.isdir(os.path.join(dir, 'Output'))):
+        #     os.mkdir(os.path.join(dir, 'Output'))
+        # with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
+        #     csv_peaks = csv.writer(h)
+        #     header_peaks = ['FWHM', 'center', 'intensity', 'type']
+        #     csv_peaks.writerow(header_peaks)
+        #     for each in peaks:     
+        #         entry = [each.FWHM, each.center, each.intensity, each.type]
+        #         csv_peaks.writerow(entry)
 
     else: 
         print('Missing argument.')
