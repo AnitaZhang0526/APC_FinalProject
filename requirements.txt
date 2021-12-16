@@ -4,6 +4,3 @@ pandas
 scipy
 lmfit
 sklearn
-random
-argparse
-csv
