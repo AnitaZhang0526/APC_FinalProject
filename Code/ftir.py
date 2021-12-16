@@ -1,11 +1,14 @@
 from Code.ExperimentalTechnique import ExperimentalTechnique
+from Code.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
+import numpy as np
 
 class FTIR(ExperimentalTechnique):
 
-	def filter_baseline():
-		# add Arjun's filter method
-		pass
+	def filter_baseline(self):
+		self.spectrum['y'] = baseline_removal(self.spectrum['y'])
+		return self
 
 	def flip_input(self,a_or_t):
-		if a_or_t == "transmittance":
-			self.spectrum['x'] = 2-log(self.spectrum['x'])
+		if a_or_t == True:
+			self.spectrum['x'] = 2 - np.log(self.spectrum['x'])
+		return self
