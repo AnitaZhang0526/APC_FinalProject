@@ -1,4 +1,5 @@
 from Code.rietveld import Rietveld
+from Code.poly import Poly
 
 import numpy as np
 
@@ -7,6 +8,6 @@ class PeakProfileFitting_Factory():
         if fitting_type == 'Rietveld':
             return Rietveld(cutoff, peak_widths, spectrum, strategy)
         elif fitting_type == 'polyfit':
-        	pass
+        	return Poly(spectrum)
         else:
             raise ValueError(f'Cannot make: {fitting_type}')
