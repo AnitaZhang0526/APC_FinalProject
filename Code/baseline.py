@@ -1,6 +1,7 @@
 #required libraries are as follows: 
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from BaselineRemoval import BaselineRemoval
 
 """
 BaselineRemoval method takes an array of input data and returns the data with the baseline removed. 
@@ -70,3 +71,16 @@ def baseline_removal(input_data):
         #return baseline-removed data 
         return baseline_removed
 
+#for testing purposes, __main__ provided below: 
+if __name__=="__main__":
+
+        input_array = [10, 20, 1.5, 5, 2, 9, 99, 25, 47]
+        Modpoly_output = baseline_removal(input_array) #ftir class hardcodes this array and creates this object 
+        OG_ModPoly_output = input_array.Modpoly(3)
+        Imodpoly_output = input_array.IModPoly(3)
+        Zhangfit_output = input_array.Zhangfit()
+        print('Original input:',input_array)
+        print('Modpoly base corrected values:',Modpoly_output)
+        print('OG Modpoly base corrected values:',OG_ModPoly_output)  
+        print('iModpoly base corrected values:',Imodpoly_output)
+        print('Zhang base corrected values:',Zhangfit_output)
