@@ -29,7 +29,7 @@ def test_get_peak_params():
     assert(test_peak.intensity == true_intensity)
     
 def test_get_peak_params_edge():
-    x1 = np.linspace(0,90,0.01)
+    x1 = np.linspace(0,90,9000)
     y1 = [1]*len(x1)
     spectrum1 = {'x':x1,'I':y1}
     poly_input = Poly(spectrum1) 
