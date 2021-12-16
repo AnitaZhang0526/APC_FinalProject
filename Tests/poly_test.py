@@ -37,4 +37,4 @@ def test_get_peak_params_edge():
     # check that calculated values of 21st peak match known true values
     peaks = poly_input.get_peaks_params()
     print(len(peaks))
-    assert(len(peaks)==0)
+    assert(len(peaks)==1)
