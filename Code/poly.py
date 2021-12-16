@@ -1,5 +1,4 @@
 # imports
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy.interpolate as interpolate
@@ -26,7 +25,7 @@ class Poly(PeakProfileFitting):
         # Note:'k=4' specifies the degree of the spline. It is 4 here so that 
         # the derivative will have degree 3 and then we can leverage the .roots() 
         # function, which is only supported for cubic splines
-        spline = interpolate.UnivariateSpline(two_theta, intensity, k=4, s=0)
+        spline = interpolate.UnivariateSpline(two_theta, intensity, k=4, s=0.05)
 
         # specify new domain for spline interpolation. note that 4 here just means
         # the spline function will plot 4x more points than the raw data. This value
