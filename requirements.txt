@@ -4,7 +4,6 @@ pandas
 scipy
 lmfit
 sklearn
-itertools
 random
 argparse
 csv
