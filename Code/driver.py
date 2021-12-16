@@ -11,7 +11,7 @@ from ExperimentalTechnique_Factory import ExperimentalTechnique_Factory as ET_Fa
 from PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Factory
 from strategy import Strategy
 
-# Test using `python driver.py -d XRD -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
+# Test using `python Code/driver.py -d XRD -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
 parser.add_argument('-d', '--data', type=str, 
     help='Type of data being uploaded, "XRD" or "FTIR".')
@@ -59,10 +59,10 @@ if __name__ == '__main__':
             spec = strategy.make_one_spec(model_choices, peak_indices, spectrum['x'], spectrum['y'], peak_widths)
             composite_model, params = analysis.make_one_model(spec)
             peaks = analysis.get_peaks_params(args['fitting'])
-            with open(os.path.join('Output', f"{args['inputfile']}.csv"), 'wt', encoding='UTF-8',newline='') as h:
+            with open(os.path.join('Output', f"{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
                 csv_peaks = csv.writer(h)
                 header_peaks = ['FWHM', 'center', 'intensity', 'type']
-                csv_peaks.writerow(header_city)
+                csv_peaks.writerow(header_peaks)
                 for each in peaks:     
                     entry = [each.FWHM, each.center, each.intensity, each.type]
                     csv_peaks.writerow(entry)
