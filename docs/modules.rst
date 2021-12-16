@@ -17,3 +17,4 @@ Code
    strategy
    xrd
    PeakProfileFitting_Factory
+   poly
