@@ -75,7 +75,8 @@ latex_elements = {
     'figure_align':'htbp',
     'pointsize': '10pt',
     'sphinxsetup': \
-        'hmargin={0.7in,0.7in}, vmargin={1in,1in}, \
+        'hmargin={0.7in,0.7in}, \
+        vmargin={1in,1in}, \
         verbatimwithframe=true, \
         TitleColor={rgb}{0,0,0}, \
-        HeaderFamily=\\rmfamily\\bfseries}
+        HeaderFamily=\\rmfamily\\bfseries'}
