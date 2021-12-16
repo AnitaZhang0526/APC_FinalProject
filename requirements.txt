@@ -3,9 +3,8 @@ numpy
 pandas
 scipy
 lmfit
-scikit-learn
+sklearn
 itertools
 random
 argparse
 csv
-sklearn
