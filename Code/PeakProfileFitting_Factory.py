@@ -1,4 +1,4 @@
-from rietveld import Rietveld
+from Code.rietveld import Rietveld
 
 import numpy as np
 

@@ -7,9 +7,9 @@ import os
 import pandas as pd
 import numpy as np
 
-from ExperimentalTechnique_Factory import ExperimentalTechnique_Factory as ET_Factory
-from PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Factory
-from strategy import Strategy
+from Code.ExperimentalTechnique_Factory import ExperimentalTechnique_Factory as ET_Factory
+from Code.PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Factory
+from Code.strategy import Strategy
 
 # Test using `python Code/driver.py -d XRD -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')

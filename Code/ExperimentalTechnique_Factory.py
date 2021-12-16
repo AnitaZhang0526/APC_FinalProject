@@ -1,5 +1,5 @@
-from xrd import XRD
-from ftir import FTIR
+from Code.xrd import XRD
+from Code.ftir import FTIR
 
 class ExperimentalTechnique_Factory():
 	def factory_method(input_type, spectrum):

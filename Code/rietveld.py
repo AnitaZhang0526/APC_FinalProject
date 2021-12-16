@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from strategy import Strategy
-from peak_profile_fitting import PeakProfileFitting 
-from peak import Peak
+from Code.strategy import Strategy
+from Code.peak_profile_fitting import PeakProfileFitting 
+from Code.peak import Peak
 
 """
 a subclass of PeakProfileFitting, a way to profile fit
