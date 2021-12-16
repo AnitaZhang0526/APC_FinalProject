@@ -11,7 +11,7 @@ from Code.ExperimentalTechnique_Factory import ExperimentalTechnique_Factory as 
 from Code.PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Factory
 from Code.strategy import Strategy
 
-# Test from root directory using `python Code/driver.py -d XRD -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
+# Test from root directory using `python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
 parser.add_argument('-d', '--data', type=str, 
     help='Type of data being uploaded, "XRD" or "FTIR".')
@@ -33,40 +33,32 @@ if __name__ == '__main__':
 
     if args['data'] and args['method'] and args['cutoff'] and args['range'] and args['inputfile']:
         dir = os.path.dirname(os.path.realpath(__file__))
-        input_path = os.path.join(dir, 'Input', str(args['inputfile']))
-        old_spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y'])
-        print(old_spectrum)
 
         spectrum, technique = ET_Factory.factory_method(args['inputfile'], args['data'], args['transmittance'])
-
         strategy = Strategy()   
+
         cutoff = float(args['cutoff'])     
         peak_widths_range = args['range'].split(',')
         peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
         analysis = PPF_Factory.factory_method(args['method'], cutoff, peak_widths, spectrum, strategy)
-        print(spectrum)
-
-        if (args['method'] == 'Rietveld'):
-            peak_indices = analysis.get_peaks()
-            print(peak_indices)
-            # old_analysis = PPF_Factory.factory_method(args['method'], args['cutoff'], peak_widths, old_spectrum, strategy)
-            # old_peaks = old_analysis.get_peaks_params(args['fitting'])
-
+        peaks = analysis.get_peaks_params(args['fitting'])
+        
+        #if (args['method'] == 'Rietveld'):
             # analysis = PPF_Factory.factory_method(args['method'], args['cutoff'], peak_widths, spectrum, strategy)
             # peaks = analysis.get_peaks_params(args['fitting'])
             #peaks = analysis.get_peaks_params(args['fitting'])
-        elif (args['method'] == 'polyfit'):
-            pass
+        #elif (args['method'] == 'polyfit'):
+         #   pass
             # peaks = analysis.get_peaks_params()
         # if not (os.path.isdir(os.path.join(dir, 'Output'))):
         #     os.mkdir(os.path.join(dir, 'Output'))
-        # with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
-        #     csv_peaks = csv.writer(h)
-        #     header_peaks = ['FWHM', 'center', 'intensity', 'type']
-        #     csv_peaks.writerow(header_peaks)
-        #     for each in peaks:     
-        #         entry = [each.FWHM, each.center, each.intensity, each.type]
-        #         csv_peaks.writerow(entry)
+        with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
+            csv_peaks = csv.writer(h)
+            header_peaks = ['FWHM', 'center', 'intensity', 'type']
+            csv_peaks.writerow(header_peaks)
+            for each in peaks:     
+                entry = [each.FWHM, each.center, each.intensity, each.type]
+                csv_peaks.writerow(entry)
 
     else: 
         print('Missing argument.')
