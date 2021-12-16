@@ -6,6 +6,6 @@ class FTIR(ExperimentalTechnique):
 		# add Arjun's filter method
 		pass
 
-	def flip_input(self,a_or_t):
+	def flip_input(self,a_or_t,spectrum):
 		if a_or_t == "transmittance":
-			self.spectrum['x'] = 2-log(self.spectrum['x'])
+			spectrum['x'] = 2-log(spectrum['x'])
