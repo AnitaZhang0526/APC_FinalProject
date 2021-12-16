@@ -15,6 +15,7 @@ from Code.strategy import Strategy
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
 parser.add_argument('-d', '--data', type=str, 
     help='Type of data being uploaded, "XRD" or "FTIR".')
+parser.add_argument('-t', '--transmittance', dest='transmittance', action='store_true')
 parser.add_argument('-m', '--method', type=str,
     help='Type of fitting to be used, "Rietveld" or "polyfit".')
 parser.add_argument('-f', '--fitting', type=str,
