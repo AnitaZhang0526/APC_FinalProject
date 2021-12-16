@@ -1,4 +1,4 @@
-#XRD/FTIR Data Processing Tool Suite
+# XRD/FTIR Data Processing Tool Suite
 Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel, and Anita Zhang
 
 ## Using this Project
