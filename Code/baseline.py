@@ -20,7 +20,7 @@ def vandermonde_matrix(input_data):
         vander_rows = np.array((list(range(1,len(input_data)+1))))
         #vander_rows = np.array(vander_rows)      
         vandermonde_matrix = np.fliplr(np.vander(vander_rows, vander_columns))
-        print('vander', vandermonde_matrix)
+        #print('vander', vandermonde_matrix)
         return vandermonde_matrix
         
 def qr_factorization(vandermonde_matrix):
@@ -31,7 +31,7 @@ def qr_factorization(vandermonde_matrix):
         The QR factorization of the Vandermonde matrix is required for generating the coefficients used in the least squares solution
         """
         qr_factorization = np.linalg.qr(vandermonde_matrix)[0][:,1:]
-        print('qr', np.round(qr_factorization,4))
+        #print('qr', np.round(qr_factorization,4))
         return qr_factorization
 
 def linear_regression(input_data, qr_factorization):
@@ -55,7 +55,7 @@ def linear_regression(input_data, qr_factorization):
           
         #compute final baseline-removed data           
         final_data=np.array(prediction) 
-        print('final data', final_data)
+        #print('final data', final_data)
         return final_data
     
 def baseline_removal(input_data):
@@ -65,7 +65,7 @@ def baseline_removal(input_data):
         vander = vandermonde_matrix(input_data)
         qr_factored = qr_factorization(vander)
         baseline_removed = input_data - linear_regression(input_data,qr_factored)
-        print('baseline', baseline_removed)
+        #print('baseline', baseline_removed)
 
         #return baseline-removed data 
         return baseline_removed

@@ -8,3 +8,11 @@ class Peak:
         self.center = center
         self.intensity = intensity
         self.type = type
+
+    def as_dict(self):
+        return {
+        	'FWHM': self.FWHM, 
+        	'center': self.center, 
+        	'intensity': self.intensity,
+        	'type': self.type
+        }
