@@ -62,7 +62,7 @@ class Rietveld(PeakProfileFitting):
 
         for i in range(len(spec['modelType'])):
             prefix = f'm{i}_'
-            model = getattr(models, spec['modelType'][0])(prefix=prefix)
+            model = getattr(models, spec['modelType'][i])(prefix=prefix)
             model.set_param_hint('sigma', min=1e-6, max=x_range)
             model.set_param_hint('center', min=x_min, max=x_max)
             model.set_param_hint('height', min=1e-6, max=1.1*I_max)
