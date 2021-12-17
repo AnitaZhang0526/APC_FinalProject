@@ -4,11 +4,11 @@ from Code.poly import Poly
 import numpy as np
 
 class PeakProfileFitting_Factory():
-    def factory_method(method, fitting, cutoff, peak_widths, spectrum, strategy):
+    def factory_method(method, fitting, cutoff, peak_widths, spectrum, strategy, threshold):
         if method == 'Rietveld':
             r =  Rietveld(cutoff, peak_widths, spectrum, strategy)
             print("Calculating parameters of peaks. Please wait.")
-            peaks = r.get_peaks_params(fitting)
+            peaks = r.get_peaks_params(fitting,threshold)
             print("Done.")
             return peaks, r
         elif method == 'polyfit':
