@@ -10,7 +10,7 @@ import numpy as np
 from Code.ExperimentalTechnique_Factory import ExperimentalTechnique_Factory as ET_Factory
 from Code.PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Factory
 from Code.strategy import Strategy
-from Code.compare_to_database import CompareToDatabase as compare_db
+from Code.compare_to_database import CompareToDatabase
 
 # Test from root directory using `python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
@@ -53,10 +53,8 @@ if __name__ == '__main__':
                 entry = [each.FWHM, each.center, each.intensity, each.type]
                 csv_peaks.writerow(entry)
 
-        df = pd.DataFrame([x.as_dict() for x in peaks])
-        df.drop(['FWHM', 'type'], axis=1, inplace=True)
-        peak_params = df.values.tolist()
-        match = compare_db.match(args['data'].lower(), peak_params)
+        match = CompareToDatabase(args['data'].lower(), peaks).match()
+        
         with open(os.path.join(dir, 'Output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
             csv_match = csv.writer(j)
             header_match = ['2_theta_1', 'intensity_1', '2_theta_2', 'intensity_2', '2_theta_3', 'intensity_3', 'material_name', 'material_formula']
