@@ -56,14 +56,18 @@ if __name__ == '__main__':
                 entry = [each.FWHM, each.center, each.intensity, each.type]
                 csv_peaks.writerow(entry)
 
+        print('Comparing peaks to database. Please wait.')
         match = CompareToDatabase(args['data'].lower(), peaks).match()
-        
-        if not (match == None):
-            with open(os.path.join(dir, 'Output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
-                csv_match = csv.writer(j)
-                header_match = ['2_theta_1', 'intensity_1', '2_theta_2', 'intensity_2', '2_theta_3', 'intensity_3', 'material_name', 'material_formula']
-                csv_match.writerow(header_match)     
+        print('Done.')
+   
+        with open(os.path.join(dir, 'Output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
+            csv_match = csv.writer(j)
+            header_match = ['2_theta_1', 'intensity_1', '2_theta_2', 'intensity_2', '2_theta_3', 'intensity_3', 'material_name', 'material_formula']
+            csv_match.writerow(header_match)
+            if not (type(match) == type(None)):     
                 csv_match.writerow(match)
+            else:
+                print("No match determined.")
             
     else: 
         print('Missing argument.')
