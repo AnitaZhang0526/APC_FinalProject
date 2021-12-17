@@ -69,5 +69,6 @@ class Strategy:
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
+        model_choices_list.append('GaussianModel')
         return specs,model_choices_list
 
