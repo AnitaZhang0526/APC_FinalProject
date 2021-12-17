@@ -12,7 +12,7 @@ from Code.PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Fa
 from Code.strategy import Strategy
 from Code.compare_to_database import CompareToDatabase
 
-# Test from root directory using `python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -c 0.9 -r "5,15" -i 1-1-4-11_pH0_3-17-2020.csv`
+# Test from root directory using `python Code/driver.py -d FTIR -m "polyfit" -t -i 1-1-4-11_pH0_3-17-2020.csv`
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
 parser.add_argument('-d', '--data', type=str, 
     help='Type of data being uploaded, "XRD" or "FTIR".')
@@ -55,11 +55,12 @@ if __name__ == '__main__':
 
         match = CompareToDatabase(args['data'].lower(), peaks).match()
         
-        with open(os.path.join(dir, 'Output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
-            csv_match = csv.writer(j)
-            header_match = ['2_theta_1', 'intensity_1', '2_theta_2', 'intensity_2', '2_theta_3', 'intensity_3', 'material_name', 'material_formula']
-            csv_match.writerow(header_match)     
-            csv_match.writerow(match)
+        if not (match == None):
+            with open(os.path.join(dir, 'Output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
+                csv_match = csv.writer(j)
+                header_match = ['2_theta_1', 'intensity_1', '2_theta_2', 'intensity_2', '2_theta_3', 'intensity_3', 'material_name', 'material_formula']
+                csv_match.writerow(header_match)     
+                csv_match.writerow(match)
             
     else: 
         print('Missing argument.')
