@@ -21,5 +21,5 @@ def test_make_specs():
     x = np.arange(0,90,0.05)
     peak_widths = np.arange(5,15)
     specs,model_choices_list = strategy.make_specs(strategy_choice,peak_indices,I,x,peak_widths)
-    assert(len(specs) == 79)
-    assert(len(model_choices_list) == 79)
+    assert(len(specs) == 78)
+    assert(len(model_choices_list) == 78)

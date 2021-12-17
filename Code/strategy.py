@@ -48,9 +48,9 @@ class Strategy:
         l = len(peak_indices)
         model_choices_list = []
         if strategy_choice == 'best':
-            
             model_combinations = list(combinations_with_replacement(options,l))
             for model_choices in model_combinations:
+                model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
@@ -58,6 +58,7 @@ class Strategy:
             n_trials = len(options)
             for i in range(n_trials):
                 model_choices = [options[i]]*len(peak_indices)
+                model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
@@ -65,9 +66,9 @@ class Strategy:
             n_trials = 10
             for i in range(n_trials):
                 model_choices = random.choices(options,l)
+                model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
-        model_choices_list.append('GaussianModel')
         return specs,model_choices_list
 
