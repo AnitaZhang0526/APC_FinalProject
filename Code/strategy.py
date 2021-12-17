@@ -2,6 +2,7 @@ import numpy as np
 from itertools import combinations_with_replacement
 import pandas as pd
 import random
+from scipy import signal
 
 class Strategy:
 
@@ -22,6 +23,10 @@ class Strategy:
             height.append(I[peak_idx])
             sigma.append(x_range/len(x)*np.min(peak_widths)),
             center.append(x[peak_idx])
+        modelType.append('GaussianModel')
+        height.append(np.mean(I))
+        sigma.append(x_range/len(x)*np.min(peak_widths))
+        center.append(45)
         spec = pd.DataFrame({'modelType':modelType,
                              'height':height,
                              'sigma':sigma,
@@ -43,6 +48,7 @@ class Strategy:
         l = len(peak_indices)
         model_choices_list = []
         if strategy_choice == 'best':
+            
             model_combinations = list(combinations_with_replacement(options,l))
             for model_choices in model_combinations:
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
