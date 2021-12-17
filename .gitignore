@@ -70,6 +70,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+_build/
 
 # PyBuilder
 target/
@@ -130,4 +131,7 @@ dmypy.json
 
 # DS store
 .DS_Store
+
+# Output
+Output/
 

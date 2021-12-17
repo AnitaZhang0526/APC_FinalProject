@@ -1,14 +1,8 @@
-import abc
+import os
+import pandas as pd
+import numpy as np
 
-class ExperimentalTechnique(metaclass=abc.ABCMeta):
-	@abc.abstractmethod
-	def load_data(self):
-		pass
-
-	@abc.abstractmethod
-	def filter_baseline(self):
-		pass
-
-	@abc.abstractmethod
-	def get_peak_features(self):
-		pass
+class ExperimentalTechnique():
+	def __init__(self, spectrum):
+		spectrum['y'] = spectrum['y']/max(spectrum['y'])
+		self.spectrum = spectrum

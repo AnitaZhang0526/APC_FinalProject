@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
+from Code.strategy import Strategy
 from Code.peak_profile_fitting import PeakProfileFitting 
 from Code.peak import Peak
 
@@ -93,7 +94,6 @@ class Rietveld(PeakProfileFitting):
         best_values = []
         specs,model_choices_list = self.strategy.make_specs(strategy_choice,peak_indices,self.x,self.I,self.peak_widths)
         for spec,model_choices in zip(specs,model_choices_list):
-            print(len(model_choices_list))
             composite_model,params = self.make_one_model(spec)
             predicted_model = composite_model.fit(self.I, params, x=self.x)
             results = predicted_model.eval(params=params)
