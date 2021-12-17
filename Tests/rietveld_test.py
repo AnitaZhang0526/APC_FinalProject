@@ -50,7 +50,8 @@ def test_find_best_fit():
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
-    best_model_choices, best_values = rietveld_input.find_best_fit('fast')
+    threshold = 0.2
+    best_model_choices, best_values = rietveld_input.find_best_fit('fast',threshold)
     assert(len(best_model_choices)==11)
     assert(isinstance(best_values,dict))
     
@@ -92,6 +93,6 @@ def test_get_peaks_params(mock):
                    'm9_center': 34.48205912997776,
                    'm9_sigma': 0.10500064381692818}
     mock.return_value = [best_model_choices, best_values]
-    strategy_choice,threshold = 0.2
+    threshold = 0.2
     peaks = rietveld_input.get_peaks_params('fast',threshold)
     assert(len(peaks)==10)
