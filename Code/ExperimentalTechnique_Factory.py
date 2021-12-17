@@ -14,8 +14,8 @@ class ExperimentalTechnique_Factory():
             return spectrum, XRD(spectrum)
         elif input_type == 'FTIR':
             ftir = FTIR(spectrum)
-            ftir = FTIR.filter_baseline(ftir)
             ftir = FTIR.flip_input(ftir, transmittance)
+            ftir = FTIR.filter_baseline(ftir)
 
             return spectrum, ftir
         else:
