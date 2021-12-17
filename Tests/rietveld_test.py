@@ -34,7 +34,7 @@ def test_make_one_model():
     peak_widths = np.arange(5,15)
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
     peak_indices = rietveld_input.get_peaks()
-    L = peak_indices.shape[0]
+    L = peak_indices.shape[0]+1
     model_choices = []
     for i in range(L):
         model_choices.append('GaussianModel')
@@ -49,7 +49,7 @@ def test_find_best_fit():
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
     best_model_choices, best_values = rietveld_input.find_best_fit('fast')
-    assert(len(best_model_choices)==10)
+    assert(len(best_model_choices)==11)
     assert(isinstance(best_values,dict))
     
 @mock.patch.object(Rietveld,'find_best_fit')
