@@ -2,6 +2,7 @@ import numpy as np
 from itertools import combinations_with_replacement
 import pandas as pd
 import random
+from scipy import signal
 
 class Strategy:
 
@@ -22,6 +23,10 @@ class Strategy:
             height.append(I[peak_idx])
             sigma.append(x_range/len(x)*np.min(peak_widths)),
             center.append(x[peak_idx])
+        modelType.append('GaussianModel')
+        height.append(np.mean(I))
+        sigma.append(x_range/len(x)*np.min(peak_widths))
+        center.append(45)
         spec = pd.DataFrame({'modelType':modelType,
                              'height':height,
                              'sigma':sigma,
@@ -45,6 +50,8 @@ class Strategy:
         if strategy_choice == 'best':
             model_combinations = list(combinations_with_replacement(options,l))
             for model_choices in model_combinations:
+                model_choices = list(model_choices)
+                model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
@@ -52,6 +59,7 @@ class Strategy:
             n_trials = len(options)
             for i in range(n_trials):
                 model_choices = [options[i]]*len(peak_indices)
+                model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
@@ -59,6 +67,7 @@ class Strategy:
             n_trials = 10
             for i in range(n_trials):
                 model_choices = random.choices(options,l)
+                model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
                 model_choices_list.append(model_choices)
