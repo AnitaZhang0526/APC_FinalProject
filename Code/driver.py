@@ -27,7 +27,9 @@ parser.add_argument('-r', '--range', type=str,
     help='Peak widths range to be used for fitting (e.g. "5,15").')
 parser.add_argument('-i', '--inputfile', type=str,
     help='Filename of input file to be analyzed (e.g. "1-1-4-11_pH0_3-17-2020.csv").')
-parser.set_defaults(transmittance=True, fitting="best", cutoff="0.9", range="5,15")
+parser.add_argument('-h', '--threshold', type=str,
+    help='Threshold for what counts as a peak (e.g. 0.2)')
+parser.set_defaults(transmittance=True, fitting="best", cutoff="0.9", range="5,15", threshold="0.2")
 
 if __name__ == '__main__':
     args = vars(parser.parse_args())
@@ -38,10 +40,11 @@ if __name__ == '__main__':
         spectrum, technique = ET_Factory.factory_method(args['inputfile'], args['data'], args['transmittance'])
         strategy = Strategy()   
 
-        cutoff = float(args['cutoff'])     
+        cutoff = float(args['cutoff'])
+        threshold = float(args['threshold'])  
         peak_widths_range = args['range'].split(',')
         peak_widths = np.arange(int(peak_widths_range[0]),int(peak_widths_range[1]))
-        peaks, analysis = PPF_Factory.factory_method(args['method'], args['fitting'], cutoff, peak_widths, spectrum, strategy)
+        peaks, analysis = PPF_Factory.factory_method(args['method'], args['fitting'], cutoff, peak_widths, spectrum, strategy,threshold)
         
         if not (os.path.isdir(os.path.join(dir, 'Output'))):
             os.mkdir(os.path.join(dir, 'Output'))
