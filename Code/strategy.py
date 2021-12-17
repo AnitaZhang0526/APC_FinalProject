@@ -59,6 +59,7 @@ class Strategy:
             for i in range(n_trials):
                 model_choices = [options[i]]*len(peak_indices)
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
+                print(len(spec['modelType']))
                 specs.append(spec)
                 model_choices_list.append(model_choices)
         elif strategy_choice == 'random':
