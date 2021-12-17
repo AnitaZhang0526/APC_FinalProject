@@ -31,11 +31,10 @@ class Rietveld(PeakProfileFitting):
     """
     : get rough initial peak estimates (without refinement)
     """
-    def get_peaks(self):
+    def get_peaks(self, threshold):
         b,a = signal.butter(2, self.cutoff, 'low')
         I_filtered = signal.filtfilt(b,a,self.I)
         peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_widths)
-        threshold = 0.20
         idx =(self.I[peak_indicies]>threshold)
         peak_indicies = peak_indicies[idx]
         return peak_indicies
@@ -88,8 +87,8 @@ class Rietveld(PeakProfileFitting):
     : strategy_choice: type string, 'fast','best', or 'random'
     : find the best composite model
     """  
-    def find_best_fit(self,strategy_choice):
-        peak_indices = self.get_peaks()
+    def find_best_fit(self,strategy_choice,threshold):
+        peak_indices = self.get_peaks(threshold)
         lowest_cost = np.inf
         best_model_choices = []
         best_values = []
@@ -109,9 +108,9 @@ class Rietveld(PeakProfileFitting):
     : strategy_choice: type string, 'fast','best', or 'random'
     : return the refined peak parameters
     """  
-    def get_peaks_params(self,strategy_choice):
+    def get_peaks_params(self,strategy_choice,threshold):
         peaks = []
-        model_choices, values = self.find_best_fit(strategy_choice)
+        model_choices, values = self.find_best_fit(strategy_choice,threshold)
         for i,type in enumerate(model_choices):
             prefix = f'm{i}_'
             key_amp = prefix+'amplitude'

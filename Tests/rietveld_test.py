@@ -23,9 +23,10 @@ def test_get_peaks():
     strategy = Strategy()
     first_peak_idx = 11
     peak_widths = np.arange(5,15)
+    threshold = 0.2
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
-    peaks_found = rietveld_input.get_peaks()
+    peaks_found = rietveld_input.get_peaks(threshold)
     assert(peaks_found[0]==first_peak_idx)
     
 def test_make_one_model():
@@ -33,7 +34,8 @@ def test_make_one_model():
     cutoff = 0.9
     peak_widths = np.arange(5,15)
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
-    peak_indices = rietveld_input.get_peaks()
+    threshold = 0.2
+    peak_indices = rietveld_input.get_peaks(threshold)
     L = peak_indices.shape[0]+1
     model_choices = []
     for i in range(L):
@@ -48,7 +50,8 @@ def test_find_best_fit():
     peak_widths = np.arange(5,15)
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
-    best_model_choices, best_values = rietveld_input.find_best_fit('fast')
+    threshold = 0.2
+    best_model_choices, best_values = rietveld_input.find_best_fit('fast',threshold)
     assert(len(best_model_choices)==11)
     assert(isinstance(best_values,dict))
     
@@ -90,5 +93,6 @@ def test_get_peaks_params(mock):
                    'm9_center': 34.48205912997776,
                    'm9_sigma': 0.10500064381692818}
     mock.return_value = [best_model_choices, best_values]
-    peaks = rietveld_input.get_peaks()
+    threshold = 0.2
+    peaks = rietveld_input.get_peaks_params('fast',threshold)
     assert(len(peaks)==10)
