@@ -50,6 +50,7 @@ class Strategy:
         if strategy_choice == 'best':
             model_combinations = list(combinations_with_replacement(options,l))
             for model_choices in model_combinations:
+                model_choices = list(model_choices)
                 model_choices.append('GaussianModel')
                 spec = self.make_one_spec(model_choices,peak_indices,I,x,peak_widths)
                 specs.append(spec)
