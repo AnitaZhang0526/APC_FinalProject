@@ -5,8 +5,21 @@ import scipy.interpolate as interpolate
 from Code.peak_profile_fitting import PeakProfileFitting
 from Code.peak import Peak
 
-
+"""
+a subclass of PeakProfileFitting, a way to quickly profile fit
+"""
 class Poly(PeakProfileFitting):
+    """
+    : Poly inherits from PeakProfileFitting
+    : The class has five properties: 
+    : x: type double, from PeakProfileFitting
+    : I: type double, from PeakProfileFitting
+    : cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
+    : peak_widths: type double array, a range that the a peak's width can fall between
+    : strategy: Strategy object, an object that contain choices regarding the optimization process 
+    : The class requires a single input parameter:
+    : spectrum: dataFrame containing x and y values
+    """
      
     def __init__(self, spectrum):
         super().__init__(spectrum)    
@@ -15,7 +28,11 @@ class Poly(PeakProfileFitting):
     # as an (Nx3) array where N is the number of peaks found
     def get_peaks_params(self):
 
-        two_theta, intensity = self.x, self.I
+        # sort data by ascending x values 
+        data = np.transpose([self.x, self.I])
+        data = data[data[:,0].argsort()]
+        
+        two_theta, intensity = data[:, 0], data[:, 1]
         min_angle = np.min(two_theta)
         max_angle = np.max(two_theta)
         num_samples = len(two_theta)
