@@ -26,7 +26,7 @@ python scrape_xrd.py
 ```
 
 #### Updating the FTIR Database
-Coming soon!
+The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/Code/ftir_database_generation/' directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/Code/databases/' directory. 
 
 ### Python Packages
 If you use a python package in the code you are writing, check `requirements.txt` and `setup.py` to see if the package is
