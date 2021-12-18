@@ -3,14 +3,14 @@ from Code.experimental_technique_factory import ExperimentalTechnique_Factory as
 from Code.xrd import XRD
 from Code.ftir import FTIR
 
-def test_XRD_factory(spectrum):
+def test_XRD_factory():
     inputfile = 'Malli_80s.allASC.ASC'
     input_type = 'XRD'
     transmittance = False
     xrd = ET_factory.factory_method(inputfile, input_type, transmittance)
     assert(isinstance(xrd,XRD))
     
-def test_FTIR_facotry(spectrum):
+def test_FTIR_facotry():
     inputfile = 'Malli_80s.allASC.ASC'
     input_type = 'FTIR'
     transmittance = True
