@@ -20,7 +20,7 @@ def test_poly_factory():
     cutoff = 0.9
     strategy = Strategy()
     threshold = 0.2
-    r = PPF_factory.factory_method(method, strategy_choice, cutoff, peak_widths, spectrum, strategy, threshold)
+    peaks, r = PPF_factory.factory_method(method, strategy_choice, cutoff, peak_widths, spectrum, strategy, threshold)
     assert(isinstance(r,Rietveld))
     
 def test_Rietveld_facotry():
@@ -30,7 +30,7 @@ def test_Rietveld_facotry():
     cutoff = 0.9
     strategy = Strategy()
     threshold = 0.2
-    p = PPF_factory.factory_method(method, strategy_choice, cutoff, peak_widths, spectrum, strategy, threshold)
+    peaks, p = PPF_factory.factory_method(method, strategy_choice, cutoff, peak_widths, spectrum, strategy, threshold)
     assert(isinstance(p,Poly))
     
 def test_error_type():
