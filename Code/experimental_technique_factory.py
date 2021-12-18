@@ -1,6 +1,5 @@
 from Code.xrd import XRD
 from Code.ftir import FTIR
-import pandas as pd
 
 class ExperimentalTechnique_Factory():
     """
