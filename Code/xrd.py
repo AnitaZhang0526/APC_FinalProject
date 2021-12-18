@@ -1,4 +1,7 @@
 from Code.experimental_technique import ExperimentalTechnique
 
 class XRD(ExperimentalTechnique):
-	pass
+    """
+    :return: an XRD object
+    """
+    pass
