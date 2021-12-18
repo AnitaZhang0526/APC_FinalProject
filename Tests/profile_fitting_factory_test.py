@@ -4,7 +4,7 @@ from Code.rietveld import Rietveld
 from Code.poly import Poly
 import numpy as np
 from Code.strategy import Strategy
-
+import pandas as pd
 
 f = open('Malli_80s.allASC.ASC', 'r')
 data = np.genfromtxt(f, delimiter=' ')
