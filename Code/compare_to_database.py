@@ -21,12 +21,7 @@ class CompareToDatabase:
 
     def match(self):
         """
-        :returns the closest material match from the XRD or FTIR
-        database, based on data type.
-
-        :return: returns the closest material match
-        :rtype: list with attributes in the following order: 
-            [2_theta_1, intensity_1, 2_theta_2, intensity_2, 2_theta_3, intensity_3, material_name, material_formula]
+        :returns the closest material match from the XRD or FTIR database, based on data type.
         """
         match = None;
 

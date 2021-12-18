@@ -104,7 +104,7 @@ class Rietveld(PeakProfileFitting):
         """
         :param strategy_choice: type string, 'fast','best', or 'random'
         :param threshold: type double, only peaks above threashold intensities will be fitted
-        :returns the refined peak parameters as Peak objects
+        :returns the refined peak parameters as a list of Peak objects
         """  
         peaks = []
         model_choices, values = self.find_best_fit(strategy_choice,threshold)
