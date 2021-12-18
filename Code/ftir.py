@@ -4,11 +4,11 @@ import numpy as np
 
 class FTIR(ExperimentalTechnique):
 
-	def filter_baseline(self):
-		self.spectrum['y'] = baseline_removal(self.spectrum['y'])
+	def filter_baseline(self,spectrum):
+		spectrum['y'] = baseline_removal(spectrum['y'])
 		return self
 
-	def flip_input(self,a_or_t):
-		if a_or_t == True:
-			self.spectrum['y'] = 2 - np.log(self.spectrum['y'])
+	def flip_input(self,transmittance,spectrum):
+		if transmittance == True:
+			spectrum['y'] = 2 - np.log(spectrum['y'])
 		return self
