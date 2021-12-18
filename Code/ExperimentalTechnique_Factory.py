@@ -8,9 +8,11 @@ class ExperimentalTechnique_Factory():
     """
     def factory_method(inputfile, input_type, transmittance):
         """
-        :param filename: type string, name of data file
-        :param transmittance: type bool, True or False
-        :returns a dataFrame containing x and y values and an ExperimentalTechnique object
+        :param filename: name of data file
+        :type: string
+        :param transmittance: True or False
+        :type: transmittance: bool
+        :return: a dataFrame containing x and y values and an ExperimentalTechnique object
         """
         if input_type == 'XRD':
             xrd = XRD() # create an XRD object if the input type is XRD

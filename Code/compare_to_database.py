@@ -13,15 +13,18 @@ class CompareToDatabase:
     def __init__(self, data_type = None, peaks = []):
         """
         :Constructor method
-        :param data_type: type string, "xrd" or "ftir", defaults to None
-        :param peaks: list of Peak object, defaults to an empty list
+        :param data_type: "xrd" or "ftir", defaults to None
+        :type data_type:: str
+        :param peaks: defaults to an empty list
+        :type peaks: list of Peak objects
+        :return: a CompareToDatabase object
         """
         self.data_type = data_type
         self.peaks = peaks
 
     def match(self):
         """
-        :returns the closest material match from the XRD or FTIR database, based on data type.
+        :return: the closest material match from the XRD or FTIR database, based on data type.
         """
         match = None;
 

@@ -10,10 +10,13 @@ class Strategy:
     """
     def make_one_spec(self,model_choices,peak_indices,I,x,peak_widths):
         """
-	    :param model_choices: list of strings, indicating the types of peak models
-	    :param peak_indices: list of doubles, peak indices of rough peak positions
-        :param peak_widths: type double array, a range that the a peak's width can fall between 
-        :returns one composite model based on specifications
+	    :param model_choices: indicating the types of peak models
+        :type model_choices: list of strings
+	    :param peak_indices: peak indices of rough peak positions
+        :type peak_indices: list of doubles
+        :param peak_widths: a range that the a peak's width can fall between 
+        :type peak_widths: double array
+        :return: one composite model based on specifications
 	    """
         modelType = []
         height = []
@@ -38,15 +41,20 @@ class Strategy:
 
     def make_specs(self,strategy_choice,peak_indices,I,x,peak_widths):
         """
-        :param strategy_choice: type string, 'fast','random', or 'best', where
+        :param strategy_choice:v'fast','random', or 'best', where
         'fast' builds three composite models each containing one uniform type of peaks,
         'random' builds 10 random composite models each containing a random combination of peak types,
         'best' builds every possible composite model
-        :param peak_indices: list of doubles, peak indices of rough peak positions
-        :param x: type double array, the independent variable data
-	    :param I: type double array, the intensity or the dependent variable data
-        :peak_widths: type double array, a range that the a peak's width can fall between 
-        :returns a list of specifications based on user's choice of level of optimization 
+        :type strategy_choice: str
+        :param peak_indices: peak indices of rough peak positions
+        :type peak_indices: list of doubles
+        :param x: the independent variable data
+        :type x: double array
+	    :param I: the intensity or the dependent variable data
+        :type I: double array
+        :peak_widths: a range that the a peak's width can fall between 
+        :type peak_widths: double array
+        :return: a list of specifications based on user's choice of level of optimization 
         and the model choices for each specification
         """
         specs = []

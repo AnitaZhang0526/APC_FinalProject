@@ -11,6 +11,8 @@ class PeakProfileFitting(metaclass=abc.ABCMeta):
         """
         :Constructor method
         :param spectrum: dataFrame containing x and y values
+        :type spectrum: dataFrame
+        :return: a PeakProfileFitting objects
         """
         self.x = spectrum['x']
         self.I = spectrum['y']
