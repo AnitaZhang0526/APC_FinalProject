@@ -10,10 +10,15 @@ class Peak:
     def __init__(self, FWHM,center,intensity,type):
         """
         :Constructor method
-        :param FWHM: type double, full width half max of a peak
-        :param center: type double, center of a peak
-        :param intensity: type double, height of a peak
-        :param type: type string, peak type options: 'GaussianModel', 'LorentzianModel', 'VoightModel', or 'Polynomial'
+        :param FWHM: full width half max of a peak
+        :type FWHM: double
+        :param center: center of a peak
+        :type center: double
+        :param intensity: height of a peak
+        :type intensity: double
+        :param type: peak type options: 'GaussianModel', 'LorentzianModel', 'VoightModel', or 'Polynomial'
+        :type type: str
+        :return: a Peak object
         """
         self.FWHM = FWHM # full width half max
         self.center = center # center
@@ -22,7 +27,7 @@ class Peak:
     
     def as_dict(self):
         """
-        :returns peaks in dictrionary format
+        :return: peaks in dictrionary format
         """
         return {
         	'FWHM': self.FWHM,  # full width half max

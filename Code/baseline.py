@@ -6,8 +6,7 @@ from sklearn.linear_model import LinearRegression
 BaselineRemoval method takes an array of input data and returns the data with the baseline removed. 
 BaselineRemoval uses an Ordinary Linear Regression method that fits to the QR-factorized Vandermonde matrix
 This method is based on the process outlined in "Automated Method for Subtraction of Fluorescence from Biological Raman Spectra" by Lieber et al, 2003
-This script was based on the imp
-lementation available at: https://github.com/StatguyUser/BaselineRemoval
+This script was based on the implementation available at: https://github.com/StatguyUser/BaselineRemoval
 """
 
 def vandermonde_matrix(input_data):
