@@ -1,4 +1,4 @@
-from Code.ExperimentalTechnique import ExperimentalTechnique
+from Code.experimental_technique import ExperimentalTechnique
 
 class XRD(ExperimentalTechnique):
 	pass
