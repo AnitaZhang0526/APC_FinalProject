@@ -1,4 +1,4 @@
-from Code.ExperimentalTechnique import ExperimentalTechnique
+from Code.experimental_technique import ExperimentalTechnique
 from Code.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
 import numpy as np
 
