@@ -6,51 +6,46 @@ from Code.strategy import Strategy
 from Code.peak_profile_fitting import PeakProfileFitting 
 from Code.peak import Peak
 
-"""
-a subclass of PeakProfileFitting, a way to profile fit
-"""
 class Rietveld(PeakProfileFitting):  
     """
-    : Rietveld inherits from PeakProfileFitting
-    : The class has five properties: 
-    : x: type double, from PeakProfileFitting
-    : I: type double, from PeakProfileFitting
-    : cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
-    : peak_widths: type double array, a range that the a peak's width can fall between
-    : strategy: Strategy object, an object that contain choices regarding the optimization process 
-    : The class requires four input parameters:
-    : cutoff, peak_widths, strategy, and
-    : spectrum: dataFrame containing x and y values
+    :This class inherits from PeakProfileFitting and implements the Rietveld refinement method
+
+    :x: type double, x values of spectrum, from PeakProfileFitting
+    :I: type double, y values of spectrum, from PeakProfileFitting
+    :cutoff: type double, given by param cutoff
+    :peak_widths: type double array, given by param peak_widths
+    :strategy: Strategy object, given by param strategy
     """
     def __init__(self,cutoff,peak_widths,spectrum,strategy):
+        """
+        :Constructor method
+        :param cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
+        :pram peak_widths: type double array, a range that the a peak's width can fall between
+        :param spectrum: dataFrame containing x and y values
+        :param strategy: Strategy object, an object that contain choices regarding the optimization process 
+        """
         super().__init__(spectrum)
         self.cutoff = cutoff
         self.peak_widths = peak_widths
         self.strategy = strategy
 
-    """
-    : get rough initial peak estimates (without refinement)
-    """
     def get_peaks(self, threshold):
-        b,a = signal.butter(2, self.cutoff, 'low')
-        I_filtered = signal.filtfilt(b,a,self.I)
-        peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_widths)
-        idx =(self.I[peak_indicies]>threshold)
+        # get rough initial peak estimates (without refinement)
+        b,a = signal.butter(2, self.cutoff, 'low') # create a filter
+        I_filtered = signal.filtfilt(b,a,self.I) # roughly filter for more precise peak definition
+        peak_indicies = signal.find_peaks_cwt(I_filtered, self.peak_widths) # look for rough peaks@
+        idx =(self.I[peak_indicies]>threshold) # only look at peaks above a certain amplitude
         peak_indicies = peak_indicies[idx]
         return peak_indicies
 
-    """
-    : calculate the squared error
-    """  
     def cost(self,results):
-        c = np.sum(np.power(results-self.I, 2))/len(self.x)
+        # calculate the squared error
+        c = np.sum(np.power(results-self.I, 2))/len(self.x) # squared error for composite model
         return c
 
-    """
-    : spec: dataFrame object, specification for the composite model
-    : make a composite model that fits all peaks
-    """  
     def make_one_model(self,spec):
+        # spec: dataFrame object, specification for the composite model
+        # make a composite model that fits all peaks 
         x = self.x
         I = self.I
         x_min = np.min(x)
@@ -59,72 +54,74 @@ class Rietveld(PeakProfileFitting):
         I_max = np.max(I)
         composite_model = None
         params = None
-
-        for i in range(len(spec['modelType'])):
+        for i in range(len(spec['modelType'])): # loop through each model
             prefix = f'm{i}_'
-            model = getattr(models, spec['modelType'][i])(prefix=prefix)
-            model.set_param_hint('sigma', min=1e-6, max=x_range)
-            model.set_param_hint('center', min=x_min, max=x_max)
-            model.set_param_hint('height', min=1e-6, max=1.1*I_max)
+            model = getattr(models, spec['modelType'][i])(prefix=prefix) # create a model object based on model type
+            model.set_param_hint('sigma', min=1e-6, max=x_range) # set parameter bounds
+            model.set_param_hint('center', min=x_min, max=x_max) 
+            model.set_param_hint('height', min=1e-6, max=1.1*I_max) 
             model.set_param_hint('amplitude', min=1e-6)
             default_params = {
                 prefix+'center':spec['center'][i],
                 prefix+'height':spec['height'][i],
                 prefix+'sigma':spec['sigma'][i]
-                }
-            model_params = model.make_params(**default_params)
+                } # set default parameters
+            model_params = model.make_params(**default_params) # create a parameter object
             if params is None:
-                params = model_params
+                params = model_params # if model_params is the first set in the composite model, params gets model_params
             else:
-                params.update(model_params)
+                params.update(model_params) # update params to include model_params for other models in the composite model
             if composite_model is None:
-                composite_model = model
+                composite_model = model # add the first component to composite model
             else:
-                composite_model = composite_model + model
+                composite_model = composite_model + model # add more components to the composite model
         return composite_model, params
 
-    """
-    : strategy_choice: type string, 'fast','best', or 'random'
-    : find the best composite model
-    """  
     def find_best_fit(self,strategy_choice,threshold):
+        """
+        :param strategy_choice: type string, 'fast','best', or 'random'
+        :param threshold: type double, only peaks above threashold intensities will be fitted
+        :returns the best composite model
+        """  
         peak_indices = self.get_peaks(threshold)
         lowest_cost = np.inf
         best_model_choices = []
         best_values = []
-        specs,model_choices_list = self.strategy.make_specs(strategy_choice,peak_indices,self.x,self.I,self.peak_widths)
+        specs,model_choices_list = self.strategy.make_specs(strategy_choice,peak_indices,self.x,self.I,self.peak_widths) # from strategy
         for spec,model_choices in zip(specs,model_choices_list):
-            composite_model,params = self.make_one_model(spec)
-            predicted_model = composite_model.fit(self.I, params, x=self.x)
-            results = predicted_model.eval(params=params)
-            c = self.cost(results)
-            if c < lowest_cost:
+            composite_model,params = self.make_one_model(spec) # make one model based on specification
+            predicted_model = composite_model.fit(self.I, params, x=self.x) # optimize the composite model using least-square
+            results = predicted_model.eval(params=params) # get values of the best-fit composite model
+            c = self.cost(results) # compute error
+            if c < lowest_cost: # choose best composite model
                 lowest_cost = c
-                best_model_choices = model_choices
+                best_model_choices = model_choices 
                 best_values = predicted_model.best_values
         return best_model_choices, best_values
 
-    """
-    : strategy_choice: type string, 'fast','best', or 'random'
-    : return the refined peak parameters
-    """  
+
     def get_peaks_params(self,strategy_choice,threshold):
+        """
+        :param strategy_choice: type string, 'fast','best', or 'random'
+        :param threshold: type double, only peaks above threashold intensities will be fitted
+        :returns the refined peak parameters as Peak objects
+        """  
         peaks = []
         model_choices, values = self.find_best_fit(strategy_choice,threshold)
         for i,type in enumerate(model_choices):
-            prefix = f'm{i}_'
+            prefix = f'm{i}_' 
             key_amp = prefix+'amplitude'
             key_cen = prefix+'center'
             key_sig = prefix+'sigma'
-            intensity = values.get(key_amp)
+            intensity = values.get(key_amp) # get parameters
             center = values.get(key_cen)
             sig = values.get(key_sig)
             if model_choices[0] == 'GaussianModel':
-                FWHM = 2*sig*np.log(2)
+                FWHM = 2*sig*np.log(2) # calculate Full width half max ofr a Gaussian peak
             elif model_choices[0] == 'LorentzianModel':
-                FWHM = 2*sig
+                FWHM = 2*sig # calculate Full width half max ofr a Lorentzian peak
             elif model_choices[0] == 'VoigtModel':
-                FWHM = 3.6013*sig
-            peak = Peak(FWHM,center,intensity,type)
+                FWHM = 3.6013*sig # calculate Full width half max ofr a Voight peak
+            peak = Peak(FWHM,center,intensity,type) # store into peak object
             peaks.append(peak)
         return peaks

@@ -1,22 +1,26 @@
 from Code.xrd import XRD
 from Code.ftir import FTIR
-import os
 import pandas as pd
 
 class ExperimentalTechnique_Factory():
+    """
+    :This class makes either an xrd or a ftir object
+    """
     def factory_method(inputfile, input_type, transmittance):
-        dir = os.path.dirname(os.path.realpath(__file__))
-        input_path = os.path.join(dir, 'Input', str(inputfile))
-        spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y'])
-        spectrum['y']=spectrum['y']/max(spectrum['y'])
-
+        """
+        :param filename: type string, name of data file
+        :param transmittance: type bool, True or False
+        :returns a dataFrame containing x and y values and an ExperimentalTechnique object
+        """
         if input_type == 'XRD':
-            return spectrum, XRD(spectrum)
+            xrd = XRD() # create an XRD object if the input type is XRD
+            spectrum = xrd.load_data(inputfile) # extract data and create spectrum dataFrame using the load_data method in XRD class
+            return spectrum, xrd
         elif input_type == 'FTIR':
-            ftir = FTIR(spectrum)
-            ftir = FTIR.flip_input(ftir, transmittance)
-            ftir = FTIR.filter_baseline(ftir)
-
+            ftir = FTIR() # create a FTIR object if the input type is FTIR
+            ftir = FTIR.flip_input(ftir, transmittance) # flip data if y axis is transmittance instead of absorbance
+            ftir = FTIR.filter_baseline(ftir) # filter baseline
+            spectrum = ftir.load_data(inputfile) # extract data and create spectrum dataFrame using the load_data method in FTIR class
             return spectrum, ftir
         else:
-            raise ValueError(f'Cannot make: {input_type}')
+            raise ValueError(f'Cannot make: {input_type}') # error if the input type is not recognized

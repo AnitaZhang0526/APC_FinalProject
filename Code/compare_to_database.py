@@ -4,29 +4,27 @@ from scipy.spatial import distance
 from Code.peak import Peak
 
 class CompareToDatabase:
-    """This class takes in peak information and 
-    returns the closest match from the database.
-
-    :param data_type: "xrd" or "ftir", defaults to None
-    :type client: str
-
-    :param peaks: 2-D array of peak locations (2-theta) and their relative intensities
-        ex: [[14.24, 90], [38.88, 100], ...],
-        defaults to []
-    :type peaks: list of Peak objects
+    """This class takes in peak information and returns the closest match from the database.
+      
+    :data_type: type string, given by param data_type
+    :peaks: list of Peak objects, given by param peaks
     """
 
     def __init__(self, data_type = None, peaks = []):
-        """Constructor method
+        """
+        :Constructor method
+        :param data_type: type string, "xrd" or "ftir", defaults to None
+        :param peaks: list of Peak object, defaults to an empty list
         """
         self.data_type = data_type
         self.peaks = peaks
 
     def match(self):
-        """Returns the closest material match from the XRD or FTIR
+        """
+        :returns the closest material match from the XRD or FTIR
         database, based on data type.
 
-        :return: Returns the closest material match
+        :return: returns the closest material match
         :rtype: list with attributes in the following order: 
             [2_theta_1, intensity_1, 2_theta_2, intensity_2, 2_theta_3, intensity_3, material_name, material_formula]
         """
