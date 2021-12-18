@@ -11,7 +11,7 @@ class FTIR(ExperimentalTechnique):
         :return: FTIR data after the baseline is removed
         """
         spectrum['y'] = baseline_removal(spectrum['y'])
-        return self
+        return spectrum
     
     def flip_input(self,transmittance,spectrum):
         """
@@ -20,4 +20,4 @@ class FTIR(ExperimentalTechnique):
         """
         if transmittance == True:
             spectrum['y'] = 2 - np.log(spectrum['y'])
-            return self
+            return spectrum
