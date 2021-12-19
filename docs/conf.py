@@ -73,9 +73,11 @@ latex_elements = {
     'releasename':"Shashank Gupta, Jordan Hamel, Alex Pirola, Arjun Prihar, Agnes Robang, Anita Zhang",
     'fontpkg': '\\usepackage{amsmath,amsfonts,amssymb,amsthm}',
     'figure_align':'htbp',
+    'extraclassoptions': 'openany,oneside',
     'pointsize': '10pt',
     'sphinxsetup': \
         'hmargin={0.7in,0.7in}, \
         vmargin={1in,1in}, \
         verbatimwithframe=true, \
-        TitleColor={rgb}{0,0,0}'}
+        TitleColor={rgb}{0,0,0}'
+        }
