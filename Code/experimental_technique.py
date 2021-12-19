@@ -13,6 +13,7 @@ class ExperimentalTechnique():
         :type filename: string
         :return: a dataFrame containing x and y values
         """
-        input_path = os.path.join(dir, 'Input', str(filename)) # get the full path of the file
+        d = os.path.dirname(os.path.realpath(__file__))
+        input_path = os.path.join(d, 'Input', str(filename)) # get the full path of the file
         spectrum = pd.read_csv(input_path, skiprows=2, header=None, names=['x','y']) # read file and store in dataFrame
         return spectrum

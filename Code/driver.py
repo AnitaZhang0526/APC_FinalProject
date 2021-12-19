@@ -7,8 +7,8 @@ import os
 import pandas as pd
 import numpy as np
 
-from Code.ExperimentalTechnique_Factory import ExperimentalTechnique_Factory as ET_Factory
-from Code.PeakProfileFitting_Factory import PeakProfileFitting_Factory as PPF_Factory
+from Code.experimental_technique_factory import ExperimentalTechnique_Factory as ET_Factory
+from Code.peak_profile_fitting_factory import PeakProfileFitting_Factory as PPF_Factory
 from Code.strategy import Strategy
 from Code.compare_to_database import CompareToDatabase
 
