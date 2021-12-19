@@ -6,12 +6,15 @@ import numpy as np
 from Code.strategy import Strategy
 import pandas as pd
 
-f = open('Malli_80s.allASC.ASC', 'r')
-data = np.genfromtxt(f, delimiter=' ')
-x = data[:,0]
-I = data[:,1]
-I = I/max(I)
-spectrum = pd.DataFrame({'x':x,'y':I})
+# f = open('Malli_80s.allASC.ASC', 'r')
+# data = np.genfromtxt(f, delimiter=' ')
+# x = data[:,0]
+# I = data[:,1]
+# I = I/max(I)
+# spectrum = pd.DataFrame({'x':x,'y':I})
+
+spectrum = pd.read_csv('Code/Input/Malli_80s.csv', skiprows=2, header=None, names=['x','y'])
+spectrum['y'] = spectrum['y']/max(spectrum['y'])
 
 def test_poly_factory():
     method = 'Rietveld'
