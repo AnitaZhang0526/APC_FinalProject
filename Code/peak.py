@@ -1,15 +1,15 @@
 class Peak:
     """
-    :This is the Peak class 
+    This is the Peak class 
     
-    :FWHM: type double, given by param FWHM
-    :center: type double, given by param center
-    :intensity: type double, given by param intensity
-    :type: type string, given by param type
+    FWHM: type double, given by param FWHM
+    center: type double, given by param center
+    intensity: type double, given by param intensity
+    type: type string, given by param type
     """
     def __init__(self, FWHM,center,intensity,type):
         """
-        :Constructor method
+        Constructor method
         :param FWHM: full width half max of a peak
         :type FWHM: double
         :param center: center of a peak

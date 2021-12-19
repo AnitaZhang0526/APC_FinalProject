@@ -4,6 +4,7 @@ import numpy as np
 
 class FTIR(ExperimentalTechnique):
     """
+    The FTIR class inherits from the ExperimentalTechnique class.
     :return: an FRIT object
     """
     def filter_baseline(self,spectrum):

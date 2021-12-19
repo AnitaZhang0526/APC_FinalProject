@@ -5,7 +5,7 @@ import numpy as np
 
 class ExperimentalTechnique():
     """
-    :This class is the param class for XRD and FTIR
+    This class is the param class for XRD and FTIR
     """
     def load_data(self,filename):
         """

@@ -6,7 +6,7 @@ from scipy import signal
 
 class Strategy:
     """
-    :This class makes a Strategy object
+    This class makes a Strategy object
     """
     def make_one_spec(self,model_choices,peak_indices,I,x,peak_widths):
         """

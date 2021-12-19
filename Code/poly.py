@@ -8,14 +8,14 @@ from Code.peak import Peak
 
 class Poly(PeakProfileFitting):
     """
-    :Poly inherits from PeakProfileFitting and impletments a quick way to identify peaks
+    Poly inherits from PeakProfileFitting and impletments a quick way to identify peaks
      
-    :x: type double, x values of spectrum, from PeakProfileFitting
-    :I: type double, y values of spectrum, from PeakProfileFitting
+    x: type double, x values of spectrum, from PeakProfileFitting
+    I: type double, y values of spectrum, from PeakProfileFitting
     """
     def __init__(self, spectrum):
         """
-        :Constructor method
+        Constructor method
         :param spectrum: dataFrame containing x and y values
         :type spectrum: dataFrame
         :return: a Poly object
