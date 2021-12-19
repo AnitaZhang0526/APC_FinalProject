@@ -5,17 +5,25 @@ import numpy as np
 
 class PeakProfileFitting_Factory():
     """
-    :This class makes either a Poly object or a Rietveld object
+    This class makes either a Poly object or a Rietveld object
     """
     def factory_method(method, strategy_choice, cutoff, peak_widths, spectrum, strategy, threshold):
         """
-        :param method: type string, 'Rietveld' or 'polyfit'
-        :param strategy_choice: type string, 'fast','random', or 'best'
-        :param cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
-        :pram peak_widths: type double array, a range that the a peak's width can fall between
+        :param method: 'Rietveld' or 'polyfit'
+        :type method: str
+        :param strategy_choice: 'fast','random', or 'best'
+        :type strategy_choice: str
+        :param cutoff: a cutoff frequency for rough filtering for initial peak approximation
+        :type cutoff: double
+        :pram peak_widths: a range that the a peak's width can fall between
+        :type peak_widths: double array
         :param spectrum: dataFrame containing x and y values
-        :param strategy: Strategy object, an object that contain choices regarding the optimization process 
-        :param threshold: type double, only peaks above threashold intensities will be fitted
+        :type spectrum: dataFrame
+        :param strategy: an object that contain choices regarding the optimization process
+        :type strategy: Strategy object
+        :param threshold: only peaks above threashold intensities will be fitted
+        :type threshold: double
+        return: either a Poly object or a Rietveld object
         """
         if method == 'Rietveld':
             r =  Rietveld(cutoff, peak_widths, spectrum, strategy) # builds a Rietveld object

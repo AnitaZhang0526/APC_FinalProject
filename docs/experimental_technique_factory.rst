@@ -1,7 +1,7 @@
-ExperimentalTechnique_Factory module
+experimental_technique_factory module
 =====================================
 
-.. automodule:: ExperimentalTechnique_Factory
+.. automodule:: experimental_technique_factory
    :members:
    :undoc-members:
    :show-inheritance:

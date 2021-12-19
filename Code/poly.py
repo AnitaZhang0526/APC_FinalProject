@@ -8,15 +8,18 @@ from Code.peak import Peak
 
 class Poly(PeakProfileFitting):
     """
-    :Poly inherits from PeakProfileFitting and impletments a quick way to identify peaks
+    Poly inherits from PeakProfileFitting and impletments a quick way to identify peaks
      
-    :x: type double, x values of spectrum, from PeakProfileFitting
-    :I: type double, y values of spectrum, from PeakProfileFitting
+    x: type double, x values of spectrum, from PeakProfileFitting
+    I: type double, y values of spectrum, from PeakProfileFitting
     """
     def __init__(self, spectrum):
         """
-        :Constructor method
+        Constructor method
+        
         :param spectrum: dataFrame containing x and y values
+        :type spectrum: dataFrame
+        :return: a Poly object
         """
         super().__init__(spectrum) # call parent-class constructor
 
@@ -25,7 +28,7 @@ class Poly(PeakProfileFitting):
         # this function uses spline-fitting to output the peak locations, heights, and widths 
         # as a list of Peak objects
         """
-        :returns peak parameters as a list of Peak objects
+        :return: peak parameters as a list of Peak objects
         """
         # sort data by ascending x values 
         data = np.transpose([self.x, self.I])

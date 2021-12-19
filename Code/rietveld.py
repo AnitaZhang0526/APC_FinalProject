@@ -8,21 +8,27 @@ from Code.peak import Peak
 
 class Rietveld(PeakProfileFitting):  
     """
-    :This class inherits from PeakProfileFitting and implements the Rietveld refinement method
+    This class inherits from PeakProfileFitting and implements the Rietveld refinement method
 
-    :x: type double, x values of spectrum, from PeakProfileFitting
-    :I: type double, y values of spectrum, from PeakProfileFitting
-    :cutoff: type double, given by param cutoff
-    :peak_widths: type double array, given by param peak_widths
-    :strategy: Strategy object, given by param strategy
+    x: type double, x values of spectrum, from PeakProfileFitting
+    I: type double, y values of spectrum, from PeakProfileFitting
+    cutoff: type double, given by param cutoff
+    peak_widths: type double array, given by param peak_widths
+    strategy: Strategy object, given by param strategy
     """
     def __init__(self,cutoff,peak_widths,spectrum,strategy):
         """
-        :Constructor method
-        :param cutoff: type double, a cutoff frequency for rough filtering for initial peak approximation
-        :pram peak_widths: type double array, a range that the a peak's width can fall between
+        Constructor method
+        
+        :param cutoff: a cutoff frequency for rough filtering for initial peak approximation
+        :type cutoff: double
+        :pram peak_widths: a range that the a peak's width can fall between
+        :type peak_widths: double array
         :param spectrum: dataFrame containing x and y values
-        :param strategy: Strategy object, an object that contain choices regarding the optimization process 
+        :type spectrum: dataFrame
+        :param strategy: an object that contain choices regarding the optimization process
+        :type strategy: Strategy object
+        :return: a Rietveld object
         """
         super().__init__(spectrum)
         self.cutoff = cutoff
@@ -79,9 +85,11 @@ class Rietveld(PeakProfileFitting):
 
     def find_best_fit(self,strategy_choice,threshold):
         """
-        :param strategy_choice: type string, 'fast','best', or 'random'
-        :param threshold: type double, only peaks above threashold intensities will be fitted
-        :returns the best composite model
+        :param strategy_choice: 'fast','best', or 'random'
+        :type strategy_choice: str
+        :param threshold: only peaks above threashold intensities will be fitted
+        :type threshold: double
+        :return: the best composite model
         """  
         peak_indices = self.get_peaks(threshold)
         lowest_cost = np.inf
@@ -102,9 +110,11 @@ class Rietveld(PeakProfileFitting):
 
     def get_peaks_params(self,strategy_choice,threshold):
         """
-        :param strategy_choice: type string, 'fast','best', or 'random'
-        :param threshold: type double, only peaks above threashold intensities will be fitted
-        :returns the refined peak parameters as a list of Peak objects
+        :param strategy_choice: 'fast','best', or 'random'
+        :type strategy_choice: str
+        :param threshold: only peaks above threashold intensities will be fitted
+        :type threshold: double
+        :return: the refined peak parameters as a list of Peak objects
         """  
         peaks = []
         model_choices, values = self.find_best_fit(strategy_choice,threshold)
