@@ -19,6 +19,7 @@ class Rietveld(PeakProfileFitting):
     def __init__(self,cutoff,peak_widths,spectrum,strategy):
         """
         Constructor method
+        
         :param cutoff: a cutoff frequency for rough filtering for initial peak approximation
         :type cutoff: double
         :pram peak_widths: a range that the a peak's width can fall between

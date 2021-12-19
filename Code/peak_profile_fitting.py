@@ -10,6 +10,7 @@ class PeakProfileFitting(metaclass=abc.ABCMeta):
     def __init__(self,spectrum):
         """
         Constructor method
+        
         :param spectrum: dataFrame containing x and y values
         :type spectrum: dataFrame
         :return: a PeakProfileFitting objects

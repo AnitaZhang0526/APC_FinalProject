@@ -14,6 +14,7 @@ class CompareToDatabase:
     def __init__(self, data_type = None, peaks = []):
         """
         Constructor method
+        
         :param data_type: "xrd" or "ftir", defaults to None
         :type data_type:: str
         :param peaks: defaults to an empty list
