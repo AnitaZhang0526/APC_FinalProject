@@ -136,9 +136,9 @@ class CompareToDatabase:
         
         for i in range(len(wavenumber_one)):
             db_peaks = [
-                Peak(None,wavenumber_one[i],None),
-                Peak(None,wavenumber_two[i],None),
-                Peak(None,wavenumber_three[i],None),
+                Peak(None,wavenumber_one[i],None,None),
+                Peak(None,wavenumber_two[i],None,None),
+                Peak(None,wavenumber_three[i],None,None),
             ]
             distance = self._ftir_distance(input_peaks, db_peaks)
             if distance < min_distance:
