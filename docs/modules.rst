@@ -1,4 +1,4 @@
-Code
+src
 ===
 
 .. toctree::
