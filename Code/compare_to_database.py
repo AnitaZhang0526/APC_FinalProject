@@ -87,7 +87,7 @@ class CompareToDatabase:
     # Takes all peaks and returns the three most intense
     def _ftir_most_intense_peaks(self, peaks):
         sorted_peaks = sorted(peaks, key = lambda x: x.center, reverse = True)
-        return sorted_peaks[:3].reverse
+        return sorted_peaks[:3]
 
     # Calculates euclidean distances between two sets of three peaks
     def _xrd_distance(self, input_peaks, db_peaks):
