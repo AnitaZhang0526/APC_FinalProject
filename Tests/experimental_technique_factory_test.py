@@ -4,18 +4,18 @@ from Code.xrd import XRD
 from Code.ftir import FTIR
 
 def test_XRD_factory():
-    inputfile = 'Malli_80s.allASC.ASC'
+    inputfile = '1-1-4-11_pH0_3-17-2020.csv'
     input_type = 'XRD'
     transmittance = False
-    xrd = ET_factory.factory_method(inputfile, input_type, transmittance)
+    spectrum, xrd = ET_factory.factory_method(inputfile, input_type, transmittance)
     assert(isinstance(xrd,XRD))
     
 def test_FTIR_facotry():
-    inputfile = 'Malli_80s.allASC.ASC'
+    inputfile = '1-1-4-11_pH0_3-17-2020.csv'
     input_type = 'FTIR'
     transmittance = True
-    ftir = ET_factory.factory_method(inputfile, input_type, transmittance)
-    assert(isinstance(p,Poly))
+    spectrum, ftir = ET_factory.factory_method(inputfile, input_type, transmittance)
+    assert(isinstance(ftir,FTIR))
     
 def test_error_type():
     inputfile = 'Malli_80s.allASC.ASC'
