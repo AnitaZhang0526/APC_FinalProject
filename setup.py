@@ -11,5 +11,6 @@ setup(
         'scipy',
         'lmfit',
         'sklearn',
+        'pdfTex'
     ]
 )
