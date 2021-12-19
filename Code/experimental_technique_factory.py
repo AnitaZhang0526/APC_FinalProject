@@ -1,6 +1,5 @@
 from Code.xrd import XRD
 from Code.ftir import FTIR
-import pandas as pd
 
 class ExperimentalTechnique_Factory():
     """
@@ -20,9 +19,9 @@ class ExperimentalTechnique_Factory():
             return spectrum, xrd
         elif input_type == 'FTIR':
             ftir = FTIR() # create a FTIR object if the input type is FTIR
-            ftir = FTIR.flip_input(ftir, transmittance) # flip data if y axis is transmittance instead of absorbance
-            ftir = FTIR.filter_baseline(ftir) # filter baseline
             spectrum = ftir.load_data(inputfile) # extract data and create spectrum dataFrame using the load_data method in FTIR class
+            spectrum = ftir.flip_input(transmittance,spectrum) # flip data if y axis is transmittance instead of absorbance
+            spectrum = ftir.filter_baseline(spectrum) # filter baseline
             return spectrum, ftir
         else:
             raise ValueError(f'Cannot make: {input_type}') # error if the input type is not recognized

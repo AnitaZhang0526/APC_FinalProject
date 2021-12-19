@@ -1,5 +1,5 @@
 experimental_technique module
-===========================
+==============================
 
 .. automodule:: experimental_technique
    :members:

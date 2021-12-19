@@ -4,20 +4,16 @@ import numpy as np
 import pandas as pd
 from Code.strategy import Strategy
 
-f = open('Malli_80s.allASC.ASC', 'r')
-data = np.genfromtxt(f, delimiter=' ')
-x = data[:,0]
-I = data[:,1]
-I = I/max(I)
-spectrum = pd.DataFrame({'x':x,'y':I})
+spectrum = pd.read_csv('Code/Input/Malli_80s.csv', skiprows=2, header=None, names=['x','y'])
+spectrum['y'] = spectrum['y']/max(spectrum['y'])
 
 def test_constructor():
     peak_widths = np.arange(5,15)
     strategy = Strategy()
     cutoff = 0.9
     rietveld_input = Rietveld(cutoff,peak_widths,spectrum,strategy)
-    assert((rietveld_input.x==x).all())
-    assert((rietveld_input.I==I).all())
+    assert((rietveld_input.x==spectrum['x']).all())
+    assert((rietveld_input.I==spectrum['y']).all())
 
 def test_get_peaks():
     strategy = Strategy()

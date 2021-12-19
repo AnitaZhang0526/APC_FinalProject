@@ -5,8 +5,7 @@ Code
    :maxdepth: 4
 
    compare_to_database
-   ExperimentalTechnique_Factory
-   PeakSearch
+   experimental_technique_factory
    baseline
    driver
    experimental_technique
@@ -16,5 +15,5 @@ Code
    rietveld
    strategy
    xrd
-   PeakProfileFitting_Factory
+   peak_profile_fitting_factory
    poly
