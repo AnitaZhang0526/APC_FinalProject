@@ -1,4 +1,4 @@
- Tests for compare_to_database.py
+#Tests for compare_to_database.py
 
 from Code.compare_to_database import CompareToDatabase
 from Code.peak import Peak
