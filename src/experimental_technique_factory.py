@@ -3,7 +3,7 @@ from src.ftir import FTIR
 
 class ExperimentalTechnique_Factory():
     """
-    :This class makes either an xrd or a ftir object
+    This class makes either an xrd or a ftir object
     """
     def factory_method(inputfile, input_type, transmittance):
         """

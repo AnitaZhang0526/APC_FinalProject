@@ -5,7 +5,7 @@ import numpy as np
 
 class PeakProfileFitting_Factory():
     """
-    :This class makes either a Poly object or a Rietveld object
+    This class makes either a Poly object or a Rietveld object
     """
     def factory_method(method, strategy_choice, cutoff, peak_widths, spectrum, strategy, threshold):
         """

@@ -8,17 +8,18 @@ from src.peak import Peak
 
 class Rietveld(PeakProfileFitting):  
     """
-    :This class inherits from PeakProfileFitting and implements the Rietveld refinement method
+    This class inherits from PeakProfileFitting and implements the Rietveld refinement method
 
-    :x: type double, x values of spectrum, from PeakProfileFitting
-    :I: type double, y values of spectrum, from PeakProfileFitting
-    :cutoff: type double, given by param cutoff
-    :peak_widths: type double array, given by param peak_widths
-    :strategy: Strategy object, given by param strategy
+    x: type double, x values of spectrum, from PeakProfileFitting
+    I: type double, y values of spectrum, from PeakProfileFitting
+    cutoff: type double, given by param cutoff
+    peak_widths: type double array, given by param peak_widths
+    strategy: Strategy object, given by param strategy
     """
     def __init__(self,cutoff,peak_widths,spectrum,strategy):
         """
-        :Constructor method
+        Constructor method
+        
         :param cutoff: a cutoff frequency for rough filtering for initial peak approximation
         :type cutoff: double
         :pram peak_widths: a range that the a peak's width can fall between
