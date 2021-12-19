@@ -20,13 +20,13 @@ reason for updating the database.
 
 #### Updating the XRD Database
 The XRD database (csv file) can be updated by running the following script
-from the `/Code/scrape/` directory:
+from the `/src/scrape/` directory:
 ```
 python scrape_xrd.py
 ```
 
 #### Updating the FTIR Database
-The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/Code/ftir_database_generation/' directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/Code/databases/' directory. 
+The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/src/ftir_database_generation/' directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/src/databases/' directory. 
 
 ### Python Packages
 If you use a python package in the code you are writing, check `requirements.txt` and `setup.py` to see if the package is
