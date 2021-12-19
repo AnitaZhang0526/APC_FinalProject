@@ -4,15 +4,17 @@ from scipy.spatial import distance
 from Code.peak import Peak
 
 class CompareToDatabase:
-    """This class takes in peak information and returns the closest match from the database.
-      
-    :data_type: type string, given by param data_type
-    :peaks: list of Peak objects, given by param peaks
+    """
+    This class takes in peak information and returns the closest match from the database.
+    
+    data_type: type string, given by param data_type
+    peaks: list of Peak objects, given by param peaks
     """
 
     def __init__(self, data_type = None, peaks = []):
         """
-        :Constructor method
+        Constructor method
+        
         :param data_type: "xrd" or "ftir", defaults to None
         :type data_type:: str
         :param peaks: defaults to an empty list

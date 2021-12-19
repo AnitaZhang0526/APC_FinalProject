@@ -15,8 +15,6 @@ XRD data will provide information about a material's crystal structure, and FTRI
 
    modules
 
-
-
 Indices and tables
 ==================
 

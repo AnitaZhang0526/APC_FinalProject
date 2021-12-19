@@ -6,8 +6,8 @@ Code
 
    compare_to_database
    experimental_technique_factory
+   peak_profile_fitting_factory
    baseline
-   driver
    experimental_technique
    ftir
    peak
@@ -15,5 +15,4 @@ Code
    rietveld
    strategy
    xrd
-   peak_profile_fitting_factory
    poly
