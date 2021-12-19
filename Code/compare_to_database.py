@@ -41,7 +41,7 @@ class CompareToDatabase:
     def _match_xrd(self):
         match = None
         min_distance = float("inf")
-        input_peaks = self._most_intense_peaks(self.peaks)
+        input_peaks = self._xrd_most_intense_peaks(self.peaks)
 
         # Must input at least 3 peaks to get a match
         if (len(input_peaks) < 3):
@@ -80,8 +80,13 @@ class CompareToDatabase:
         return match
 
     # Takes all peaks and returns the three most intense
-    def _most_intense_peaks(self, peaks):
+    def _xrd_most_intense_peaks(self, peaks):
         sorted_peaks = sorted(peaks, key = lambda x: x.intensity, reverse = True)
+        return sorted_peaks[:3]
+    
+    # Takes all peaks and returns the three most intense
+    def _ftir_most_intense_peaks(self, peaks):
+        sorted_peaks = sorted(peaks, key = lambda x: x.center, reverse = True)
         return sorted_peaks[:3]
 
     # Calculates euclidean distances between two sets of three peaks
@@ -113,7 +118,7 @@ class CompareToDatabase:
     def _match_ftir(self):
         match = None
         min_distance = float("inf")
-        input_peaks = self._most_intense_peaks(self.peaks)
+        input_peaks = self._ftir_most_intense_peaks(self.peaks)
 
         # Must input at least 3 peaks to get a match
         if (len(input_peaks) < 3):
