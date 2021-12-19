@@ -1,4 +1,4 @@
-# Tests for compare_to_database.py
+ Tests for compare_to_database.py
 
 from Code.compare_to_database import CompareToDatabase
 from Code.peak import Peak
@@ -102,4 +102,67 @@ def test_xrd_only_2_peaks():
 		Peak(None,6.90,10,None),
 	]
 	match = CompareToDatabase("xrd", peaks).match()
+	assert(match == None)
+
+def test_match_ftir_polyethylene_wax():
+	# Entry in database:
+	# 719.4,2848.8,2914.4, polyethylene wax,Primpke et al. 2018
+	peaks = [
+		Peak(None,2848.8,None),
+		Peak(None,262.5,None),
+		Peak(None,719.4,None),
+		Peak(None,120.6,None),
+		Peak(None,2914.4,None),
+		Peak(None,652.9,None),
+	]
+	match = CompareToDatabase("ftir", peaks).match()
+	assert(match["name"] == "polyethylene wax")
+
+def test_match_ftir_wrong_peaks():
+	# Entry in database:
+	# 719.4,2848.8,2914.4, polyethylene wax,Primpke et al. 2018
+	peaks = [
+		Peak(None,2848.8,None),
+		Peak(None,3544.5,None),
+		Peak(None,719.4,None),
+		Peak(None,3754.0,None),
+		Peak(None,2914.4,None),
+		Peak(None,2940.5,None),
+	]
+	match = CompareToDatabase("ftir", peaks).match()
+	assert(match["name"] != "polyethylene wax")
+
+def test_match_ftir_silicone_rubber():
+	# Entry in database:
+	# 785.0,1006.8,1064.7, silicone rubber,Primpke et al. 2018,
+	peaks = [
+		Peak(None,1064.7,None),
+		Peak(None,384.5,None),
+		Peak(None,150.6,None),
+		Peak(None,1006.8,None),
+		Peak(None,785.0,None),
+		Peak(None,585.4,None),
+	]
+	match = CompareToDatabase("ftir", peaks).match()
+	assert(match["name"] == "silicone rubber")
+
+
+def test_ftir_no_peaks():
+	peaks = []
+	match = CompareToDatabase("ftir", peaks).match()
+	assert(match == None)
+
+def test_ftir_only_one_peak():
+	peaks = [
+		Peak(None,1064.5,None),
+	]
+	match = CompareToDatabase("ftir", peaks).match()
+	assert(match == None)
+
+def test_ftir_only_2_peaks():
+	peaks = [
+		Peak(None,1458.1,None),
+		Peak(None,785.6,None),
+	]
+	match = CompareToDatabase("ftir", peaks).match()
 	assert(match == None)
