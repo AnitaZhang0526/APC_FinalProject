@@ -1,5 +1,5 @@
 peak_profile_fitting module
-===========================
+============================
 
 .. automodule:: peak_profile_fitting
    :members:
