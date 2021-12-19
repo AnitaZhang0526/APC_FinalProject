@@ -1,4 +1,4 @@
-from Code.strategy import Strategy
+from src.strategy import Strategy
 import numpy as np
 import pandas as pd
 

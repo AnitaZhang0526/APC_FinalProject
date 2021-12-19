@@ -1,5 +1,5 @@
-from Code.rietveld import Rietveld
-from Code.poly import Poly
+from src.rietveld import Rietveld
+from src.poly import Poly
 
 import numpy as np
 

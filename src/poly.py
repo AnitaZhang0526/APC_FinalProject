@@ -2,8 +2,8 @@
 import numpy as np
 import pandas as pd
 import scipy.interpolate as interpolate
-from Code.peak_profile_fitting import PeakProfileFitting
-from Code.peak import Peak
+from src.peak_profile_fitting import PeakProfileFitting
+from src.peak import Peak
 
 
 class Poly(PeakProfileFitting):

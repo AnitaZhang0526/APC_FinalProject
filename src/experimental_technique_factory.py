@@ -1,5 +1,5 @@
-from Code.xrd import XRD
-from Code.ftir import FTIR
+from src.xrd import XRD
+from src.ftir import FTIR
 
 class ExperimentalTechnique_Factory():
     """

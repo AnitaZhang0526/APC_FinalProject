@@ -1,6 +1,6 @@
 import cProfile
-from Code.rietveld import Rietveld
-from Code.rietveld_old import Rietveld_old
+from src.rietveld import Rietveld
+from src.rietveld_old import Rietveld_old
 import numpy as np
 import pandas as pd
 

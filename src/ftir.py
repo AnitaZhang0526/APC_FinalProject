@@ -1,5 +1,5 @@
-from Code.experimental_technique import ExperimentalTechnique
-from Code.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
+from src.experimental_technique import ExperimentalTechnique
+from src.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
 import numpy as np
 
 class FTIR(ExperimentalTechnique):

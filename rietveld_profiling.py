@@ -1,8 +1,8 @@
 import cProfile
-from Code.rietveld import Rietveld
+from src.rietveld import Rietveld
 import numpy as np
 import pandas as pd
-from Code.strategy import Strategy
+from src.strategy import Strategy
 
 f = open('Malli_80s.allASC.ASC', 'r')
 data = np.genfromtxt(f, delimiter=' ')

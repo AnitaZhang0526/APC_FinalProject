@@ -7,18 +7,18 @@ import os
 import pandas as pd
 import numpy as np
 
-from Code.experimental_technique_factory import ExperimentalTechnique_Factory as ET_Factory
-from Code.peak_profile_fitting_factory import PeakProfileFitting_Factory as PPF_Factory
-from Code.strategy import Strategy
-from Code.compare_to_database import CompareToDatabase
+from src.experimental_technique_factory import ExperimentalTechnique_Factory as ET_Factory
+from src.peak_profile_fitting_factory import PeakProfileFitting_Factory as PPF_Factory
+from src.strategy import Strategy
+from src.compare_to_database import CompareToDatabase
 
 """
 :This is the driver code that runs the tool suite
 :from root directory, run by type in:
-'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> -t <True or False> -s <threshold> -i <filename>'
+'python src/driver.py -d <data_type> -m <method> -f <strategy_choice> -t <True or False> -s <threshold> -i <filename>'
 :transmittance defaults to True, strategy_choice defaults to "fast", cutoff defaults to "0.9",
 range defaults to "5,15", and threshold defaults to "0.2"
-:e.g. 'python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s -i 1-1-4-11_pH0_3-17-2020.csv'
+:e.g. 'python src/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s -i 1-1-4-11_pH0_3-17-2020.csv'
 """
 # parses command line arguments
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
@@ -57,9 +57,9 @@ if __name__ == '__main__':
         # (2) Calculates the peaks and its parameters from the input data and exports this into a CSV.
         peaks, analysis = PPF_Factory.factory_method(args['method'], args['strategy_choice'], cutoff, peak_widths, spectrum, strategy, threshold)
         
-        if not (os.path.isdir(os.path.join(dir, 'Output'))):
-            os.mkdir(os.path.join(dir, 'Output')) # create a new file is the file does not already exist
-        with open(os.path.join(dir, 'Output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
+        if not (os.path.isdir(os.path.join(dir, 'output'))):
+            os.mkdir(os.path.join(dir, 'output')) # create a new file is the file does not already exist
+        with open(os.path.join(dir, 'output', f"peaks_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as h:
             csv_peaks = csv.writer(h)
             header_peaks = ['FWHM', 'center', 'intensity', 'type']
             csv_peaks.writerow(header_peaks)
@@ -72,7 +72,7 @@ if __name__ == '__main__':
         match = CompareToDatabase(args['data'].lower(), peaks).match()
         print('Done.')
    
-        with open(os.path.join(dir, 'Output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
+        with open(os.path.join(dir, 'output', f"match_{args['inputfile']}"), 'wt', encoding='UTF-8',newline='') as j:
             csv_match = csv.writer(j)
             header_match = ['2_theta_1', 'intensity_1', '2_theta_2', 'intensity_2', '2_theta_3', 'intensity_3', 'material_name', 'material_formula']
             csv_match.writerow(header_match)

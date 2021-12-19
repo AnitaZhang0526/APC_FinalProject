@@ -1,4 +1,4 @@
-from Code.experimental_technique import ExperimentalTechnique
+from src.experimental_technique import ExperimentalTechnique
 
 class XRD(ExperimentalTechnique):
     """

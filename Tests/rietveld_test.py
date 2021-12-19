@@ -1,10 +1,10 @@
 from unittest import mock
-from Code.rietveld import Rietveld
+from src.rietveld import Rietveld
 import numpy as np
 import pandas as pd
-from Code.strategy import Strategy
+from src.strategy import Strategy
 
-spectrum = pd.read_csv('Code/Input/Malli_80s.csv', skiprows=2, header=None, names=['x','y'])
+spectrum = pd.read_csv('src/input/Malli_80s.csv', skiprows=2, header=None, names=['x','y'])
 spectrum['y'] = spectrum['y']/max(spectrum['y'])
 
 def test_constructor():

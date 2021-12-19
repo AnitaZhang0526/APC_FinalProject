@@ -1,10 +1,10 @@
-from Code.poly import Poly
+from src.poly import Poly
 import numpy as np
 import pandas as pd
-from Code.strategy import Strategy
+from src.strategy import Strategy
 
 # reading in test file
-spectrum = pd.read_csv('Code/Input/1-1-4-11_pH0_3-17-2020.csv', skiprows=2, header=None, names=['x','y'])
+spectrum = pd.read_csv('src/input/1-1-4-11_pH0_3-17-2020.csv', skiprows=2, header=None, names=['x','y'])
 spectrum['y'] = spectrum['y']/max(spectrum['y'])
 
 # test that peak finding works (tests accuracy of peak locations,

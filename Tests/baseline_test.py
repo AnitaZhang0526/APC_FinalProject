@@ -1,6 +1,6 @@
 import unittest
 import sys
-from Code.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
+from src.baseline import baseline_removal, vandermonde_matrix,qr_factorization,linear_regression 
 from sklearn.linear_model import LinearRegression # import LinearRegression
 import numpy as np
 

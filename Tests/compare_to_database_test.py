@@ -1,7 +1,7 @@
 # Tests for compare_to_database.py
 
-from Code.compare_to_database import CompareToDatabase
-from Code.peak import Peak
+from src.compare_to_database import CompareToDatabase
+from src.peak import Peak
 from unittest import mock
 
 @mock.patch.object(CompareToDatabase, "_match_xrd")

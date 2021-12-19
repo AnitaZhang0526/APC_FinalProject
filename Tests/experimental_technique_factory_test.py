@@ -1,7 +1,7 @@
 import pytest
-from Code.experimental_technique_factory import ExperimentalTechnique_Factory as ET_factory
-from Code.xrd import XRD
-from Code.ftir import FTIR
+from src.experimental_technique_factory import ExperimentalTechnique_Factory as ET_factory
+from src.xrd import XRD
+from src.ftir import FTIR
 
 def test_XRD_factory():
     inputfile = '1-1-4-11_pH0_3-17-2020.csv'

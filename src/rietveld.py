@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 from lmfit import models
-from Code.strategy import Strategy
-from Code.peak_profile_fitting import PeakProfileFitting 
-from Code.peak import Peak
+from src.strategy import Strategy
+from src.peak_profile_fitting import PeakProfileFitting 
+from src.peak import Peak
 
 class Rietveld(PeakProfileFitting):  
     """

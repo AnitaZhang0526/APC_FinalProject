@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.spatial import distance
-from Code.peak import Peak
+from src.peak import Peak
 
 class CompareToDatabase:
     """This class takes in peak information and returns the closest match from the database.
@@ -57,7 +57,7 @@ class CompareToDatabase:
             "material_name":str,
             "material_formula":str,
         }
-        db = pd.read_csv("./Code/databases/xrd.csv", dtype = dtype_dict)
+        db = pd.read_csv("./src/databases/xrd.csv", dtype = dtype_dict)
 
         two_theta_one = db['2_theta_1']
         intensity_one = db['intensity_1']
