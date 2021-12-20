@@ -12,14 +12,13 @@ from Code.peak_profile_fitting_factory import PeakProfileFitting_Factory as PPF_
 from Code.strategy import Strategy
 from Code.compare_to_database import CompareToDatabase
 
-"""
-This is the driver code that runs the tool suite
-from root directory, run by type in:
-'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> -t <True or False> -s <threshold> -i <filename>'
-transmittance defaults to True, strategy_choice defaults to "fast", cutoff defaults to "0.9",
-range defaults to "5,15", and threshold defaults to "0.2"
-e.g. 'python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i 1-1-4-11_pH0_3-17-2020.csv'
-"""
+# This is the driver code that runs the tool suite
+# from root directory, run by type in:
+# 'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> -t <True or False> -s <threshold> -i <filename>'
+# transmittance defaults to True, strategy_choice defaults to "fast", cutoff defaults to "0.9",
+# range defaults to "5,15", and threshold defaults to "0.2"
+# e.g. 'python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i 1-1-4-11_pH0_3-17-2020.csv'
+
 # parses command line arguments
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
 parser.add_argument('-d', '--data', type=str, 

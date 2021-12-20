@@ -8,6 +8,8 @@ Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel
 From the top level directory, run `pip install -e .` to install the required python packages.
 
 ### Running the Project
+After you install the tool suite, you can analyze XRD or FTIR csv data files by typing in the follwing in the command line from the root directory:
+
 The executable has 8 command line arguments: 
 'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> <-t> -c <cutoff> -r <range> -s <threshold> -i <filename>'
 1. `<data>` is the type of data being uploaded, either "XRD" or "FTIR".
@@ -19,8 +21,14 @@ The executable has 8 command line arguments:
 7. `<threshold>` is the threshold for what counts as a peak (e.g. 0.2).
 8. `<inputfile>` is the filename of the input within the `Input` folder to be analyzed (e.g. "1-1-4-11_pH0_3-17-2020.csv").
 
+The arguments strategy_choice, cutoff, range, threshold are optional. If not specified, the default strategy_choice is "fast", the default range is "5,15", and the default threshold is 0.2. 
+
 So, for instance, to analyze FTIR data while considering transmittance using the Rietveld method using fast profiling with a peak threshold of 0.2, you run
 `python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i 1-1-4-11_pH0_3-17-2020.csv`
+
+The tool suite will output two csv files, one containing a summary of the peaks and the other containing a material match. If not material match is found, the latter csv file will be empty.
+
+Classes within the tool suite can also be run as separate modules. If a dataFrame with fields 'x' and 'y' is given, the ```Rietveld``` class or the ```Poly``` class can be used to identify peaks and return peak parameters. To do so, call the ```get_peaks_params``` method. Other than obtaining peaks from the peak profiling classes, one can also import peaks using the module ```import_peaks```, which turns peak data into a list of Peak objects. With Peak objects, the ```match``` method in ```compare_to_database``` can be called to find a material match and return the two output csv files.
 
 ## Contributing to this Project
 
