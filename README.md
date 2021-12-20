@@ -63,8 +63,8 @@ To open the html, ```cd _build``` and type in ```open index.html```. If you are 
 
 If a PDF format is desired, make sure you have ```pdfTex``` installed on your machine, and then type in ```make latexpdf``` in the command line from the docs directory. The generated pdf file will be under ```_build/latex/XRDFTIRAnalysisToolSuite.pdf```.
 
-### Using the Auto-Documentation Script
-To generate the pdf manual, make sure pdfTex is installed on your machine and type in '''pdflatex main.tex''' in command line from the '''design_manual directory'''.  
+### Using the Design Manual
+To generate the pdf manual, make sure pdfTex is installed on your machine and type in ```pdflatex main.tex``` in command line from the \design_manual directory\.  
     
 ### Git Workflow
 This section of the ReadMe outlines the git workflow that each team member will follow in order to collaboratively work on our project files. The goal is for all of us to be able to refer back to this document to responsibly upload our changes to source files, minimizing version control errors. To summarize, each feature of the project will be worked on in a seaparate branch by a single team member. With the approval of two other teammates, these features will be merged into a development branch and ultimately into the master branch:
