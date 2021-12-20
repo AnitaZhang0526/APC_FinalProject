@@ -8,7 +8,19 @@ Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel
 From the top level directory, run `pip install -e .` to install the required python packages.
 
 ### Running the Project
-Coming soon!
+The executable has 8 command line arguments: 
+'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> <-t> -c <cutoff> -r <range> -s <threshold> -i <filename>'
+1. `<data>` is the type of data being uploaded, either "XRD" or "FTIR".
+2. `<method>` is the type of peak fitting method to be applied to the data, either "Rietveld", "Le-Bail", "Pawley", or "polyfit". Currently, only "Rietveld" and "polyfit" are fully implemented.
+3. `<transmittance>` is a boolean argument, so including `-t` in the command defines it as `True`, while excluding this tag defines it as `False`. Transmittance is an option for FTIR data. 
+4. `<strategy_choice>` determines the strategy in profiling and building composite models. The options for this are "fast", "random", or "best".
+5. `<cutoff>` is the cutoff used for fitting (e.g. 0.9).
+6. `<range>` is the peak widths range to be used for fitting (e.g. "5,15").
+7. `<threshold>` is the threshold for what counts as a peak (e.g. 0.2).
+8. `<inputfile>` is the filename of the input within the `Input` folder to be analyzed (e.g. "1-1-4-11_pH0_3-17-2020.csv").
+
+So, for instance, to analyze FTIR data while considering transmittance using the Rietveld method using fast profiling with a peak threshold of 0.2, you run
+`python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i 1-1-4-11_pH0_3-17-2020.csv`
 
 ## Contributing to this Project
 
@@ -26,7 +38,7 @@ python scrape_xrd.py
 ```
 
 #### Updating the FTIR Database
-The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/Code/ftir_database_generation/' directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/Code/databases/' directory. 
+The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/Code/ftir_database_generation/` directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/Code/databases/' directory. 
 
 ### Python Packages
 If you use a python package in the code you are writing, check `requirements.txt` and `setup.py` to see if the package is
