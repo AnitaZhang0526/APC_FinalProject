@@ -42,7 +42,7 @@ def test_match_xrd_anilite():
 	match = CompareToDatabase("xrd", peaks).match()
 	assert(match["material_name"] == "Anilite")
 
-def test_match_xrd_right_location_wrong_intensity():
+def test_xrd_no_match():
 	# Entry in database to *not* match:
 	# 46.28,100,32.29,65,27.86,57,Anilite,Cu7S4
 	peaks = [
@@ -54,7 +54,7 @@ def test_match_xrd_right_location_wrong_intensity():
 		Peak(None,27.86,57,None),
 	]
 	match = CompareToDatabase("xrd", peaks).match()
-	assert(match["material_name"] != "Anilite")
+	assert(match == None)
 
 def test_match_xrd_equal_intensity_peaks():
 	# Entry in database:
@@ -104,44 +104,44 @@ def test_xrd_only_2_peaks():
 	match = CompareToDatabase("xrd", peaks).match()
 	assert(match == None)
 
-def test_match_ftir_polyethylene_wax():
+def test_match_ftir_nitrile_rubber():
 	# Entry in database:
-	# 719.4,2848.8,2914.4, polyethylene wax,Primpke et al. 2018
+	# nitrile rubber,Primpke et al. 2018,966.3,1435.0,2924.1,1.0,0.9508345,0.37627639
 	peaks = [
-		Peak(None,2848.8,None,None),
-		Peak(None,262.5,None,None),
-		Peak(None,719.4,None,None),
-		Peak(None,120.6,None,None),
-		Peak(None,2914.4,None,None),
-		Peak(None,652.9,None,None),
+		Peak(None,966.3,1.0,None),
+		Peak(None,262.5,0.103,None),
+		Peak(None,1435.0,0.9508345,None),
+		Peak(None,120.6,0.12,None),
+		Peak(None,2914.4,0.25,None),
+		Peak(None,2924.1,0.37627639,None),
 	]
 	match = CompareToDatabase("ftir", peaks).match()
-	assert(match["name"] == "polyethylene wax")
+	assert(match["name"] == "nitrile rubber")
 
-def test_match_ftir_wrong_peaks():
+def test_match_ftir_no_match():
 	# Entry in database:
-	# 719.4,2848.8,2914.4, polyethylene wax,Primpke et al. 2018
+	# nitrile rubber,Primpke et al. 2018,966.3,1435.0,2924.1,1.0,0.9508345,0.3762763
 	peaks = [
-		Peak(None,2848.8,None,None),
-		Peak(None,3544.5,None,None),
-		Peak(None,719.4,None,None),
-		Peak(None,3754.0,None,None),
-		Peak(None,2914.4,None,None),
-		Peak(None,2940.5,None,None),
+	Peak(None,3000.1,1.0,None),
+		Peak(None,262.5,0.103,None),
+		Peak(None,2500,0.9508345,None),
+		Peak(None,120.6,0.12,None),
+		Peak(None,2914.4,0.25,None),
+		Peak(None,4000,0.37627639,None),
 	]
 	match = CompareToDatabase("ftir", peaks).match()
-	assert(match["name"] != "polyethylene wax")
+	assert(match == None)
 
 def test_match_ftir_silicone_rubber():
 	# Entry in database:
-	# 785.0,1006.8,1064.7, silicone rubber,Primpke et al. 2018,
+	# silicone rubber,Primpke et al. 2018,785.0,1006.8,1064.7,1.0,0.8293072,0.4721336
 	peaks = [
-		Peak(None,1064.7,None,None),
-		Peak(None,384.5,None,None),
-		Peak(None,150.6,None,None),
-		Peak(None,1006.8,None,None),
-		Peak(None,785.0,None,None),
-		Peak(None,585.4,None,None),
+		Peak(None,1064.7,0.4721336,None),
+		Peak(None,384.5,0.2821336,None),
+		Peak(None,150.6,0.2569874,None),
+		Peak(None,1006.8,0.8293072,None),
+		Peak(None,785.0,1.0,None),
+		Peak(None,585.4,0.1721336,None),
 	]
 	match = CompareToDatabase("ftir", peaks).match()
 	assert(match["name"] == "silicone rubber")
@@ -154,15 +154,15 @@ def test_ftir_no_peaks():
 
 def test_ftir_only_one_peak():
 	peaks = [
-		Peak(None,1542.1,None,None),
+		Peak(None,1542.1,1.0,None),
 	]
 	match = CompareToDatabase("ftir", peaks).match()
 	assert(match == None)
 
 def test_ftir_only_2_peaks():
 	peaks = [
-		Peak(None,1425.5,None,None),
-		Peak(None,1543.8,None,None),
+		Peak(None,1425.5,1.0,None),
+		Peak(None,1543.8,1.0,None),
 	]
 	match = CompareToDatabase("ftir", peaks).match()
 	assert(match == None)

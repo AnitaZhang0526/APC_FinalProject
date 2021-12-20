@@ -22,6 +22,8 @@ class CompareToDatabase:
         """
         self.data_type = data_type
         self.peaks = peaks
+        self._ftir_cutoff = 1000.0
+        self._xrd_cutoff = 20.0
 
     def match(self):
         """
@@ -78,6 +80,9 @@ class CompareToDatabase:
                 min_distance = distance
                 match = db.iloc[i, :]
 
+        if (min_distance > self._xrd_cutoff):
+            return None
+
         return match
 
     # Takes all peaks and returns the three most intense
@@ -87,10 +92,8 @@ class CompareToDatabase:
     
     # Takes all peaks and returns the three most intense
     def _ftir_most_intense_peaks(self, peaks):
-        sorted_peaks = sorted(peaks, key = lambda x: x.center, reverse = True)
-        sorted_three_peaks = sorted_peaks[:3]
-        sorted_three_peaks.reverse()
-        return sorted_three_peaks
+        sorted_peaks = sorted(peaks, key = lambda x: x.intensity, reverse = True)
+        return sorted_peaks[:3]
 
     # Calculates euclidean distances between two sets of three peaks
     def _xrd_distance(self, input_peaks, db_peaks):
@@ -153,5 +156,7 @@ class CompareToDatabase:
                 min_distance = distance
                 match = db.iloc[i, :]
 
-        return match
+        if (min_distance > self._ftir_cutoff):
+            return None
 
+        return match
