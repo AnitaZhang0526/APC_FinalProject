@@ -18,7 +18,7 @@ from root directory, run by type in:
 'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> -t <True or False> -s <threshold> -i <filename>'
 transmittance defaults to True, strategy_choice defaults to "fast", cutoff defaults to "0.9",
 range defaults to "5,15", and threshold defaults to "0.2"
-e.g. 'python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s -i 1-1-4-11_pH0_3-17-2020.csv'
+e.g. 'python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i 1-1-4-11_pH0_3-17-2020.csv'
 """
 # parses command line arguments
 parser = argparse.ArgumentParser(description='Analyzes results from XRD and FTIR output data.')
@@ -42,7 +42,7 @@ parser.set_defaults(transmittance=True, strategy_choice="fast", cutoff="0.9", ra
 if __name__ == '__main__':
     args = vars(parser.parse_args())
 
-    if args['data'] and args['method'] and args['cutoff'] and args['range'] and args['inputfile']:
+    if args['data'] and args['method'] and args['inputfile']:
         dir = os.path.dirname(os.path.realpath(__file__))
 
         # (1) Factory methods to create the Experimental Technique and Peak Profile Fitting
