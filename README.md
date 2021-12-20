@@ -8,7 +8,19 @@ Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel
 From the top level directory, run `pip install -e .` to install the required python packages.
 
 ### Running the Project
-Coming soon!
+After you install the tool suite, you can analyze XRD or FTIR csv data files by typing in the follwing in the command line from the root directory:
+
+```python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> (-t) -s <threshold> -c <cutoff> -r <range> -i <filename>```
+
+data_type: str, either 'XRD' or 'FTIR'; method: str, either "Rietveld" or "polyfit", strategy_choice: str, "fast", "random", or "best"; threshold: float, an intensity above which the peaks will be considered; cutoff: double, the frequency cutoff for filtering the data for initial peak determination, range: str, two numbers indicated the range of possible peak widths, separated by a comma; and filename: str, name of the csv data file. Having ```-t``` or not indicates whether a FTIR data file's independent variabe is transmittance or absorbance. If the data represent transmittance, the data will automatically be flipped upside down. If there is ```-t```, the data will be treated as transmittance data. if ```-t``` is omitted, the data will be treated as absorbance data. For XRD files, because the data should not be flipped, ```-t``` should always be omitted.
+
+The arguments strategy_choice, cutoff, range, threshold are optional. If not specified, the default strategy_choice is "fast", the default range is "5,15", and the default threshold is 0.2. 
+
+An example: ```python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i "1-1-4-11_pH0_3-17-2020.csv"```
+
+The tool suite will output two csv files, one containing a summary of the peaks and the other containing a material match. If not material match is found, the latter csv file will be empty.
+
+Classes within the tool suite can also be run as separate modules. If a dataFrame with fields 'x' and 'y' is given, the ```Rietveld``` class or the ```Poly``` class can be used to identify peaks and return peak parameters. To do so, call the ```get_peaks_params``` method. Other than obtaining peaks from the peak profiling classes, one can also import peaks using the module ```import_peaks```, which turns peak data into a list of Peak objects. With Peak objects, the ```match``` method in ```compare_to_database``` can be called to find a material match and return the two output csv files.
 
 ## Contributing to this Project
 
