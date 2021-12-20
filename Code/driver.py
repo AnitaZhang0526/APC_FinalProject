@@ -41,7 +41,7 @@ parser.set_defaults(transmittance=True, strategy_choice="fast", cutoff="0.9", ra
 if __name__ == '__main__':
     args = vars(parser.parse_args())
 
-    if args['data'] and args['method'] and args['cutoff'] and args['range'] and args['inputfile']:
+    if args['data'] and args['method'] and args['inputfile']:
         dir = os.path.dirname(os.path.realpath(__file__))
 
         # (1) Factory methods to create the Experimental Technique and Peak Profile Fitting
