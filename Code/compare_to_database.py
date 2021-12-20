@@ -22,6 +22,8 @@ class CompareToDatabase:
         """
         self.data_type = data_type
         self.peaks = peaks
+        self._ftir_cutoff = 1000.0
+        self._xrd_cutoff = 20.0
 
     def match(self):
         """
@@ -77,6 +79,9 @@ class CompareToDatabase:
             if distance < min_distance:
                 min_distance = distance
                 match = db.iloc[i, :]
+
+        if (min_distance > self._xrd_cutoff):
+            return None
 
         return match
 
@@ -152,6 +157,9 @@ class CompareToDatabase:
             if distance < min_distance:
                 min_distance = distance
                 match = db.iloc[i, :]
+
+        if (min_distance > self._ftir_cutoff):
+            return None
 
         return match
 
