@@ -8,7 +8,19 @@ Created by Alex Pirola, Agnes Robang, Shashank Gupta, Arjun Prihar, Jordan Hamel
 From the top level directory, run `pip install -e .` to install the required python packages.
 
 ### Running the Project
-Coming soon!
+The executable has 8 command line arguments: 
+'python Code/driver.py -d <data_type> -m <method> -f <strategy_choice> <-t> -c <cutoff> -r <range> -s <threshold> -i <filename>'
+1. `<data>` is the type of data being uploaded, either "XRD" or "FTIR".
+2. `<method>` is the type of peak fitting method to be applied to the data, either "Rietveld", "Le-Bail", "Pawley", or "polyfit". Currently, only "Rietveld" and "polyfit" are fully implemented.
+3. `<transmittance>` is a boolean argument, so including `-t` in the command defines it as `True`, while excluding this tag defines it as `False`. Transmittance is an option for FTIR data. 
+4. `<strategy_choice>` determines the strategy in profiling and building composite models. The options for this are "fast", "random", or "best".
+5. `<cutoff>` is the cutoff used for fitting (e.g. 0.9).
+6. `<range>` is the peak widths range to be used for fitting (e.g. "5,15").
+7. `<threshold>` is the threshold for what counts as a peak (e.g. 0.2).
+8. `<inputfile>` is the filename of the input within the `Input` folder to be analyzed (e.g. "1-1-4-11_pH0_3-17-2020.csv").
+
+So, for instance, to analyze FTIR data while considering transmittance using the Rietveld method using fast profiling with a peak threshold of 0.2, you run
+`python Code/driver.py -d FTIR -m "Rietveld" -f "fast" -t -s 0.2 -i 1-1-4-11_pH0_3-17-2020.csv`
 
 ## Contributing to this Project
 
@@ -26,7 +38,7 @@ python scrape_xrd.py
 ```
 
 #### Updating the FTIR Database
-The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/Code/ftir_database_generation/' directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/Code/databases/' directory. 
+The FTIR data has to be manually updated due to the lack of the open-source documentation. The FTIR analysis data and the corresponding sample information can be added to the 'ftir_library.csv' and 'ftir_metadata.csv', respectively, in `/Code/ftir_database_generation/'` directory. From the same directory, running the script 'ftir_database.py' will update the FTIR database in '/Code/databases/' directory. 
 
 ### Python Packages
 If you use a python package in the code you are writing, check `requirements.txt` and `setup.py` to see if the package is
@@ -38,17 +50,10 @@ To document your code, you will need to do three things:
 2. Create a file ```docs/name_of_code_file.rst``` , as shown in this link: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/build-the-docs.html.
 3. Add the name of your module to ```docs/modules.rst```.
 
-<<<<<<< HEAD
 To view the documentation on a webpage, ```cd docs``` to get to the docs directory, and run ```make html``` to auto-document existing .py files to generate a webpage with instructions. The current webpage uses the default theme.
 To open the html, ```cd _build``` and type in ```open index.html```. If you are using a Windows operating system, you can also open the link through your favorite browser (ex. ```google-chrome index.html```)
 
 If a PDF format is desired, make sure you have ```pdfTex``` installed on your machine, ```cd docs``` to get to the docs directory, and then type in ```make latexpdf``` in the command line from the docs directory. The generated pdf file will be under ```_build/latex/XRDFTIRAnalysisToolSuite.pdf```.
-=======
-To view the documentation as a webpage, ```cd docs``` to go to the docs directory, run ```make html``` to auto-document existing .py files to generate a webpage with instructions. The current webpage uses the default theme.
-To open the html, ```cd _build``` and type in ```open index.html```. If you are using a Windows operating system, you can also open the link through your favorite browser (ex. ```google-chrome index.html```)
-
-If a PDF format is desired, make sure you have ```pdfTex``` installed on your machine, and then type in ```make latexpdf``` in the command line from the docs directory. The generated pdf file will be under ```_build/latex/XRDFTIRAnalysisToolSuite.pdf```..
->>>>>>> d4e1b65 (updated readme)
 
 ### Git Workflow
 This section of the ReadMe outlines the git workflow that each team member will follow in order to collaboratively work on our project files. The goal is for all of us to be able to refer back to this document to responsibly upload our changes to source files, minimizing version control errors. To summarize, each feature of the project will be worked on in a seaparate branch by a single team member. With the approval of two other teammates, these features will be merged into a development branch and ultimately into the master branch:
