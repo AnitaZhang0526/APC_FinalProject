@@ -1,4 +1,9 @@
-from Code.ExperimentalTechnique import ExperimentalTechnique
+from Code.experimental_technique import ExperimentalTechnique
 
 class XRD(ExperimentalTechnique):
-	pass
+    """
+    The XRD class inherits from the ExperimentalTechnique class.
+    
+    :return: an XRD object
+    """
+    pass

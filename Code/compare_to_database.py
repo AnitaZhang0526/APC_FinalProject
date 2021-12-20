@@ -4,15 +4,16 @@ from scipy.spatial import distance
 from Code.peak import Peak
 
 class CompareToDatabase:
-    """This class takes in peak information and returns the closest match from the database.
-      
-    :data_type: type string, given by param data_type
-    :peaks: list of Peak objects, given by param peaks
+    """
+    This class takes in peak information and returns the closest match from the database.
+    
+    data_type: type string, given by param data_type
+    peaks: list of Peak objects, given by param peaks
     """
 
     def __init__(self, data_type = None, peaks = []):
         """
-        :Constructor method
+        Constructor method
         :param data_type: "xrd" or "ftir", defaults to None
         :type data_type:: str
         :param peaks: defaults to an empty list
@@ -21,6 +22,8 @@ class CompareToDatabase:
         """
         self.data_type = data_type
         self.peaks = peaks
+        self._ftir_cutoff = 1000.0
+        self._xrd_cutoff = 20.0
 
     def match(self):
         """
@@ -77,12 +80,22 @@ class CompareToDatabase:
                 min_distance = distance
                 match = db.iloc[i, :]
 
+        if (min_distance > self._xrd_cutoff):
+            return None
+
         return match
 
-    # Takes all XRD peaks and returns the three most intense
+    # Takes all peaks and returns the three most intense
     def _xrd_most_intense_peaks(self, peaks):
         sorted_peaks = sorted(peaks, key = lambda x: x.intensity, reverse = True)
         return sorted_peaks[:3]
+    
+    # Takes all peaks and returns the three most intense
+    def _ftir_most_intense_peaks(self, peaks):
+        sorted_peaks = sorted(peaks, key = lambda x: x.center, reverse = True)
+        sorted_three_peaks = sorted_peaks[:3]
+        sorted_three_peaks.reverse()
+        return sorted_three_peaks
 
     # Calculates euclidean distances between two sets of three peaks
     def _xrd_distance(self, input_peaks, db_peaks):
@@ -98,7 +111,55 @@ class CompareToDatabase:
 
         return distance.euclidean(i, d)
 
-    # Returns match from FTIR database
+       # Calculates euclidean distances between two sets of three peaks
+    def _ftir_distance(self, input_peaks, db_peaks):
+        i = []
+        for ip in input_peaks:
+            i.append(ip.center) 
+        d = []
+        for dp in db_peaks:
+            d.append(dp.center)
+
+        return distance.euclidean(i, d)    
+
+       # Return match from FTIR database 
     def _match_ftir(self):
-        # TODO this method will be filled in later
-        return None
+        match = None
+        min_distance = float("inf")
+        input_peaks = self._ftir_most_intense_peaks(self.peaks)
+
+        # Must input at least 3 peaks to get a match
+        if (len(input_peaks) < 3):
+            return match
+
+        dtype_dict = {
+            
+            "wavenumber_1":float, 
+            "wavenumber_2":float,
+            "wavenumber_3":float,
+            "name":str,
+            "organization/article":str,
+        }
+        db = pd.read_csv("./Code/databases/ftir_peaks.csv", dtype = dtype_dict)
+
+        
+        wavenumber_one = db['wavenumber_1']        
+        wavenumber_two = db['wavenumber_2']
+        wavenumber_three = db['wavenumber_3']
+        
+        for i in range(len(wavenumber_one)):
+            db_peaks = [
+                Peak(None,wavenumber_one[i],None,None),
+                Peak(None,wavenumber_two[i],None,None),
+                Peak(None,wavenumber_three[i],None,None),
+            ]
+            distance = self._ftir_distance(input_peaks, db_peaks)
+            if distance < min_distance:
+                min_distance = distance
+                match = db.iloc[i, :]
+
+        if (min_distance > self._ftir_cutoff):
+            return None
+
+        return match
+
