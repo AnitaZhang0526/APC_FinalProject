@@ -42,7 +42,7 @@ def test_match_xrd_anilite():
 	match = CompareToDatabase("xrd", peaks).match()
 	assert(match["material_name"] == "Anilite")
 
-def test_match_xrd_right_location_wrong_intensity():
+def test_xrd_no_match():
 	# Entry in database to *not* match:
 	# 46.28,100,32.29,65,27.86,57,Anilite,Cu7S4
 	peaks = [
@@ -54,7 +54,7 @@ def test_match_xrd_right_location_wrong_intensity():
 		Peak(None,27.86,57,None),
 	]
 	match = CompareToDatabase("xrd", peaks).match()
-	assert(match["material_name"] != "Anilite")
+	assert(match == None)
 
 def test_match_xrd_equal_intensity_peaks():
 	# Entry in database:
@@ -118,7 +118,7 @@ def test_match_ftir_polyethylene_wax():
 	match = CompareToDatabase("ftir", peaks).match()
 	assert(match["name"] == "polyethylene wax")
 
-def test_match_ftir_wrong_peaks():
+def test_match_ftir_no_match():
 	# Entry in database:
 	# 719.4,2848.8,2914.4, polyethylene wax,Primpke et al. 2018
 	peaks = [
@@ -130,7 +130,7 @@ def test_match_ftir_wrong_peaks():
 		Peak(None,2940.5,None,None),
 	]
 	match = CompareToDatabase("ftir", peaks).match()
-	assert(match["name"] != "polyethylene wax")
+	assert(match == None)
 
 def test_match_ftir_silicone_rubber():
 	# Entry in database:
