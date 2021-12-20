@@ -42,7 +42,7 @@ id = np.array(list(sample_id))
 intensity = np.array(list(sample_intensity))
 wavenumber = np.array(list(sample_wavenumber))
 name = np.array(list(sample_name))
-name_mod = np.append(name, "None") 
+name_mod = np.append(name, "None")
 
 # Splitting the single arrays into multpiple arrays
 # corresponding to datapoints of each material   
@@ -55,7 +55,8 @@ wavenumber_split = np.split(wavenumber,rep_cum)
 length_intensity = len(intensity_split) - 1
 cutoff_intensity = None
 num_peaks = 3
-output = []
+output1 = []
+output2 = []
 length = []  
 
 for j in range(length_intensity):
@@ -66,13 +67,20 @@ for j in range(length_intensity):
     new_peaks = sort_peaks[:num_peaks]
     length_peaks = len(new_peaks) 
     wavenumber_peaks = np.empty(length_peaks)
+    intensity_peaks = np.empty(length_peaks)
     for i in range(length_peaks):
         wavenumber_peaks[i] = wavenumber_split[j][new_peaks[i]]
-    output.append(sorted(wavenumber_peaks))
+        intensity_peaks[i] = intensity_split[j][new_peaks[i]]
+    output1.append(wavenumber_peaks)
+    output2.append(intensity_peaks)
+
 
 # Here the final peaks corresponding to sample id, name and, resources 
 # have been saved in the ftir_peaks.csv  
-df = pd.DataFrame(output)
+df1 = pd.DataFrame(output1)
+df2 = pd.DataFrame(output2)
+df = pd.concat([df1, df2], axis=1)
+
 df.insert(0, "Sample Name", sample_name, True)
 df.insert(1, "Source", sample_source, True)
 
@@ -80,7 +88,7 @@ df.insert(1, "Source", sample_source, True)
 df = df.drop_duplicates()
 
 # adding column name to the respective columns
-df.columns =['name', 'organization/article', 'wavenumber_1', 'wavenumber_2', 'wavenumber_3']
+df.columns =['name', 'organization/article', 'wavenumber_1', 'wavenumber_2', 'wavenumber_3', 'intensity_1', 'intensity_2', 'intensity_3']
 
 # Saving the dataframe containing the peak information as .csv file
 df.to_csv('./Code/databases/ftir_peaks.csv', index = False)
